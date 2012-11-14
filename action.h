@@ -1,7 +1,7 @@
 #ifndef _H_ACTION_H
 #define _H_ACTION_H
 
-#include "data.h"
+#include "data.c"
 
 extern Error* executeAction(Action* action);
 
