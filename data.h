@@ -1,6 +1,9 @@
 #ifndef _H_DATA_H_
 #define _H_DATA_H_
 
+#include <stdio.h>
+#include <malloc.h>
+
 typedef enum {
 	REQ_CUP,
 	REQ_CDOWN,
@@ -14,6 +17,7 @@ typedef enum {
 typedef enum {
 	ACT_CUP,
 	ACT_CDOWN,
+	ACT_FLOOR,
 	ACT_DOPEN,
 	ACT_DCLOSE,
 	ACT_ALARM,
@@ -24,21 +28,22 @@ typedef enum {
 	ERR_CUP,
 	ERR_CDOWN,
 	ERR_DOPEN,
+	ERR_FLOOR,
 	ERR_DCLOSE,
 	ERR_ALARM,
 } ErrorType;
 
-typedef _Request {
+typedef struct {
 	RequestType requestType;
 	void* key;
 } Request;
 
-typedef _Action {
+typedef struct _Action {
 	ActionType actionType;
 	void* key;
 } Action;
 
-typedef _Error {
+typedef struct _Error {
 	ErrorType errorType;
 } Error
 

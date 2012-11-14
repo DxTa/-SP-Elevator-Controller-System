@@ -18,5 +18,6 @@ Action* executeRequest(Request* request) {
 		case REQ_ALARM:
 			break;
 	}
+	return NULL;
 }
 

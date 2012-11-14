@@ -1,9 +1,9 @@
 #ifndef _H_REQUEST_H
 #define _H_REQUEST_H
 
-#include "data.h"
+#include "data.c"
 
-extern Request* sendRequest(RequestType reqType,void* value);
+Request* sendRequest(RequestType reqType,void* value);
 
 #endif
 
