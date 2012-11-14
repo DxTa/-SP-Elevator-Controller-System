@@ -21,6 +21,11 @@ int main() {
 	/* while(err) { */
 		/* err = executeAction(executeError(err)); */
 	/* } */
-	printf("hehehe");
-	return 1;
+
+	Request *test;
+	int* a = (int*)malloc(sizeof(int));
+	*a = 5;
+	test = makeCUPRequest(a);
+	printf("%d\n",*((int*)test->key));
+	return 0;
 }
