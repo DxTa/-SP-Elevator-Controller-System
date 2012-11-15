@@ -1,8 +1,8 @@
 #ifndef _H_DATA_H_
 #define _H_DATA_H_
 
-#include <stdio.h>
-#include <malloc.h>
+#include <stdlib.h>
+#include "./FunctionQueue/fqueue.h"
 
 typedef enum {
 	REQ_CUP,
@@ -33,17 +33,17 @@ typedef enum {
 	ERR_ALARM,
 } ErrorType;
 
-typedef struct {
+typedef struct Request {
 	RequestType requestType;
 	void* key;
 } Request;
 
-typedef struct _Action {
+typedef struct Action {
 	ActionType actionType;
 	void* key;
 } Action;
 
-typedef struct _Error {
+typedef struct Error {
 	ErrorType errorType;
 } Error
 

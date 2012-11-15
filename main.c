@@ -1,15 +1,16 @@
+#include <stdio.h>
 #include "data.h"
 #include "request.h"
 #include "elevator.h"
 #include "action.h"
 
+
 int main() {
 	// se co chay timer.
 
-	/*                          --------- Sensor(2 kieu) --------
-	                            |								|
-								|								|
-	        sendRequest         |            sendAction         |      sendError
+	/*                                                       planner
+	                            							   | |
+	        sendRequest                      sendAction        | |     sendError
 	request ------------> RequestManager ------------------> action ----------------> errorHandler
 														        ^ 						  |
 																|     sendAction          |
@@ -21,6 +22,6 @@ int main() {
 	/* while(err) { */
 		/* err = executeAction(executeError(err)); */
 	/* } */
-	printf("hehehe");
-	return 1;
+
+	return 0;
 }
