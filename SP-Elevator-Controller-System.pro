@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     elevator.c \
     data.c \
     action.c \
-    FunctionQueue/fqueue.c
+    FunctionQueue/fqueue.c \
+    outsidedialog.cpp
 
 HEADERS  += mainwindow.h \
     request.h \
@@ -27,6 +28,8 @@ HEADERS  += mainwindow.h \
     elevator.h \
     data.h \
     action.h \
-    FunctionQueue/fqueue.h
+    FunctionQueue/fqueue.h \
+    outsidedialog.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    outsidedialog.ui
