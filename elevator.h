@@ -3,6 +3,15 @@
 
 #include "data.c"
 
-extern Action* executeRequest(Request* request);
+Action* makeCUPAction(void* key);
+Action* makeCDOWNAction(void* key);
+Action* makeFLOORAction(void* key);
+Action* makeDOPENAction(void* key);
+Action* makeDCLOSEAction(void* key);
+Action* makeALARMAction(void* key);
+
+Action* executeRequest(Request* request);
+
+
 
 #endif

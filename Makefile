@@ -4,8 +4,8 @@ LIBS =  -lm
 
 all: erun
 
-erun: main.o data.o request.o elevator.o action.o error.o
-	${CC} main.o data.o request.o elevator.o action.o error.o -o erun
+erun: main.o data.o request.o elevator.o action.o error.o fqueue.o
+	${CC} main.o data.o request.o elevator.o action.o error.o fqueue.o -o erun
 
 main.o: main.c
 	${CC} ${CFLAGS} main.c
@@ -24,6 +24,9 @@ action.o: action.c
 
 error.o: error.c
 	${CC} ${CFLAGS} error.c
+
+fqueue.o: ./FunctionQueue/fqueue.c
+	${CC} ${CFLAGS} ./FunctionQueue/fqueue.c
 
 clean:
 	rm -f *.o *~
