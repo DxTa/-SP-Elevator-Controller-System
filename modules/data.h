@@ -2,7 +2,6 @@
 #define _H_DATA_H_
 
 #include <stdlib.h>
-#include "./FunctionQueue/fqueue.h"
 
 typedef enum {
 	REQ_CUP,
@@ -45,6 +44,9 @@ typedef struct Action {
 
 typedef struct Error {
 	ErrorType errorType;
-} Error
+} Error;
+
+
+int* makeInt(int value);
 
 #endif
