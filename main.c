@@ -1,15 +1,16 @@
+#include <stdio.h>
 #include "data.h"
 #include "request.h"
 #include "elevator.h"
 #include "action.h"
 
+
 int main() {
 	// se co chay timer.
 
-	/*                          --------- Sensor(2 kieu) --------
-	                            |								|
-								|								|
-	        sendRequest         |            sendAction         |      sendError
+	/*                                                       planner
+	                            							   | |
+	        sendRequest                      sendAction        | |     sendError
 	request ------------> RequestManager ------------------> action ----------------> errorHandler
 														        ^ 						  |
 																|     sendAction          |
@@ -22,10 +23,5 @@ int main() {
 		/* err = executeAction(executeError(err)); */
 	/* } */
 
-	Request *test;
-	int* a = (int*)malloc(sizeof(int));
-	*a = 5;
-	test = makeCUPRequest(a);
-	printf("%d\n",*((int*)test->key));
 	return 0;
 }

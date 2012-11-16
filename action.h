@@ -3,6 +3,7 @@
 
 #include "data.c"
 
-extern Error* executeAction(Action* action);
+
+Error* executeAction(Action* action);
 
 #endif

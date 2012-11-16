@@ -1,22 +1,59 @@
 #include "elevator.h"
 
+Action* makeCUPAction(void* key) {
+	Action* act = (Action*)malloc(sizeof(Action));
+	act->actionType = ACT_CUP;
+	act->key = (int*)key;
+	return act;
+}
+
+Action* makeCDOWNAction(void* key) {
+	Action* act = (Action*)malloc(sizeof(Action));
+	act->actionType = ACT_CDOWN;
+	act->key = (int*)key;
+	return act;
+}
+
+Action* makeFLOORAction(void* key) {
+	Action* act = (Action*)malloc(sizeof(Action));
+	act->actionType = ACT_FLOOR;
+	return act;
+}
+
+Action* makeDOPENAction(void* key) {
+	Action* act = (Action*)malloc(sizeof(Action));
+	act->actionType = ACT_DOPEN;
+	return act;
+}
+
+Action* makeDCLOSEAction(void* key) {
+	Action* act = (Action*)malloc(sizeof(Action));
+	act->actionType = ACT_DCLOSE;
+	return act;
+}
+
+Action* makeALARMAction(void* key) {
+	Action* act = (Action*)malloc(sizeof(Action));
+	act->actionType = ACT_ALARM;
+	return act;
+}
+
 Action* executeRequest(Request* request) {
 	if(request == NULL)
 		return NULL;
-	// check hang ho xong goi action
 	switch(request->requestType) {
 		case REQ_CUP:
-			break;
+			return makeCUPAction(request->key);
 		case REQ_CDOWN:
-			break;
+			return makeCDOWNAction(request->key);
 		case REQ_FLOOR:
-			break;
+			return makeFLOORAction(request->key);
 		case REQ_DOPEN:
-			break;
+			return makeDOPENAction(request->key);
 		case REQ_DCLOSE:
-			break;
+			return makeDCLOSEAction(request->key);
 		case REQ_ALARM:
-			break;
+			return makeALARMAction(request->key);
 	}
 	return NULL;
 }
