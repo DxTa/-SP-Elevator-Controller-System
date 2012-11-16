@@ -4,14 +4,14 @@
 #include <stdlib.h>
 
 typedef struct Fnode {
-	void* (*function)();
+	Action val;
 	struct Fnode* next;
 } Fnode;
 
 
 Fnode* currFnode;
 
-Fnode* newFnode(void*(*pfunction)());
-void addFnode(Fnode** list, void*(*pfunction)());
+Fnode* newFnode(Action act);
+void addFnode(Fnode** list, Action act);
 
 #endif
