@@ -12,6 +12,4 @@ Action* makeALARMAction(void* key);
 
 Action* executeRequest(Request* request);
 
-
-
 #endif

@@ -1,0 +1,16 @@
+#! /bin/bash
+
+qmake SP-Elevator-Controller-System.pro
+
+echo "qmake complete"
+
+make
+
+echo "make complete"
+
+./SP-Elevator-Controller-System
+
+clear
+
+
+
