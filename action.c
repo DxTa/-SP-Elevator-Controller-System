@@ -15,6 +15,16 @@ Error* executeAction(Action* action) {
 			break;
 		case ACT_ALARM:
 			break;
+		case ACT_BREAK:
+			break;
+		case ACT_LDIRECTION:
+			break;
+		case ACT_LFLOOR:
+			break;
+		case ACT_LMESSAGE:
+			break;
+		default:
+			break;
 	}
 	return NULL;
 }

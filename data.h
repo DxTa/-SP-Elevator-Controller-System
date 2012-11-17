@@ -2,7 +2,6 @@
 #define _H_DATA_H_
 
 #include <stdlib.h>
-#include "./FunctionQueue/fqueue.h"
 
 typedef enum {
 	REQ_CUP,
@@ -15,12 +14,16 @@ typedef enum {
 } RequestType;
 
 typedef enum {
-	ACT_CUP,
-	ACT_CDOWN,
+	ACT_CUP,	//car up
+	ACT_CDOWN,	//car down
 	ACT_FLOOR,
 	ACT_DOPEN,
 	ACT_DCLOSE,
 	ACT_ALARM,
+	ACT_BREAK,
+	ACT_LDIRECTION, //led for direction
+	ACT_LFLOOR,	//led for floor number
+	ACT_LMESSAGE, //led for show message
 
 } ActionType;
 
@@ -48,3 +51,4 @@ typedef struct Error {
 } Error
 
 #endif
+;
