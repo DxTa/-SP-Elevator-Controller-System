@@ -7,8 +7,8 @@ modular programming
   	// se co chay timer.
 	/*                                                       planner
 	                                                           | |
-	        sendRequest                      sendAction        | |     sendError
-	request ------------> RequestManager ------------------> action ----------------> errorHandler
+	        sendRequest                      sendAction        | |     sendRespond
+	request ------------> RequestManager ------------------> action ----------------> respondHandler
 							          							^                           |
 		                                                  		|       sendAction          |
 			             				  						-----------------------------
