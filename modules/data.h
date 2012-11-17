@@ -48,7 +48,10 @@ typedef struct Action {
 
 typedef struct Error {
 	ErrorType errorType;
-} Error
+} Error;
+
+
+int* makeInt(int value);
 
 #endif
 ;

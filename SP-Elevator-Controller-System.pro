@@ -13,23 +13,23 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
-    request.c \
-    error.c \
-    elevator.c \
-    data.c \
-    action.c \
-    FunctionQueue/fqueue.c \
-    outsidedialog.cpp
+        ui/mainwindow.cpp \
+    modules/request.c \
+    modules/error.c \
+    modules/elevator.c \
+    modules/data.c \
+    modules/action.c \
+    modules/FunctionQueue/fqueue.c \
+    ui/outsidedialog.cpp
 
-HEADERS  += mainwindow.h \
-    request.h \
-    error.h \
-    elevator.h \
-    data.h \
-    action.h \
-    FunctionQueue/fqueue.h \
-    outsidedialog.h
+HEADERS  += ui/mainwindow.h \
+    modules/request.h \
+    modules/error.h \
+    modules/elevator.h \
+    modules/data.h \
+    modules/action.h \
+    modules/FunctionQueue/fqueue.h \
+    ui/outsidedialog.h
 
-FORMS    += mainwindow.ui \
-    outsidedialog.ui
+FORMS    += ui/mainwindow.ui \
+    ui/outsidedialog.ui
