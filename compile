@@ -1,7 +1,5 @@
 #! /bin/bash
 
-make clean
-
 rm -rf ./SP-Elevator-Controller-System
 
 qmake SP-Elevator-Controller-System.pro

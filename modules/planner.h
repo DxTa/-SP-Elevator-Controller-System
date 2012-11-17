@@ -5,8 +5,8 @@
 #include "./FunctionQueue/fqueue.h"
 
 void enqueueAction(Fnode** list, Action *act, int el);
-void dequeueAction(Fnode* *list, int floor, int el)
-Fnode* nextDes(Fnode *list, int el)
+void dequeueAction(Fnode* *list, int floor, int el);
+Fnode* nextDes(Fnode *list, int el);
 int directOfElevator(Fnode *list, int el);
 
 #endif

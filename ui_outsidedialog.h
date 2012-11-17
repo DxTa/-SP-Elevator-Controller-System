@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'outsidedialog.ui'
 **
-** Created: Sun Nov 18 01:15:33 2012
+** Created: Sun Nov 18 01:32:42 2012
 **      by: Qt User Interface Compiler version 4.8.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!

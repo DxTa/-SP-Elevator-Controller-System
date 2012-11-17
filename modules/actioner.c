@@ -1,7 +1,7 @@
-#include "action.h"
+#include "actioner.h"
 
 
-Error* executeAction(Action* action) {
+Respond* executeAction(Action* action) {
 	switch(action->actionType) {
 		case ACT_CUP:
 			break;

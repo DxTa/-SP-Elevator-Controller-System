@@ -34,7 +34,7 @@ typedef enum {
 	ERR_FLOOR,
 	ERR_DCLOSE,
 	ERR_ALARM,
-} ErrorType;
+} RespondType;
 
 typedef struct Request {
 	RequestType requestType;
@@ -46,9 +46,9 @@ typedef struct Action {
 	void* key;
 } Action;
 
-typedef struct Error {
-	ErrorType errorType;
-} Error;
+typedef struct Respond {
+	RespondType respondType;
+} Respond;
 
 
 int* makeInt(int value);

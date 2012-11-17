@@ -1,7 +1,7 @@
-#include "error.h"
+#include "responder.h"
 
-Action* executeError(Error* err) {
-	switch(err->errorType) {
+Action* executeRespond(Respond* respond) {
+	switch(respond->respondType) {
 		case ERR_CUP:
 			break;
 		case ERR_CDOWN:
