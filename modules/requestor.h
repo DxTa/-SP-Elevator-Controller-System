@@ -1,5 +1,5 @@
-#ifndef _H_ELEVATOR_H_
-#define _H_ELEVATOR_H_
+#ifndef _H_REQUESTOR_H_
+#define _H_REQUESTOR_H_
 
 #include "data.h"
 

@@ -1,8 +1,6 @@
 #include "outsidedialog.h"
 #include "ui_outsidedialog.h"
 
-int curFloor = 0;
-
 extern "C"
 {
 	#include <stdio.h>
@@ -29,15 +27,11 @@ OutsideDialog::~OutsideDialog()
 
 void OutsideDialog::upClicked()
 {
-	curFloor++;
-	sendRequest(REQ_CUP,makeInt(curFloor));
     //TODO: make a request to the elevator system here
 }
 
 void OutsideDialog::downClicked()
 {
-	curFloor--;
-	sendRequest(REQ_CUP,makeInt(curFloor));
     //TODO: make a request to the elevator system here
 }
 
