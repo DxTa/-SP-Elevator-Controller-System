@@ -1,7 +1,7 @@
 #ifndef _H_REQUEST_H
 #define _H_REQUEST_H
 
-#include "data.c"
+#include "data.h"
 
 Request* makeCUPRequest(void*);
 Request* makeCDOWNRequest(void*);

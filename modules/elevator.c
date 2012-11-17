@@ -17,24 +17,28 @@ Action* makeCDOWNAction(void* key) {
 Action* makeFLOORAction(void* key) {
 	Action* act = (Action*)malloc(sizeof(Action));
 	act->actionType = ACT_FLOOR;
+	act->key = key;
 	return act;
 }
 
 Action* makeDOPENAction(void* key) {
 	Action* act = (Action*)malloc(sizeof(Action));
 	act->actionType = ACT_DOPEN;
+	act->key = key;
 	return act;
 }
 
 Action* makeDCLOSEAction(void* key) {
 	Action* act = (Action*)malloc(sizeof(Action));
 	act->actionType = ACT_DCLOSE;
+	act->key = key;
 	return act;
 }
 
 Action* makeALARMAction(void* key) {
 	Action* act = (Action*)malloc(sizeof(Action));
 	act->actionType = ACT_ALARM;
+	act->key = key;
 	return act;
 }
 
