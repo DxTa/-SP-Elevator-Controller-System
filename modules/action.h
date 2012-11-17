@@ -3,8 +3,10 @@
 
 
 #include "data.h"
+#include "planner.h"
+
+int elevator[2];
 
 Error* executeAction(Action* action);
-
 
 #endif
