@@ -12,7 +12,24 @@ class ElevatorSystem : public QObject
 public:
     explicit ElevatorSystem(QObject *parent = 0);
     void start();
-    int tick();
+
+private:
+    void update(int elapsedTime);
+
+    // Nested class
+    class ElevatorSystemThread : public QThread
+    {
+    public:
+        ElevatorSystem *elevatorSystem;
+
+    protected:
+        void run();
+    };
+
+    // Variable
+    int currentValue;
+    QTime time;
+    ElevatorSystemThread *thread;
     
 signals:
     void valueChanged(int newValue);
@@ -21,21 +38,8 @@ public slots:
     void reset();
 
 protected:
-    void update(int elapsedTime);
-    int currentValue;
-    QTime time;
+    int tick();
     
-};
-
-class ElevatorSystemThread : public QThread
-{
-    Q_OBJECT
-
-public:
-    ElevatorSystem *elevatorSystem;
-
-protected:
-    void run();
 };
 
 #endif // ELEVATORSYSTEM_H

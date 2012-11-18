@@ -2,7 +2,8 @@
 ElevatorSystem::ElevatorSystem(QObject *parent) :
     QObject(parent)
 {
-
+    this->thread = new ElevatorSystemThread();
+    this->thread->elevatorSystem = this;
 }
 
 void ElevatorSystem::start()
@@ -10,12 +11,10 @@ void ElevatorSystem::start()
     this->time.start();
     this->currentValue = 0;
 
-    ElevatorSystemThread *thread = new ElevatorSystemThread();
-    thread->elevatorSystem = this;
-    thread->start();
+    this->thread->start();
 }
 
-void ElevatorSystemThread::run()
+void ElevatorSystem::ElevatorSystemThread::run()
 {
     while (1)
     {
