@@ -28,21 +28,11 @@ typedef enum {
 } ActionType;
 
 typedef enum {
-<<<<<<< HEAD
-	ERR_DOOR_CANNOT_CLOSE,
-	ERR_INVALID_FLOOR,
-	ERR_INVALID_BUTTON,
-	ERR_OVERLOAD
-} ErrorType;
-=======
-	ERR_CUP,
-	ERR_CDOWN,
-	ERR_DOPEN,
-	ERR_FLOOR,
-	ERR_DCLOSE,
-	ERR_ALARM,
+	RES_DOOR_CANNOT_CLOSE,
+	RES_INVALID_FLOOR,
+	RES_INVALID_BUTTON,
+	RES_OVERLOAD
 } RespondType;
->>>>>>> bd4946925fdef08072cdf42597ab8f20c95c1a68
 
 typedef struct Request {
 	RequestType requestType;
