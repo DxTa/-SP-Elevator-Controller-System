@@ -5,16 +5,14 @@
 #include "../data.h"
 
 typedef struct Fnode {
-	Action val;
+	Action *val;
 	struct Fnode* next;
 } Fnode;
 
 
-Fnode* currFnode;
-
-Fnode* newFnode(Action act);
-void addFnode(Fnode** list, Action act);
-void addFnodeAt(Fnode* *list, Action act, int offset);
+Fnode* newFnode(Action *act);
+void addFnode(Fnode** list, Action *act);
+void addFnodeAt(Fnode* *list, Action *act, int offset);
 void removeFnodeAtBack(Fnode* *list);
 void removeFnodeAtRear(Fnode* *list);
 

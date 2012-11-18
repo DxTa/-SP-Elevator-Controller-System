@@ -13,8 +13,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
 void MainWindow::startElevatorSimulator()
 {
+    this->elevatorSystem = new ElevatorSystem();
+    elevatorSystem->start();
+
     OutsideDialog *outsideDialog;
-    outsideDialog = new OutsideDialog(NULL);
+    outsideDialog = new OutsideDialog(NULL, this->elevatorSystem);
     outsideDialog->show();
     outsideDialog->raise();
     outsideDialog->activateWindow();
