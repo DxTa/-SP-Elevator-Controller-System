@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+#include "elevatorsystem.h"
+
 namespace Ui {
 class MainWindow;
 }
@@ -20,6 +22,7 @@ public slots:
 
 private:
     Ui::MainWindow *ui;
+    ElevatorSystem *elevatorSystem;
 };
 
 #endif // MAINWINDOW_H
