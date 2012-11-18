@@ -9,7 +9,7 @@ extern "C"
 // include C library here
 }
 
-OutsideDialog::OutsideDialog(QWidget *parent) :
+OutsideDialog::OutsideDialog(QWidget *parent, ElevatorSystem *elevatorSystem) :
     QDialog(parent),
     ui(new Ui::OutsideDialog)
 {
@@ -18,6 +18,9 @@ OutsideDialog::OutsideDialog(QWidget *parent) :
     QObject::connect(ui->upButton, SIGNAL(clicked()), this, SLOT(upClicked()));
     QObject::connect(ui->downButton, SIGNAL(clicked()), this, SLOT(downClicked()));
     QObject::connect(ui->stepInsideButton, SIGNAL(clicked()), this, SLOT(getInsideClicked()));
+
+    this->elevatorSystem = elevatorSystem;
+    // connect signal & slot of elevator system
 }
 
 OutsideDialog::~OutsideDialog()

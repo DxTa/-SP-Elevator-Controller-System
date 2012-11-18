@@ -1,3 +1,4 @@
+#include "planner.h"
 //tat ca cac bien `int el` la de xac dinh dieu khien thang may nao
 //chua dung j nhieu
 //nhung chac la se dung`
@@ -104,7 +105,8 @@ void dequeueAction(Fnode* *list, int floor, int el) {
 				break;
 			case (curr->val->ActionType == ACT_FLOOR && (int)curr->val->key == floor):
 			case (directOfElevator(*list,el) == 1 && curr->val->ActionType == ACT_CUP && (int)curr->val->key == floor):
-			case (directOfelevator(*list,el) == -1 && curr->val->ActionType == ACT_CDOWN && (int)curr->val->key == floor):
+			case (directOfElevator(*list,el) == -1 && curr->val->ActionType == ACT_CDOWN && (int)curr->val->key == floor):
+			case (directOfElevator(*list,el) == 0 && (int)curr->val->key == floor):
 				if (prev == NULL) {
 					*list = curr->next;
 					temp = curr;
@@ -127,11 +129,14 @@ void dequeueAction(Fnode* *list, int floor, int el) {
 	}
 }
 
-Fnode* nextDes(Fnode *list, int el) {
-	Fnode* curr;
-	curr = list;
+Fnode* nextDes(Fnode *list, int el,Fnode *now) {
+	Fnode *curr;
+	if (curr == NULL)
+		curr = list;
+	else
+		curr = now->next;
 	while(curr != NULL) {
-		if (curr != ACT_BREAK)
+		if (curr != ACT_BREAK && (int)curr->val->key != (int)now->val->key && (int)curr->val->key != elevator[el])
 			break;
 		else
 			curr = curr->next;
@@ -140,6 +145,12 @@ Fnode* nextDes(Fnode *list, int el) {
 }
 
 int directOfElevator(Fnode *list, int el) {
-
-	return 0;
+	Fnode* des;
+	des = nextDes(list,el,NULL);
+	if ((int)des->val->key < elevator[el])
+		return -1; //go down
+	else if ((int)des->val->key > elevator[el])
+		return 1; //go up
+	else
+		return 0; //go no where
 }
