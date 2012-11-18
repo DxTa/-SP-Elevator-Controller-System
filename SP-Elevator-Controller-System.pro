@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     modules/actioner.c \
     modules/FunctionQueue/fqueue.c \
     ui/outsidedialog.cpp \
-    elevatorsystem.cpp
+    elevatorsystem.cpp \
+    ui/insidedialog.cpp
 
 HEADERS  += ui/mainwindow.h \
     modules/request.h \
@@ -31,7 +32,9 @@ HEADERS  += ui/mainwindow.h \
     modules/actioner.h \
     modules/FunctionQueue/fqueue.h \
     ui/outsidedialog.h \
-    elevatorsystem.h
+    elevatorsystem.h \
+    ui/insidedialog.h
 
 FORMS    += ui/mainwindow.ui \
-    ui/outsidedialog.ui
+    ui/outsidedialog.ui \
+    ui/insidedialog.ui
