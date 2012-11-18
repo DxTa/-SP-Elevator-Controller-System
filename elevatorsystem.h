@@ -14,7 +14,7 @@ public:
     void start();
 
 private:
-    void update(int elapsedTime);
+    int update(int elapsedTime);
 
     // Nested class
     class ElevatorSystemThread : public QThread
@@ -27,15 +27,12 @@ private:
     };
 
     // Variable
-    int currentValue;
     QTime time;
     ElevatorSystemThread *thread;
     
 signals:
-    void valueChanged(int newValue);
     
 public slots:
-    void reset();
 
 protected:
     int tick();

@@ -21,7 +21,6 @@ public slots:
     void upClicked();
     void downClicked();
     void stepInsideClicked();
-    void valueChanged(int newValue);
 
 private:
     Ui::OutsideDialog *ui;
