@@ -1,9 +1,6 @@
 #include "elevatorsystem.h"
 
-extern "C"
-{
-// include C library here
-}
+Request *curReq;
 
 ElevatorSystem::ElevatorSystem(QObject *parent) :
     QObject(parent)
@@ -44,6 +41,17 @@ int ElevatorSystem::tick()
 int ElevatorSystem::update(int elapsedTime)
 {
     // Update your system here
-
+	if(curReq) {
+		switch(curReq->requestType) {
+			case REQ_CUP:
+				qDebug() << "Request Up";
+				break;
+			case REQ_CDOWN:
+				qDebug() << "Request Down";
+				break;
+		}
+		qDebug() << *((int*)curReq->key);
+		curReq = NULL;
+	}
     return 0;
 }

@@ -2,6 +2,7 @@
 #define OUTSIDEDIALOG_H
 
 #include <QDialog>
+#include <QDebug>
 
 #include "elevatorsystem.h"
 

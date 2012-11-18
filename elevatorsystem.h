@@ -4,6 +4,17 @@
 #include <QObject>
 #include <QTime>
 #include <QThread>
+#include <QDebug>
+
+extern "C"
+{
+	#include <stdio.h>
+	#include "modules/data.h"
+	#include "modules/request.h"
+// include C library here
+}
+
+extern Request *curReq;
 
 class ElevatorSystem : public QObject
 {
@@ -29,14 +40,14 @@ private:
     // Variable
     QTime time;
     ElevatorSystemThread *thread;
-    
+
 signals:
-    
+
 public slots:
 
 protected:
     int tick();
-    
+
 };
 
 #endif // ELEVATORSYSTEM_H
