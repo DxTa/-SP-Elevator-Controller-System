@@ -1,13 +1,13 @@
 #include "fqueue.h"
 
-Fnode* newFnode(Action act) {
+Fnode* newFnode(Action *act) {
 	Fnode *node = (Fnode*)malloc(sizeof(Fnode));
 	node->val = act;
 	node->next = NULL;
 	return node;
 }
 
-void addFnode(Fnode* *list, Action act) {
+void addFnode(Fnode* *list, Action *act) {
 	Fnode *newNode = newFnode(act);
 	if (*list == NULL)
 		*list = newNode;
@@ -17,23 +17,24 @@ void addFnode(Fnode* *list, Action act) {
 	}
 }
 
-void addFnodeAt(Fnode* *list, Action act, int offset) {
+void addFnodeAt(Fnode* *list, Action *act, int offset) {
 	Fnode *newNode = newFnode(act);
+	Fnode *curr;
 	if (*list == NULL)
 		*list = newNode;
 	else {
 		Fnode *prev = NULL;
-		currFnode = *list;
+		curr = *list;
 		int count = 0;
-		while(currFnode != NULL && count != offset) {
-			prev = currFnode;
-			currFnode = currFnode->next;
+		while(curr != NULL && count != offset) {
+			prev = curr;
+			curr = curr->next;
 			count++;
 		}
 		if (prev != NULL)
 			prev->next = newNode;
-		if (currFnode != NULL)
-			newNode->next = currFnode;
+		if (curr != NULL)
+			newNode->next = curr;
 		*list = newNode;
 	}
 }
@@ -42,7 +43,7 @@ void removeFnodeAtBack(Fnode* *list) {
 	Fnode* temp;
 	temp = *list;
 	*list = (*list)->next;
-	free(temp);
+	/* free(temp); */
 }
 
 void removeFnodeAtRear(Fnode* *list) {
@@ -59,5 +60,5 @@ void removeFnodeAtRear(Fnode* *list) {
 		*list = NULL;
 	else
 		prev->next = NULL;
-	free(temp);
+	/* free(temp); */
 }

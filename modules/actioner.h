@@ -3,6 +3,9 @@
 
 
 #include "data.h"
+#include "planner.h"
+
+int elevator[2];
 
 Respond* executeAction(Action* action);
 

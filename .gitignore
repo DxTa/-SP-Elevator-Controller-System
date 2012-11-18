@@ -22,10 +22,7 @@
 *._*
 SP-Elevator-Controller-System
 SP-Elevator-Controller-System.pro.user
-Makefile
-
 moc_*.cpp
-moc_*.h
-ui_*.cpp
 ui_*.h
-
+*.core
+Makefile
