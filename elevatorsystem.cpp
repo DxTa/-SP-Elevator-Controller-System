@@ -1,5 +1,4 @@
 #include "elevatorsystem.h"
-
 ElevatorSystem::ElevatorSystem(QObject *parent) :
     QObject(parent)
 {
@@ -21,6 +20,9 @@ void ElevatorSystemThread::run()
     while (1)
     {
         if (this->elevatorSystem->tick() != 0) break;
+
+        // 60fps
+        this->msleep(1000/60);
     }
 }
 
