@@ -53,6 +53,8 @@ int ElevatorSystem::update(int elapsedTime)
 
 	if(curReq) {
 		curAct = executeRequest(curReq);
+		if(curAct != NULL)
+			qDebug() << "\n-----------\n";
 		curResp = executeAction(curAct);
 		curReq = NULL;
 	}

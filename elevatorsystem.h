@@ -8,7 +8,6 @@
 
 extern "C"
 {
-	#include <stdio.h>
 	#include "modules/data.h"
 	#include "modules/request.h"
 	#include "modules/requestor.h"
@@ -18,7 +17,7 @@ extern "C"
 }
 
 extern Request *curReq;
-// extern Action *curAct;
+extern Action *curAct;
 extern Respond *curResp;
 
 
