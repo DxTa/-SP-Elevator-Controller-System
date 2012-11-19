@@ -28,12 +28,10 @@ typedef enum {
 } ActionType;
 
 typedef enum {
-	ERR_CUP,
-	ERR_CDOWN,
-	ERR_DOPEN,
-	ERR_FLOOR,
-	ERR_DCLOSE,
-	ERR_ALARM,
+	RES_DOOR_CANNOT_CLOSE,
+	RES_INVALID_FLOOR,
+	RES_INVALID_BUTTON,
+	RES_OVERLOAD
 } RespondType;
 
 typedef struct Request {
@@ -48,6 +46,7 @@ typedef struct Action {
 
 typedef struct Respond {
 	RespondType respondType;
+	char *message;
 } Respond;
 
 
