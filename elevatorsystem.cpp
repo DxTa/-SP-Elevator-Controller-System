@@ -1,6 +1,8 @@
 #include "elevatorsystem.h"
 
 Request *curReq;
+Action *curAct;
+Respond *curResp;
 
 ElevatorSystem::ElevatorSystem(QObject *parent) :
     QObject(parent)
@@ -41,16 +43,17 @@ int ElevatorSystem::tick()
 int ElevatorSystem::update(int elapsedTime)
 {
     // Update your system here
+	if(curResp) {
+		curAct = executeRespond(curResp);
+		curResp = executeAction(curAct);
+	} else
+		curResp = executeAction(curAct);
+
+	//Uu tien Respond
+
 	if(curReq) {
-		switch(curReq->requestType) {
-			case REQ_CUP:
-				qDebug() << "Request Up";
-				break;
-			case REQ_CDOWN:
-				qDebug() << "Request Down";
-				break;
-		}
-		qDebug() << *((int*)curReq->key);
+		curAct = executeRequest(curReq);
+		curResp = executeAction(curAct);
 		curReq = NULL;
 	}
     return 0;
