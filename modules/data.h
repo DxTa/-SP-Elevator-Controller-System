@@ -10,7 +10,6 @@ typedef enum {
 	REQ_DOPEN,
 	REQ_DCLOSE,
 	REQ_ALARM,
-
 } RequestType;
 
 typedef enum {
@@ -51,8 +50,14 @@ typedef struct Respond {
 
 
 extern char* curMessage;
+extern Request *curReq;
+extern Action *curAct;
+extern Respond *curResp;
+
 
 int* makeInt(int value);
+
+int extractInt(void *val);
 
 #endif
 ;

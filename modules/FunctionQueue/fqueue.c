@@ -20,12 +20,13 @@ void addFnode(Fnode* *list, Action *act) {
 void addFnodeAt(Fnode* *list, Action *act, int offset) {
 	Fnode *newNode = newFnode(act);
 	Fnode *curr;
+	int count;
 	if (*list == NULL)
 		*list = newNode;
 	else {
 		Fnode *prev = NULL;
 		curr = *list;
-		int count = 0;
+		count = 0;
 		while(curr != NULL && count != offset) {
 			prev = curr;
 			curr = curr->next;
@@ -35,11 +36,13 @@ void addFnodeAt(Fnode* *list, Action *act, int offset) {
 			prev->next = newNode;
 		if (curr != NULL)
 			newNode->next = curr;
-		*list = newNode;
+		if (prev == NULL) *list = newNode;
 	}
 }
 
 void removeFnodeAtBack(Fnode* *list) {
+	static int i = 0;
+	i++;
 	Fnode* temp;
 	temp = *list;
 	*list = (*list)->next;
@@ -61,4 +64,13 @@ void removeFnodeAtRear(Fnode* *list) {
 	else
 		prev->next = NULL;
 	/* free(temp); */
+}
+
+int count(Fnode* list) {
+	Fnode *curr;
+	curr = list;
+	int count = 0;
+	while (curr != NULL) { count++; curr = curr->next; }
+	return count;
+
 }
