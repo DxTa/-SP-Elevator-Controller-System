@@ -4,6 +4,7 @@ Action* makeCUPAction(void* key) {
 	Action* act = (Action*)malloc(sizeof(Action));
 	act->actionType = ACT_CUP;
 	act->key = (int*)key;
+	printf("Requestor : ACT_CUP %d\n",*((int*)key));
 	return act;
 }
 
@@ -11,6 +12,7 @@ Action* makeCDOWNAction(void* key) {
 	Action* act = (Action*)malloc(sizeof(Action));
 	act->actionType = ACT_CDOWN;
 	act->key = (int*)key;
+	printf("Requestor : ACT_CDOWN %d\n",*((int*)key));
 	return act;
 }
 
@@ -18,6 +20,7 @@ Action* makeFLOORAction(void* key) {
 	Action* act = (Action*)malloc(sizeof(Action));
 	act->actionType = ACT_FLOOR;
 	act->key = key;
+	printf("Requestor : ACT_FLOOR %d\n",*((int*)key));
 	return act;
 }
 
