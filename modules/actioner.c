@@ -17,7 +17,7 @@ Respond* working() {
 					printf("---dang len %d---\n",elevator[0]);
 				} else {
 					printf("---den tang %d---\n",extractInt(action->key));
-					removeFnodeAtBack(&list[0]);
+					dequeueAction(&list[0],elevator[0]);
 					printf("LIST %d\n",count(list[0]));
 				}
 				break;
@@ -31,7 +31,7 @@ Respond* working() {
 					printf("---dang len %d---\n",elevator[0]);
 				} else {
 					printf("---den tang %d---\n",extractInt(action->key));
-					removeFnodeAtBack(&list[0]);
+					dequeueAction(&list[0],elevator[0]);
 					printf("LIST %d\n",count(list[0]));
 				}
 				break;
