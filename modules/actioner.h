@@ -8,5 +8,6 @@ extern int elevator[2];
 
 Respond* executeAction(Action* action);
 
+Respond* working();
 
 #endif

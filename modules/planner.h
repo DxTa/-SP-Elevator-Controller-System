@@ -1,5 +1,5 @@
-#ifndef _H_ACTION_H
-#define _H_ACTION_H
+#ifndef _H_PLANNER_H
+#define _H_PLANNER_H
 
 #include "data.h"
 #include "./FunctionQueue/fqueue.h"
