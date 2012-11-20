@@ -1,5 +1,6 @@
 #include "actioner.h"
 
+int elevator[2];
 
 Respond* executeAction(Action* action) {
 	switch(action->actionType) {

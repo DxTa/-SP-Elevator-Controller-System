@@ -8,13 +8,18 @@
 
 extern "C"
 {
-	#include <stdio.h>
 	#include "modules/data.h"
 	#include "modules/request.h"
+	#include "modules/requestor.h"
+	#include "modules/actioner.h"
+	#include "modules/responder.h"
 // include C library here
 }
 
 extern Request *curReq;
+extern Action *curAct;
+extern Respond *curResp;
+
 
 class ElevatorSystem : public QObject
 {

@@ -49,6 +49,9 @@ typedef struct Respond {
 	char *message;
 } Respond;
 
+
+extern char* curMessage;
+
 int* makeInt(int value);
 
 #endif
