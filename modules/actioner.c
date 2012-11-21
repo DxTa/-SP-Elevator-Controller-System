@@ -25,7 +25,6 @@ Respond* working() {
 		switch(action->actionType) {
 			case ACT_CUP:
 				printf("CUP");
-
 				switch(comparePosition(elevator[0],extractInt(action->key))) {
 					case 1 :
 						goDown(&elevator[0]);

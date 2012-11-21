@@ -23,6 +23,9 @@ SOURCES += main.cpp\
     modules/FunctionQueue/fqueue.c \
     modules/planner.c \
     modules/engine.c \
+    modules/door.c \
+    modules/informer.c \
+    modules/checker.c \
     ui/outsidedialog.cpp \
     elevatorsystem.cpp \
     ui/insidedialog.cpp
@@ -37,6 +40,9 @@ HEADERS  += ui/mainwindow.h \
     modules/FunctionQueue/fqueue.h \
     modules/planner.h \
     modules/engine.h \
+    modules/door.h \
+    modules/informer.h \
+    modules/checker.h \
     ui/outsidedialog.h \
     elevatorsystem.h \
     ui/insidedialog.h
