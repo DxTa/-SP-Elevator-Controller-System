@@ -36,11 +36,10 @@ Respond* working() {
 						printf("---dang len %d---\n",elevator[0]);
 						break;
 					case 0:
-						removeFnodeAtBack(&list[0]);
+						dequeueAction(&list[0],elevator[0]);
 						printf("---den tang %d---\n",extractInt(action->key));
 						return makeArrivalRespond(action->key);
 				}
-
 				break;
 			case ACT_CDOWN:
 				printf("CDOWN");
@@ -54,7 +53,7 @@ Respond* working() {
 						printf("---dang len %d---\n",elevator[0]);
 						break;
 					case 0:
-						removeFnodeAtBack(&list[0]);
+						dequeueAction(&list[0],elevator[0]);
 						printf("---den tang %d---\n",extractInt(action->key));
 						return makeArrivalRespond(action->key);
 				}

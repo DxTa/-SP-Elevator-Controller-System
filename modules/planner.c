@@ -109,48 +109,48 @@ void enqueueAction(Fnode** list, Action *act, int el) {
 
 //ham nay se duoc goi khi thang may den 1 tang
 //no se loai bo cac action thua` thai~ khoi lich trinh
-/* void dequeueAction(Fnode* *list, int floor, int el) { */
-	/* Fnode *curr,*prev,*temp; */
-	/* curr = *list; */
-	/* prev = NULL; */
-	/* while(1){ */
-		/* switch(1) { */
-			/* case (curr == NULL): */
-				/* break; */
-			/* case (curr->val->actionType == ACT_FLOOR && extractInt(curr->val->key) == floor): */
-			/* case (directOfElevator(*list,el) == 1 && curr->val->actionType == ACT_CUP && extractInt(curr->val->key) == floor): */
-			/* case (directOfElevator(*list,el) == -1 && curr->val->actionType == ACT_CDOWN && extractInt(curr->val->key) == floor): */
-			/* case (directOfElevator(*list,el) == 0 && extractInt(curr->val->key) == floor): */
-				/* if (prev == NULL) { */
-					/* *list = curr->next; */
-					/* temp = curr; */
-					/* curr = curr->next; */
-					/* [> free(temp); <] */
-				/* } */
-				/* else { */
-					/* prev->next = curr->next; */
-					/* temp = curr; */
-					/* curr = curr->next; */
-					/* [> free(temp); <] */
-				/* } */
-				/* continue; */
-			/* default: */
-				/* prev = curr; */
-				/* curr = curr->next; */
-				/* continue; */
-		/* } */
-		/* break; */
-	/* } */
-/* } */
+void dequeueAction(Fnode* *list, int el) {
+	Fnode *curr,*prev,*temp;
+	curr = *list;
+	prev = NULL;
+	while(1){
+		if (curr == NULL)
+			break;
+		else if ((curr->val->actionType == ACT_FLOOR && extractInt(curr->val->key) == el) ||
+				(directOfElevator(*list,el) == 1 && curr->val->actionType == ACT_CUP && extractInt(curr->val->key) == el) ||
+				(directOfElevator(*list,el) == -1 && curr->val->actionType == ACT_CDOWN && extractInt(curr->val->key) == el) ||
+				(directOfElevator(*list,el) == 0 && extractInt(curr->val->key) == el) ) {
+			if (prev == NULL) {
+				*list = curr->next;
+				temp = curr;
+				curr = curr->next;
+				/* [> free(temp); <] */
+			}
+			else {
+				prev->next = curr->next;
+				temp = curr;
+				curr = curr->next;
+				/* [> free(temp); <] */
+			}
+			continue;
+		}
+		else {
+			prev = curr;
+			curr = curr->next;
+			continue;
 
-Fnode* nextDes(Fnode *list, int el,Fnode *now) {
-	Fnode *curr;
-	if (now == NULL)
+		}
+		break;
+	}
+}
+
+Fnode* nextDes(Fnode *list, int el,Fnode *curr) {
+	if (curr == NULL)
 		curr = list;
 	else
-		curr = now->next;
+		curr = curr->next;
 	while(curr != NULL) {
-		if (curr != ACT_BREAK && extractInt(curr->val->key) != extractInt(now->val->key) && extractInt(curr->val->key) != el)
+		if (curr != ACT_BREAK && extractInt(curr->val->key) != el)
 			break;
 		else
 			curr = curr->next;
@@ -160,11 +160,13 @@ Fnode* nextDes(Fnode *list, int el,Fnode *now) {
 
 int directOfElevator(Fnode *list, int el) {
 	Fnode* des;
+
 	des = nextDes(list,el,NULL);
-	if (extractInt(des->val->key) < el)
+	if (des == NULL)
+		return 0;
+	else if (extractInt(des->val->key) < el)
 		return -1; //go down
 	else if (extractInt(des->val->key) > el)
 		return 1; //go up
-	else
-		return 0; //go no where
+	else return 0;
 }
