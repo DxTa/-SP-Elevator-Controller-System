@@ -12,8 +12,29 @@ struct Respond responds[10] = {
   // duoi (0 hoac 1)
   {RES_INVALID_BUTTON, "Button is not determined."},
   // qua nhieu nguoi trong thang may
-  {RES_OVERLOAD, "Overload."}
+  {RES_OVERLOAD, "Overload."},
+
+  {RES_OPEN_DOOR, "Hold door open"},
+  {RES_CLOSE_DOOR, "Close door"}
 };
+
+Respond* makeDoorCannotCloseRespond() {
+	Respond* r = (Respond*)malloc(sizeof(Respond));
+	r->respondType = RES_DOOR_CANNOT_CLOSE;
+	return r;
+}
+
+Respond* makeDOPENDoneRespond() {
+	Respond* r = (Respond*)malloc(sizeof(Respond));
+	r->respondType = RES_OPEN_DOOR;
+	return r;
+}
+
+Respond* makeDCLOSEDoneRespond() {
+	Respond* r = (Respond*)malloc(sizeof(Respond));
+	r->respondType = RES_CLOSE_DOOR;
+	return r;
+}
 
 // in ra thong bao loi, tam thoi dung chuong trinh.
 // TODO: chuoi cac hoat dong khi gap error
@@ -28,23 +49,29 @@ void error(RespondType res) {
 
 Action* executeRespond(Respond* respond) {
 	switch(respond->respondType) {
-        case RES_DOOR_CANNOT_CLOSE:
+    case RES_DOOR_CANNOT_CLOSE:
 			error(RES_DOOR_CANNOT_CLOSE);
 			// mo cua o vi tri hien tai, can bien current position
 			/* return makeDOPENAction(); */
 			break;
-        case RES_INVALID_FLOOR:
+    case RES_INVALID_FLOOR:
 			error(RES_INVALID_FLOOR);
 			// bo request nay di, xu li request tiep trong queue
 			break;
-        case RES_INVALID_BUTTON:
+    case RES_INVALID_BUTTON:
 			error(RES_INVALID_BUTTON);
 			// bo request nay di, xu li request tiep trong queue
 			break;
-        case RES_OVERLOAD:
+    case RES_OVERLOAD:
 			error(RES_OVERLOAD);
 			/* return makeDOPENAction(); */
 			break;
+
+    case RES_OPEN_DOOR:
+		case RES_CLOSE_DOOR:
+			return NULL;
+			break;
+		
 		default:
 			break;
 	}

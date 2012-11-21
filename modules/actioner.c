@@ -11,8 +11,11 @@ Respond* executeAction(Action* action) {
 		case ACT_FLOOR:
 			break;
 		case ACT_DOPEN:
+			return makeDOPENDoneRespond();
 			break;
 		case ACT_DCLOSE:
+			// if co loi, return makeDoorCannotCloseRespond()
+      return makeDCLOSEDoneRespond();
 			break;
 		case ACT_ALARM:
 			break;
