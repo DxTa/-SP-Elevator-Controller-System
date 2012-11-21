@@ -7,6 +7,9 @@ void enqueueAction(Fnode** list, Action *act, int el) {
 	Fnode* curr;
 	int index = 0;
 	switch(act->actionType) {
+		/* case ACT_DOPEN: */
+			/* addFnode(list,act); */
+			/* break; */
 		case ACT_BREAK:
 			if ((*list)->val->actionType != ACT_BREAK)
 				addFnode(list,act);

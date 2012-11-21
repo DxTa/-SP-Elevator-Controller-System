@@ -18,9 +18,11 @@ SOURCES += main.cpp\
     modules/responder.c \
     modules/requestor.c \
     modules/data.c \
+    modules/actmaker.c \
     modules/actioner.c \
     modules/FunctionQueue/fqueue.c \
     modules/planner.c \
+    modules/engine.c \
     ui/outsidedialog.cpp \
     elevatorsystem.cpp \
     ui/insidedialog.cpp
@@ -30,9 +32,11 @@ HEADERS  += ui/mainwindow.h \
     modules/responder.h \
     modules/requestor.h \
     modules/data.h \
+    modules/actmaker.h \
     modules/actioner.h \
     modules/FunctionQueue/fqueue.h \
     modules/planner.h \
+    modules/engine.h \
     ui/outsidedialog.h \
     elevatorsystem.h \
     ui/insidedialog.h
