@@ -28,6 +28,9 @@ void error(RespondType res) {
 
 Action* executeRespond(Respond* respond) {
 	switch(respond->respondType) {
+		case RESP_ARRIVAL:
+			return makeDOPENAction(respond->key);
+			break;
         case RES_DOOR_CANNOT_CLOSE:
 			error(RES_DOOR_CANNOT_CLOSE);
 			// mo cua o vi tri hien tai, can bien current position
