@@ -31,7 +31,10 @@ typedef enum {
 	RES_DOOR_CANNOT_CLOSE,
 	RES_INVALID_FLOOR,
 	RES_INVALID_BUTTON,
-	RES_OVERLOAD
+	RES_OVERLOAD,
+
+	RES_OPEN_DOOR,
+	RES_CLOSE_DOOR
 } RespondType;
 
 typedef struct Request {
@@ -47,6 +50,7 @@ typedef struct Action {
 typedef struct Respond {
 	RespondType respondType;
 	void* key;
+	char *message;
 } Respond;
 
 
