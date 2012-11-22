@@ -69,14 +69,14 @@ Action* executeRespond(Respond* respond) {
 			break;
 
 		// respond khi ng dung bam nut mo hoac dong thang may
-    case RES_OPEN_DOOR:
-    	return makeDOPENAction(respond->key);
-    	break;
-		case RES_CLOSE_DOOR:
+	case RES_OPEN_DOOR:
+			return makeDOPENAction(respond->key);
+			break;
+	case RES_CLOSE_DOOR:
 			return makeDCLOSEAction(respond->key);
 			break;
-		
-		default:
+
+	default:
 			break;
 	}
 	return NULL;
