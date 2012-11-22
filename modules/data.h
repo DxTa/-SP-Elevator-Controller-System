@@ -50,6 +50,7 @@ typedef struct Action {
 typedef struct Respond {
 	RespondType respondType;
 	void* key;
+	char *message;
 } Respond;
 
 
