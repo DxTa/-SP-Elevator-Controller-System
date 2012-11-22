@@ -3,14 +3,6 @@
 int elevator[2] = {0,0};
 Fnode* list[2];
 
-void openDoor() {
-	printf("Open door\n");
-}
-
-void closeDoor() {
-	printf("Close door\n");
-}
-
 Respond* makeArrivalRespond(void *key) {
 	Respond* resp = (Respond*)malloc(sizeof(Respond));
 	resp->key = key;
