@@ -35,7 +35,8 @@ Respond* working() {
 						printf("---dang len %d---\n",elevator[0]);
 						break;
 					case 0:
-						dequeueAction(&list[0],elevator[0]);
+						dequeueAction(&list[0],ACT_CUP,action->key);
+						dequeueAction(&list[0],ACT_FLOOR,action->key);
 						printf("---den tang %d---\n",extractInt(action->key));
 						return makeArrivalRespond(action->key);
 				}
@@ -52,7 +53,8 @@ Respond* working() {
 						printf("---dang len %d---\n",elevator[0]);
 						break;
 					case 0:
-						dequeueAction(&list[0],elevator[0]);
+						dequeueAction(&list[0],ACT_CDOWN,action->key);
+						dequeueAction(&list[0],ACT_FLOOR,action->key);
 						printf("---den tang %d---\n",extractInt(action->key));
 						return makeArrivalRespond(action->key);
 				}
@@ -61,7 +63,8 @@ Respond* working() {
 				printf("---dang ... ----\n");
 				break;
 			case ACT_DOPEN:
-				printf("\n---mo cua ----\n");
+				printf("\n---mo cua %d----\n",elevator[0]);
+				dequeueAction(&list[0],ACT_DOPEN,NULL);
 				break;
 		}
 	}
@@ -80,7 +83,7 @@ Respond* executeAction(Action* action) {
 			printf("LIST AFTER ENQUEUE %d\n",count(list[0]));
 			break;
 		case ACT_DOPEN:
-			printf("---add action mo cua-----(moi toi chua dc xu ly)\n");
+			printf("---add action mo cua %d-----(moi toi chua dc xu ly)\n", elevator[0]);
 			/* printf("LIST BEFORE ENQUEUE %d\n",count(list[0])); */
 			enqueueAction(&list[0],action,elevator[0]);
 			/* printf("LIST AFTER ENQUEUE %d\n",count(list[0])); */
