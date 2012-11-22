@@ -84,8 +84,12 @@ Respond* executeAction(Action* action) {
 			/* printf("LIST BEFORE ENQUEUE %d\n",count(list[0])); */
 			enqueueAction(&list[0],action,elevator[0]);
 			/* printf("LIST AFTER ENQUEUE %d\n",count(list[0])); */
+			//return makeDOPENDoneRespond();
 			break;
 		case ACT_DCLOSE:
+			// action dong cua
+			// if co loi, return makeDoorCannotCloseRespond()
+      //return makeDCLOSEDoneRespond();
 			break;
 		case ACT_ALARM:
 			break;
