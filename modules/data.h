@@ -10,7 +10,6 @@ typedef enum {
 	REQ_DOPEN,
 	REQ_DCLOSE,
 	REQ_ALARM,
-
 } RequestType;
 
 typedef enum {
@@ -28,6 +27,7 @@ typedef enum {
 } ActionType;
 
 typedef enum {
+	RESP_ARRIVAL,
 	RES_DOOR_CANNOT_CLOSE,
 	RES_INVALID_FLOOR,
 	RES_INVALID_BUTTON,
@@ -49,13 +49,19 @@ typedef struct Action {
 
 typedef struct Respond {
 	RespondType respondType;
-	char *message;
+	void* key;
 } Respond;
 
 
 extern char* curMessage;
+extern Request *curReq;
+extern Action *curAct;
+extern Respond *curResp;
+
 
 int* makeInt(int value);
+
+int extractInt(void *val);
 
 #endif
 ;

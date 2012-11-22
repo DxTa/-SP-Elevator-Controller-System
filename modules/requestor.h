@@ -2,13 +2,7 @@
 #define _H_REQUESTOR_H_
 
 #include "data.h"
-
-Action* makeCUPAction(void* key);
-Action* makeCDOWNAction(void* key);
-Action* makeFLOORAction(void* key);
-Action* makeDOPENAction(void* key);
-Action* makeDCLOSEAction(void* key);
-Action* makeALARMAction(void* key);
+#include "actmaker.h"
 
 Action* executeRequest(Request* request);
 

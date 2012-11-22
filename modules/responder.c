@@ -14,7 +14,7 @@ struct Respond responds[10] = {
   // qua nhieu nguoi trong thang may
   {RES_OVERLOAD, "Overload."},
 
-  {RES_OPEN_DOOR, "Hold door open"},
+  {RES_OPEN_DOOR, "Open door"},
   {RES_CLOSE_DOOR, "Close door"}
 };
 
@@ -42,13 +42,16 @@ void error(RespondType res) {
   int i;
   for (i = 0 ; i < NUM_OF_RESPONDS; i++)
     if (responds[i].respondType == res) {
-      //printf("%s\n", responds[i].message);
-      exit(0);
+      printf("%s\n", responds[i].message);
+      //exit(0);
     }
 }
 
 Action* executeRespond(Respond* respond) {
 	switch(respond->respondType) {
+		case RESP_ARRIVAL:
+			return makeDOPENAction(respond->key);
+			break;
     case RES_DOOR_CANNOT_CLOSE:
 			error(RES_DOOR_CANNOT_CLOSE);
 			// mo cua o vi tri hien tai, can bien current position

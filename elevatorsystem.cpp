@@ -1,9 +1,5 @@
 #include "elevatorsystem.h"
 
-Request *curReq;
-Action *curAct;
-Respond *curResp;
-
 ElevatorSystem::ElevatorSystem(QObject *parent) :
     QObject(parent)
 {
@@ -46,8 +42,10 @@ int ElevatorSystem::update(int elapsedTime)
 	if(curResp) {
 		curAct = executeRespond(curResp);
 		curResp = executeAction(curAct);
+		curAct = NULL;
 	} else
 		curResp = executeAction(curAct);
+
 
 	//Uu tien Respond
 
@@ -57,6 +55,8 @@ int ElevatorSystem::update(int elapsedTime)
 			qDebug() << "\n-----------\n";
 		curResp = executeAction(curAct);
 		curReq = NULL;
+		curAct = NULL;
 	}
+
     return 0;
 }

@@ -16,10 +16,6 @@ extern "C"
 // include C library here
 }
 
-extern Request *curReq;
-extern Action *curAct;
-extern Respond *curResp;
-
 
 class ElevatorSystem : public QObject
 {
