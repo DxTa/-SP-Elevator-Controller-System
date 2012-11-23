@@ -167,6 +167,7 @@ void enqueueAction(Fnode** list, Action *act, int el) {
 				else if ( ((el <= extractInt(act->key)) && (extractInt(act->key) <= extractInt(curr->val->key))) ||
 						((el >= extractInt(act->key)) && (extractInt(act->key) >= extractInt(curr->val->key))) ) {
 					addFnodeAt(list,act,index);
+					break;
 				}
 				else if (
 						((curr->next != NULL) && (extractInt(curr->val->key) <= extractInt(act->key)) && (extractInt(act->key) <= extractInt(curr->next->val->key))) ||

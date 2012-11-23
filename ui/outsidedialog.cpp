@@ -68,5 +68,6 @@ void OutsideDialog::floor(int i) {
 
 void OutsideDialog::stepInsideClicked()
 {
+	curReq = sendRequest(REQ_DCLOSE,makeInt(10));
     //TODO: check if elevator arrived first
 }

@@ -19,6 +19,7 @@ SOURCES += main.cpp\
     modules/requestor.c \
     modules/data.c \
     modules/actmaker.c \
+    modules/respmaker.c \
     modules/actioner.c \
     modules/FunctionQueue/fqueue.c \
     modules/planner.c \
@@ -36,6 +37,7 @@ HEADERS  += ui/mainwindow.h \
     modules/requestor.h \
     modules/data.h \
     modules/actmaker.h \
+    modules/respmaker.h \
     modules/actioner.h \
     modules/FunctionQueue/fqueue.h \
     modules/planner.h \

@@ -1,6 +1,6 @@
 #include "door.h"
 
-const float door_speed = 0.04;
+const float door_speed = 0.003;
 
 void openD(float *pos) {
 	if (*pos < 1)

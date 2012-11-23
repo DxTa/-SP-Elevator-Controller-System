@@ -4,20 +4,6 @@ int elevator[2] = {0,0};
 float eleDoor[2] = {0,0};
 Fnode* list[2];
 
-Respond* makeArrivalRespond(void *key) {
-	Respond* resp = (Respond*)malloc(sizeof(Respond));
-	resp->key = key;
-	resp->respondType = RESP_ARRIVAL;
-	return resp;
-}
-
-Respond* makeDCloseRespond(void *key) {
-	Respond* resp = (Respond*)malloc(sizeof(Respond));
-	resp->key = key;
-	resp->respondType = RES_CLOSE_DOOR;
-	return resp;
-}
-
 int comparePosition(int cur,int des) {
 	if(cur > des)
 		return -1;
@@ -96,7 +82,7 @@ Respond* working() {
 						return makeDCloseRespond(action->key);
 					case 1:
 						openD(&eleDoor[0]);
-						printf("dang mo %d....\n",elevator[0]);
+						printf("dang mo %.2f \%....\n",eleDoor[0]);
 						break;
 				}
 				break;
@@ -109,7 +95,7 @@ Respond* working() {
 						break;
 					case 1:
 						closeD(&eleDoor[0]);
-						printf("dang dong %d....\n",elevator[0]);
+						printf("dang dong %.2f \%....\n",eleDoor[0]);
 						break;
 				}
 				break;
@@ -132,7 +118,6 @@ Respond* executeAction(Action* action) {
 		case ACT_DOPEN:
 			// can phai check xem thang may co o tang` nao hay khong
 			// neu khong thi deo cho mo? cua?
-			printf("---add action mo cua %d-----(moi toi chua dc xu ly)\n", elevator[0]);
 			/* printf("LIST BEFORE ENQUEUE %d\n",count(list[0])); */
 			dequeueAction(&list[0],ACT_DCLOSE,NULL);
 			enqueueAction(&list[0],action,elevator[0]);

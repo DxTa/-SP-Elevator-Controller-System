@@ -1,7 +1,7 @@
 int Motorspeed = 1;
 
 void goUp(int *pos) {
-*pos += Motorspeed;
+	*pos += Motorspeed;
 }
 
 void goDown(int *pos) {
