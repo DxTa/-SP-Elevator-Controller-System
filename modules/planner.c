@@ -237,6 +237,7 @@ void dequeueAction(Fnode* *list, ActionType type, void* key) {
 //find the next action that move the car from `Fnode * curr`
 //if curr == NULL search from the beginning
 Fnode* nextDes(Fnode *list, int el,Fnode *curr) {
+	if(list == NULL) return NULL;
 	Fnode *temp;
 	int index = skip(list,&temp,2);
 

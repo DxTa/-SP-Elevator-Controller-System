@@ -29,12 +29,12 @@ OutsideDialog::OutsideDialog(QWidget *parent, ElevatorSystem *elevatorSystem) :
 	connect (ui->floor_5, SIGNAL(clicked()), signalMapper, SLOT(map())) ;
 	connect (ui->floor_6, SIGNAL(clicked()), signalMapper, SLOT(map())) ;
 
-	signalMapper -> setMapping (ui->floor_1, 1) ;
-	signalMapper -> setMapping (ui->floor_2, 2) ;
-	signalMapper -> setMapping (ui->floor_3, 3) ;
-	signalMapper -> setMapping (ui->floor_4, 4) ;
-	signalMapper -> setMapping (ui->floor_5, 5) ;
-	signalMapper -> setMapping (ui->floor_6, 6) ;
+	signalMapper -> setMapping (ui->floor_1, 10) ;
+	signalMapper -> setMapping (ui->floor_2, 20) ;
+	signalMapper -> setMapping (ui->floor_3, 30) ;
+	signalMapper -> setMapping (ui->floor_4, 40) ;
+	signalMapper -> setMapping (ui->floor_5, 50) ;
+	signalMapper -> setMapping (ui->floor_6, 60) ;
 
 	connect (signalMapper, SIGNAL(mapped(int)), this, SLOT(floor(int))) ;
 

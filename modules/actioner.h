@@ -4,15 +4,13 @@
 #include "data.h"
 #include "planner.h"
 #include "engine.h"
+#include "respmaker.h"
 
 extern int elevator[2];
 
-
-Respond* makeArrivalRespond(void *key);
+int comparePosition(int cur,int des);
 
 Respond* executeAction(Action* action);
-
-int comparePosition(int cur,int des);
 
 Respond* working();
 

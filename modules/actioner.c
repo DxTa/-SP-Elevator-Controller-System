@@ -4,20 +4,6 @@ int elevator[2] = {0,0};
 float eleDoor[2] = {0,0};
 Fnode* list[2];
 
-Respond* makeArrivalRespond(void *key) {
-	Respond* resp = (Respond*)malloc(sizeof(Respond));
-	resp->key = key;
-	resp->respondType = RESP_ARRIVAL;
-	return resp;
-}
-
-Respond* makeDCloseRespond(void *key) {
-	Respond* resp = (Respond*)malloc(sizeof(Respond));
-	resp->key = key;
-	resp->respondType = RES_CLOSE_DOOR;
-	return resp;
-}
-
 int comparePosition(int cur,int des) {
 	if(cur > des)
 		return -1;
@@ -79,10 +65,10 @@ Respond* working() {
 						break;
 					case 0:
 						dequeueAction(&list[0],ACT_FLOOR,action->key);
-						/* if (directOfElevator(list[0],elevator[0]) >= 1) */
-							/* dequeueAction(&list[0],ACT_CUP,action->key); */
-						/* if (directOfElevator(list[0],elevator[0]) <= 1) */
-							/* dequeueAction(&list[0],ACT_CDOWN,action->key); */
+						if (directOfElevator(list[0],elevator[0]) >= 1)
+							dequeueAction(&list[0],ACT_CUP,action->key);
+						if (directOfElevator(list[0],elevator[0]) <= 1)
+							dequeueAction(&list[0],ACT_CDOWN,action->key);
 						printf("---den tang %d---\n",extractInt(action->key));
 						return makeArrivalRespond(action->key);
 				}
@@ -132,7 +118,6 @@ Respond* executeAction(Action* action) {
 		case ACT_DOPEN:
 			// can phai check xem thang may co o tang` nao hay khong
 			// neu khong thi deo cho mo? cua?
-			printf("---add action mo cua %d-----(moi toi chua dc xu ly)\n", elevator[0]);
 			/* printf("LIST BEFORE ENQUEUE %d\n",count(list[0])); */
 			dequeueAction(&list[0],ACT_DCLOSE,NULL);
 			enqueueAction(&list[0],action,elevator[0]);
