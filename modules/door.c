@@ -17,7 +17,7 @@ int isDOpen(float *pos) {
 	if (*pos >= 1) {
 		*pos = 1;
 		if(wait_time <=  0) {
-			wait_time = 3;
+			wait_time = 4;
 			return 0;
 		} else {
 			wait_time -= door_speed;
