@@ -82,7 +82,7 @@ Respond* working() {
 						return makeDCloseRespond(action->key);
 					case 1:
 						openD(&eleDoor[0]);
-						printf("dang mo %d....\n",elevator[0]);
+						printf("dang mo %.2f \%....\n",eleDoor[0]);
 						break;
 				}
 				break;
@@ -95,7 +95,7 @@ Respond* working() {
 						break;
 					case 1:
 						closeD(&eleDoor[0]);
-						printf("dang dong %d....\n",elevator[0]);
+						printf("dang dong %.2f \%....\n",eleDoor[0]);
 						break;
 				}
 				break;

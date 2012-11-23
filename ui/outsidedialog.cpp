@@ -29,12 +29,12 @@ OutsideDialog::OutsideDialog(QWidget *parent, ElevatorSystem *elevatorSystem) :
 	connect (ui->floor_5, SIGNAL(clicked()), signalMapper, SLOT(map())) ;
 	connect (ui->floor_6, SIGNAL(clicked()), signalMapper, SLOT(map())) ;
 
-	signalMapper -> setMapping (ui->floor_1, 10) ;
-	signalMapper -> setMapping (ui->floor_2, 20) ;
-	signalMapper -> setMapping (ui->floor_3, 30) ;
-	signalMapper -> setMapping (ui->floor_4, 40) ;
-	signalMapper -> setMapping (ui->floor_5, 50) ;
-	signalMapper -> setMapping (ui->floor_6, 60) ;
+	signalMapper -> setMapping (ui->floor_1, 1) ;
+	signalMapper -> setMapping (ui->floor_2, 2) ;
+	signalMapper -> setMapping (ui->floor_3, 3) ;
+	signalMapper -> setMapping (ui->floor_4, 4) ;
+	signalMapper -> setMapping (ui->floor_5, 5) ;
+	signalMapper -> setMapping (ui->floor_6, 6) ;
 
 	connect (signalMapper, SIGNAL(mapped(int)), this, SLOT(floor(int))) ;
 
@@ -62,11 +62,12 @@ void OutsideDialog::downClicked()
 }
 
 void OutsideDialog::floor(int i) {
-	curReq = sendRequest(REQ_FLOOR,makeInt(i));
-	qDebug() << i;
+	curReq = sendRequest(REQ_FLOOR,makeInt(i*10));
+	qDebug() << i*10;
 }
 
 void OutsideDialog::stepInsideClicked()
 {
+	curReq = sendRequest(REQ_DCLOSE,makeInt(10));
     //TODO: check if elevator arrived first
 }
