@@ -15,9 +15,28 @@ OutsideDialog::OutsideDialog(QWidget *parent, ElevatorSystem *elevatorSystem) :
 {
     ui->setupUi(this);
 
+	/* Add normal slots */
     QObject::connect(ui->upButton, SIGNAL(clicked()), this, SLOT(upClicked()));
     QObject::connect(ui->downButton, SIGNAL(clicked()), this, SLOT(downClicked()));
-    // QObject::connect(ui->stepInsideButton, SIGNAL(clicked()), this, SLOT(getInsideClicked()));
+
+
+	/* Add arguments to slots */
+	QSignalMapper* signalMapper = new QSignalMapper (this) ;
+	connect (ui->floor_1, SIGNAL(clicked()), signalMapper, SLOT(map())) ;
+	connect (ui->floor_2, SIGNAL(clicked()), signalMapper, SLOT(map())) ;
+	connect (ui->floor_3, SIGNAL(clicked()), signalMapper, SLOT(map())) ;
+	connect (ui->floor_4, SIGNAL(clicked()), signalMapper, SLOT(map())) ;
+	connect (ui->floor_5, SIGNAL(clicked()), signalMapper, SLOT(map())) ;
+	connect (ui->floor_6, SIGNAL(clicked()), signalMapper, SLOT(map())) ;
+
+	signalMapper -> setMapping (ui->floor_1, 1) ;
+	signalMapper -> setMapping (ui->floor_2, 2) ;
+	signalMapper -> setMapping (ui->floor_3, 3) ;
+	signalMapper -> setMapping (ui->floor_4, 4) ;
+	signalMapper -> setMapping (ui->floor_5, 5) ;
+	signalMapper -> setMapping (ui->floor_6, 6) ;
+
+	connect (signalMapper, SIGNAL(mapped(int)), this, SLOT(floor(int))) ;
 
     this->elevatorSystem = elevatorSystem;
     // connect signal & slot of elevator system
@@ -40,6 +59,11 @@ void OutsideDialog::downClicked()
  	curReq = sendRequest(REQ_CDOWN,makeInt(100));
 //	qDebug() << *((int*)curReq->key);
     //TODO: make a request to the elevator system here
+}
+
+void OutsideDialog::floor(int i) {
+	curReq = sendRequest(REQ_FLOOR,makeInt(i));
+	qDebug() << i;
 }
 
 void OutsideDialog::stepInsideClicked()

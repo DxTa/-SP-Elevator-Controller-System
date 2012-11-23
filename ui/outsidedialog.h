@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QDebug>
+#include <QSignalMapper>
 
 #include "elevatorsystem.h"
 
@@ -22,6 +23,7 @@ public slots:
     void upClicked();
     void downClicked();
     void stepInsideClicked();
+	void floor(int );
 
 private:
     Ui::OutsideDialog *ui;
