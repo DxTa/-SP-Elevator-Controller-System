@@ -3,5 +3,11 @@
 
 #include "data.h"
 
+extern float wait_time;
+
+void openD(float *pos);
+void closeD(float *pos);
+int isDOpen(float *pos);
+int isDClose(float *pos);
 
 #endif
