@@ -68,7 +68,24 @@ Respond* working() {
 				}
 				break;
 			case ACT_FLOOR:
-				printf("---dang ... ----\n");
+				switch(comparePosition(elevator[0],extractInt(action->key))) {
+					case -1 :
+						goDown(&elevator[0]);
+						printf("---dang xuong %d---\n",elevator[0]);
+						break;
+					case 1:
+						goUp(&elevator[0]);
+						printf("---dang len %d---\n",elevator[0]);
+						break;
+					case 0:
+						dequeueAction(&list[0],ACT_FLOOR,action->key);
+						if (directOfElevator(list[0],elevator[0]) >= 1)
+							dequeueAction(&list[0],ACT_CUP,action->key);
+						if (directOfElevator(list[0],elevator[0]) <= 1)
+							dequeueAction(&list[0],ACT_CDOWN,action->key);
+						printf("---den tang %d---\n",extractInt(action->key));
+						return makeArrivalRespond(action->key);
+				}
 				break;
 			case ACT_DOPEN:
 				switch(isDOpen(&eleDoor[0])) {
@@ -113,6 +130,8 @@ Respond* executeAction(Action* action) {
 			printf("LIST AFTER ENQUEUE %d\n",count(list[0]));
 			break;
 		case ACT_DOPEN:
+			// can phai check xem thang may co o tang` nao hay khong
+			// neu khong thi deo cho mo? cua?
 			printf("---add action mo cua %d-----(moi toi chua dc xu ly)\n", elevator[0]);
 			/* printf("LIST BEFORE ENQUEUE %d\n",count(list[0])); */
 			dequeueAction(&list[0],ACT_DCLOSE,NULL);
@@ -121,6 +140,7 @@ Respond* executeAction(Action* action) {
 			//return makeDOPENDoneRespond();
 			break;
 		case ACT_DCLOSE:
+			// giong ACT_DOPEN
 			// action dong cua
 			dequeueAction(&list[0],ACT_DOPEN,NULL);
 			enqueueAction(&list[0],action,elevator[0]);
