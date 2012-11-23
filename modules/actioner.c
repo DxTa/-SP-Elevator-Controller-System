@@ -1,6 +1,7 @@
 #include "actioner.h"
 
 int elevator[2] = {0,0};
+float eleDoor[2] = {0,0};
 Fnode* list[2];
 
 Respond* makeArrivalRespond(void *key) {
@@ -19,21 +20,12 @@ Respond* makeDCloseRespond(void *key) {
 
 int comparePosition(int cur,int des) {
 	if(cur > des)
-		return 1;
-	else if (cur < des)
 		return -1;
+	else if (cur < des)
+		return 1;
 	else
 		return 0;
 }
-
-void makeTimeout(int duration) {
-	int i=0;
-	for (i=0; i<duration; i++)
-		if (i%100 == 0)
-			printf(".\n");
-	return 0;
-}
-
 
 Respond* working() {
 	if(list[0]) {
@@ -42,13 +34,13 @@ Respond* working() {
 			case ACT_CUP:
 				printf("CUP");
 				switch(comparePosition(elevator[0],extractInt(action->key))) {
-					case 1 :
+					case -1 :
 						goDown(&elevator[0]);
-						printf("---dang xuong %d---\n",elevator[0]);
+						printf("-aa--dang xuong %d---\n",elevator[0]);
 						break;
-					case -1:
+					case 1:
 						goUp(&elevator[0]);
-						printf("---dang len %d---\n",elevator[0]);
+						printf("-aa--dang len %d---\n",elevator[0]);
 						break;
 					case 0:
 						dequeueAction(&list[0],ACT_CUP,action->key);
@@ -60,11 +52,11 @@ Respond* working() {
 			case ACT_CDOWN:
 				printf("CDOWN");
 				switch(comparePosition(elevator[0],extractInt(action->key))) {
-					case 1 :
+					case -1 :
 						goDown(&elevator[0]);
 						printf("---dang xuong %d---\n",elevator[0]);
 						break;
-					case -1:
+					case 1:
 						goUp(&elevator[0]);
 						printf("---dang len %d---\n",elevator[0]);
 						break;
@@ -79,14 +71,30 @@ Respond* working() {
 				printf("---dang ... ----\n");
 				break;
 			case ACT_DOPEN:
-				printf("\n---mo cua %d----\n",elevator[0]);
-				dequeueAction(&list[0],ACT_DOPEN,NULL);
-				makeTimeout(1000);
-				return makeDCloseRespond(action->key);
+				switch(isDOpen(&eleDoor[0])) {
+					case 0:
+						//check j thi o day
+						dequeueAction(&list[0],ACT_DOPEN,NULL);
+						printf("mo duoc roi\n");
+						return makeDCloseRespond(action->key);
+					case 1:
+						openD(&eleDoor[0]);
+						printf("dang mo %d....\n",elevator[0]);
+						break;
+				}
 				break;
 			case ACT_DCLOSE:
-				printf("\n---dong cua %d----\n",elevator[0]);
-				dequeueAction(&list[0],ACT_DCLOSE,NULL);
+				switch(isDClose(&eleDoor[0])) {
+					case 0:
+						//check j thi o day
+						dequeueAction(&list[0],ACT_DCLOSE,NULL);
+						printf("dong duoc roi\n");
+						break;
+					case 1:
+						closeD(&eleDoor[0]);
+						printf("dang dong %d....\n",elevator[0]);
+						break;
+				}
 				break;
 		}
 	}
@@ -107,12 +115,14 @@ Respond* executeAction(Action* action) {
 		case ACT_DOPEN:
 			printf("---add action mo cua %d-----(moi toi chua dc xu ly)\n", elevator[0]);
 			/* printf("LIST BEFORE ENQUEUE %d\n",count(list[0])); */
+			dequeueAction(&list[0],ACT_DCLOSE,NULL);
 			enqueueAction(&list[0],action,elevator[0]);
 			/* printf("LIST AFTER ENQUEUE %d\n",count(list[0])); */
 			//return makeDOPENDoneRespond();
 			break;
 		case ACT_DCLOSE:
 			// action dong cua
+			dequeueAction(&list[0],ACT_DOPEN,NULL);
 			enqueueAction(&list[0],action,elevator[0]);
 			// if co loi, return makeDoorCannotCloseRespond()
 			//return makeDCLOSEDoneRespond();
