@@ -14,6 +14,8 @@ int getLvlAct(Action *act) {
 			return 3;
 		case ACT_DCLOSE:
 			return 2;
+		default:
+			return -1;
 	}
 }
 
@@ -237,16 +239,17 @@ void dequeueAction(Fnode* *list, ActionType type, void* key) {
 Fnode* nextDes(Fnode *list, int el,Fnode *curr) {
 	Fnode *temp;
 	int index = skip(list,&temp,2);
-	while (temp != NULL) {
+
+	while (temp != NULL && curr != NULL) {
 		if (temp == curr)
 			break;
 		else
 			temp = temp->next;
 	}
-	if (temp != curr)
+	if (temp != curr && curr != NULL)
 		return NULL;
 	while(temp != NULL) {
-		if (getLvlAct(temp) == 1 && extractInt(temp->val->key) != el)
+		if (getLvlAct(temp->val) == 1 && extractInt(temp->val->key) != el)
 			break;
 		else
 			temp = temp->next;
@@ -259,8 +262,9 @@ int directOfElevator(Fnode *list, int el) {
 	Fnode* des;
 
 	des = nextDes(list,el,NULL);
-	if (des == NULL)
+	if (des == NULL) {
 		return 0;
+	}
 	else if (extractInt(des->val->key) < el)
 		return -1; //go down
 	else if (extractInt(des->val->key) > el)
