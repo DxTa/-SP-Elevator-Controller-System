@@ -62,8 +62,8 @@ void OutsideDialog::downClicked()
 }
 
 void OutsideDialog::floor(int i) {
-	curReq = sendRequest(REQ_FLOOR,makeInt(i));
-	qDebug() << i;
+	curReq = sendRequest(REQ_FLOOR,makeInt(i*10));
+	qDebug() << i*10;
 }
 
 void OutsideDialog::stepInsideClicked()

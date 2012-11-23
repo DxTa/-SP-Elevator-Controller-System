@@ -79,10 +79,10 @@ Respond* working() {
 						break;
 					case 0:
 						dequeueAction(&list[0],ACT_FLOOR,action->key);
-						/* if (directOfElevator(list[0],elevator[0]) >= 1) */
-							/* dequeueAction(&list[0],ACT_CUP,action->key); */
-						/* if (directOfElevator(list[0],elevator[0]) <= 1) */
-							/* dequeueAction(&list[0],ACT_CDOWN,action->key); */
+						if (directOfElevator(list[0],elevator[0]) >= 1)
+							dequeueAction(&list[0],ACT_CUP,action->key);
+						if (directOfElevator(list[0],elevator[0]) <= 1)
+							dequeueAction(&list[0],ACT_CDOWN,action->key);
 						printf("---den tang %d---\n",extractInt(action->key));
 						return makeArrivalRespond(action->key);
 				}

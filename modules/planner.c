@@ -105,11 +105,14 @@ void enqueueAction(Fnode** list, Action *act, int el) {
 					addFnodeAt(list,act,index);
 					break;
 				}
-				else if ( ((el <= extractInt(act->key)) && (extractInt(act->key) <= extractInt(curr->val->key))) ||
-						((curr->next != NULL) && (extractInt(curr->val->key) <= extractInt(act->key)) && (extractInt(act->key) <= extractInt(curr->next->val->key)))) {
+				else if ((el <= extractInt(act->key)) && (extractInt(act->key) <= extractInt(curr->val->key))) {
 					addFnodeAt(list,act,index);
 					break;
-
+				}
+				else if ((curr->next != NULL) && (extractInt(curr->val->key) <= extractInt(act->key)) && (extractInt(act->key) <= extractInt(curr->next->val->key))) {
+					index++;
+					addFnodeAt(list,act,index);
+					break;
 				}
 				else {
 					curr = curr->next;
@@ -124,14 +127,7 @@ void enqueueAction(Fnode** list, Action *act, int el) {
 				break;
 			curr = NULL;
 			index=0;
-			if ((*list != NULL) && (*list)->val->actionType == ACT_BREAK) {
-				curr = (*list)->next;
-				index++;
-			}
-			else {
-				curr = *list;
-			}
-
+			index == skip(*list,&curr,getLvlAct(act)+1);
 			while(1) {
 				if (el == extractInt(act->key))
 					break;
@@ -139,8 +135,12 @@ void enqueueAction(Fnode** list, Action *act, int el) {
 					addFnodeAt(list,act,index);
 					break;
 				}
-				else if (((el >= extractInt(act->key)) && (extractInt(act->key) >= extractInt(curr->val->key))) ||
-						((curr->next != NULL) && (extractInt(curr->val->key) >= extractInt(act->key)) && (extractInt(act->key) >= extractInt(curr->next->val->key))) ) {
+				else if ((el >= extractInt(act->key)) && (extractInt(act->key) >= extractInt(curr->val->key))) {
+					addFnodeAt(list,act,index);
+					break;
+				}
+				else if ((curr->next != NULL) && (extractInt(curr->val->key) >= extractInt(act->key)) && (extractInt(act->key) >= extractInt(curr->next->val->key))) {
+					index++;
 					addFnodeAt(list,act,index);
 					break;
 				}
@@ -156,11 +156,7 @@ void enqueueAction(Fnode** list, Action *act, int el) {
 				break;
 			curr = NULL;
 			index=0;
-			if ((*list != NULL) && (*list)->val->actionType == ACT_BREAK) {
-				curr = (*list)->next;
-				index++;
-			}
-			else curr = *list;
+			index == skip(*list,&curr,getLvlAct(act)+1);
 			while(1) {
 				if (el == extractInt(act->key))
 					break;
@@ -169,12 +165,15 @@ void enqueueAction(Fnode** list, Action *act, int el) {
 					break;
 				}
 				else if ( ((el <= extractInt(act->key)) && (extractInt(act->key) <= extractInt(curr->val->key))) ||
-						((el >= extractInt(act->key)) && (extractInt(act->key) >= extractInt(curr->val->key))) ||
+						((el >= extractInt(act->key)) && (extractInt(act->key) >= extractInt(curr->val->key))) ) {
+					addFnodeAt(list,act,index);
+				}
+				else if (
 						((curr->next != NULL) && (extractInt(curr->val->key) <= extractInt(act->key)) && (extractInt(act->key) <= extractInt(curr->next->val->key))) ||
 						((curr->next != NULL) && (extractInt(curr->val->key) >= extractInt(act->key)) && (extractInt(act->key) >= extractInt(curr->next->val->key))) ) {
+					index++;
 					addFnodeAt(list,act,index);
 					break;
-
 				}
 				else {
 					curr = curr->next;
@@ -214,8 +213,9 @@ void dequeueAction(Fnode* *list, ActionType type, void* key) {
 	}
 	else {
 		while(curr != NULL) {
-			if (curr->val->actionType == type && curr->val->key == key)
+			if (curr->val->actionType == type && curr->val->key == key) {
 				break;
+			}
 			else {
 				prev = curr;
 				curr = curr->next;
@@ -237,6 +237,7 @@ void dequeueAction(Fnode* *list, ActionType type, void* key) {
 //find the next action that move the car from `Fnode * curr`
 //if curr == NULL search from the beginning
 Fnode* nextDes(Fnode *list, int el,Fnode *curr) {
+	if (list == NULL) return NULL;
 	Fnode *temp;
 	int index = skip(list,&temp,2);
 
@@ -260,7 +261,6 @@ Fnode* nextDes(Fnode *list, int el,Fnode *curr) {
 //show the curr direction of elevator
 int directOfElevator(Fnode *list, int el) {
 	Fnode* des;
-
 	des = nextDes(list,el,NULL);
 	if (des == NULL) {
 		return 0;
