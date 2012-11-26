@@ -5,6 +5,13 @@ int elevator[2] = {0,0};
 int eleWeight[2] = {0,0};
 float eleDoor[2] = {0,0};
 
+void addWeight(int cur,int more) {
+	if(more < 0 && eleWeight[cur-1] <= 0 )
+		return;
+	eleWeight[cur-1] += more;
+	printf("---Weight: %d\n",eleWeight[cur-1]);
+}
+
 int comparePosition(int cur,int des) {
 	if(cur > des)
 		return -1;
