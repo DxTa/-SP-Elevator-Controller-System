@@ -9,6 +9,7 @@ Action* makeFLOORAction(void* key);
 Action* makeDOPENAction(void* key);
 Action* makeDCLOSEAction(void* key);
 Action* makeALARMAction(void* key);
+Action* makeSTOPAction(void* key);
 
 
 #endif
