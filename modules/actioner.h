@@ -11,6 +11,7 @@ extern int eleWeight[2];
 extern float eleDoor[2];
 
 int comparePosition(int cur,int des);
+void addWeight(int cur,int more);
 
 Respond* executeAction(Action* action);
 
