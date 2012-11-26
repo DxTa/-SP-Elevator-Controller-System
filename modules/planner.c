@@ -99,8 +99,11 @@ void enqueueAction(Fnode** list, Action *act, int el) {
 			curr = NULL;
 			index == skip(*list,&curr,getLvlAct(act)+1);
 			while(1) {
-				if (el == extractInt(act->key))
+				if (el == extractInt(act->key)) {
+					if (directOfElevator(*list,el) >= 0)
+						addFnodeAt(list,act,index);
 					break;
+				}
 				else if (curr == NULL) {
 					addFnodeAt(list,act,index);
 					break;
@@ -129,8 +132,11 @@ void enqueueAction(Fnode** list, Action *act, int el) {
 			index=0;
 			index == skip(*list,&curr,getLvlAct(act)+1);
 			while(1) {
-				if (el == extractInt(act->key))
+				if (el == extractInt(act->key)) {
+					if (directOfElevator(*list,el) <= 0)
+						addFnodeAt(list,act,index);
 					break;
+				}
 				else if (curr == NULL) {
 					addFnodeAt(list,act,index);
 					break;

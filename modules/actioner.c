@@ -1,8 +1,9 @@
 #include "actioner.h"
 
-int elevator[2] = {0,0};
-float eleDoor[2] = {0,0};
 Fnode* list[2];
+int elevator[2] = {0,0};
+int eleWeight[2] = {0,0};
+float eleDoor[2] = {0,0};
 
 int comparePosition(int cur,int des) {
 	if(cur > des)
@@ -94,6 +95,7 @@ Respond* working() {
 					case 0:
 						//check j thi o day
 						dequeueAction(&list[0],ACT_DCLOSE,NULL);
+						printf("---------%d\n",eleWeight[0]);
 						printf("dong duoc roi\n");
 						break;
 					case 1:
