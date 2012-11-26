@@ -5,6 +5,8 @@
 #include <QTime>
 #include <QThread>
 #include <QDebug>
+#include <QSignalMapper>
+
 
 extern "C"
 {

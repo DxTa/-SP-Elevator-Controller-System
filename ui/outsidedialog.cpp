@@ -50,6 +50,7 @@ OutsideDialog::~OutsideDialog()
 
 void OutsideDialog::upClicked()
 {
+
  	curReq = sendRequest(REQ_CUP,makeInt(50));
 //	qDebug() << *((int*)curReq->key);
     //TODO: make a request to the elevator system here

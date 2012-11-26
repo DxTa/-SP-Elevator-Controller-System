@@ -16,6 +16,8 @@
   <widget class="QFrame" name="elevatorView">
    <property name="geometry">
     <rect>
+     <!-- <x>210</x> -->
+     <!-- <y>590</y> -->
      <x>210</x>
      <y>590</y>
      <width>267</width>
