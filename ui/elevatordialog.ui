@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>694</width>
-    <height>726</height>
+    <height>706</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,10 +16,10 @@
   <widget class="QFrame" name="elevatorView">
    <property name="geometry">
     <rect>
-     <x>210</x>
-     <y>590</y>
-     <width>267</width>
-     <height>91</height>
+     <x>227</x>
+     <y>583</y>
+     <width>371</width>
+     <height>101</height>
     </rect>
    </property>
    <property name="frameShape">
@@ -114,7 +114,7 @@
     <rect>
      <x>102</x>
      <y>50</y>
-     <width>103</width>
+     <width>125</width>
      <height>634</height>
     </rect>
    </property>

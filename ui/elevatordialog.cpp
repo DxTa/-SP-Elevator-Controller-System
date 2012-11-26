@@ -94,17 +94,14 @@ ElevatorDialog::~ElevatorDialog()
 
 void ElevatorDialog::upClicked(int i) {
  	curReq = sendRequest(REQ_CUP,makeInt(i));
-	qDebug() << i;
 }
 
 void ElevatorDialog::downClicked(int i) {
  	curReq = sendRequest(REQ_CDOWN,makeInt(i));
-	qDebug() << i;
 }
 
 void ElevatorDialog::floor(int i ) {
 	curReq = sendRequest(REQ_FLOOR,makeInt(i));
-	qDebug() << i;
 }
 
 void ElevatorDialog::changeWeight(int i) {
@@ -115,7 +112,7 @@ void ElevatorDialog::changeElevatorPosition(int position)
 {
     QRect geometry = ui->elevatorView->geometry();
 
-    geometry.setY(ElevatorDialog::ElevatorViewY - position*((600-50)/6));
+    geometry.setY(ElevatorDialog::ElevatorViewY - 7 - 107*(position-20)/20);
 
     ui->elevatorView->setGeometry(geometry);
 }

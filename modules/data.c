@@ -7,7 +7,7 @@ Respond *curResp;
 
 int* makeInt(int value) {
 	int *in = (int*)malloc(sizeof(int));
-	*in = value;
+	*in = value*20;
 	return in;
 }
 
