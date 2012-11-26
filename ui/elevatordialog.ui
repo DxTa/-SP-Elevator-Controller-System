@@ -16,8 +16,6 @@
   <widget class="QFrame" name="elevatorView">
    <property name="geometry">
     <rect>
-     <!-- <x>210</x> -->
-     <!-- <y>590</y> -->
      <x>210</x>
      <y>590</y>
      <width>267</width>
@@ -27,7 +25,10 @@
    <property name="frameShape">
     <enum>QFrame::Box</enum>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout_3">
+   <layout class="QHBoxLayout" name="_2">
+    <property name="sizeConstraint">
+     <enum>QLayout::SetFixedSize</enum>
+    </property>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
@@ -108,13 +109,13 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>102</x>
      <y>50</y>
      <width>103</width>
-     <height>631</height>
+     <height>634</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -324,18 +325,6 @@
     </item>
    </layout>
   </widget>
-  <zorder>upButton_1</zorder>
-  <zorder>downButton_1</zorder>
-  <zorder>label</zorder>
-  <zorder>layoutWidget</zorder>
-  <zorder>layoutWidget_2</zorder>
-  <zorder>frame</zorder>
-  <zorder>frame_2</zorder>
-  <zorder>label_4</zorder>
-  <zorder>frame_3</zorder>
-  <zorder>frame_4</zorder>
-  <zorder>frame_5</zorder>
-  <zorder>frame_6</zorder>
  </widget>
  <resources/>
  <connections/>
