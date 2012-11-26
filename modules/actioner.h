@@ -7,6 +7,8 @@
 #include "respmaker.h"
 
 extern int elevator[2];
+extern int eleWeight[2];
+extern float eleDoor[2];
 
 int comparePosition(int cur,int des);
 

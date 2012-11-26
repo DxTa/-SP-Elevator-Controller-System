@@ -59,7 +59,6 @@ extern Request *curReq;
 extern Action *curAct;
 extern Respond *curResp;
 
-
 int* makeInt(int value);
 
 int extractInt(void *val);
