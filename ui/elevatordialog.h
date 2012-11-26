@@ -25,10 +25,12 @@ public slots:
     void downClicked(int);
 	void floor(int );
 	void changeWeight(int );
+    void changeElevatorPosition(int position);
 
 private:
     Ui::ElevatorDialog *ui;
     ElevatorSystem *elevatorSystem;
+    static int ElevatorViewY;
 };
 
 #endif // ELEVATORDIALOG_H

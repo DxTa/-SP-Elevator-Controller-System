@@ -9,6 +9,8 @@ extern "C"
 // include C library here
 }
 
+int ElevatorDialog::ElevatorViewY = 590;
+
 ElevatorDialog::ElevatorDialog(QWidget *parent, ElevatorSystem *elevatorSystem) :
     QDialog(parent),
     ui(new Ui::ElevatorDialog)
@@ -78,6 +80,8 @@ ElevatorDialog::ElevatorDialog(QWidget *parent, ElevatorSystem *elevatorSystem) 
 
     this->elevatorSystem = elevatorSystem;
 
+    // Elevator view
+    this->connect(this->elevatorSystem, SIGNAL(changeElevatorPosition(int)), this, SLOT(changeElevatorPosition(int)));
 }
 
 ElevatorDialog::~ElevatorDialog()
@@ -87,20 +91,26 @@ ElevatorDialog::~ElevatorDialog()
 
 
 void ElevatorDialog::upClicked(int i) {
- 	curReq = sendRequest(REQ_CUP,makeInt(i));
-	qDebug() << i;
+ 	curReq = sendRequest(REQ_CUP,makeInt(i*20));
 }
 
 void ElevatorDialog::downClicked(int i) {
- 	curReq = sendRequest(REQ_CDOWN,makeInt(i));
-	qDebug() << i;
+ 	curReq = sendRequest(REQ_CDOWN,makeInt(i*20));
 }
 
 void ElevatorDialog::floor(int i ) {
-	curReq = sendRequest(REQ_FLOOR,makeInt(i));
-	qDebug() << i;
+	curReq = sendRequest(REQ_FLOOR,makeInt(i*20));
 }
 
 void ElevatorDialog::changeWeight(int i) {
 	addWeight(1,i);
+}
+
+void ElevatorDialog::changeElevatorPosition(int position)
+{
+    QRect geometry = ui->elevatorView->geometry();
+
+    geometry.setY(ElevatorDialog::ElevatorViewY - position*((30-2)/6));
+
+    ui->elevatorView->setGeometry(geometry);
 }
