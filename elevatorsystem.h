@@ -29,6 +29,7 @@ public:
 
 private:
     int update(int elapsedTime);
+    void draw();
 
     // Nested class
     class ElevatorSystemThread : public QThread
@@ -44,7 +45,10 @@ private:
     QTime time;
     ElevatorSystemThread *thread;
 
+    int currentPosition;
+
 signals:
+    void changeElevatorPosition(int position);
 
 public slots:
 
