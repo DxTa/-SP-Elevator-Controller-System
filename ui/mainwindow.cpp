@@ -17,7 +17,7 @@ void MainWindow::startElevatorSimulator()
     elevatorSystem->start();
 
     ElevatorDialog *elevatorDialog;
-    elevatorDialog = new ElevatorDialog(NULL);
+    elevatorDialog = new ElevatorDialog(NULL,this->elevatorSystem);
     elevatorDialog->show();
     elevatorDialog->raise();
     elevatorDialog->activateWindow();
