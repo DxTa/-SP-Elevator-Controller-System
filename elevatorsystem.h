@@ -4,6 +4,18 @@
 #include <QObject>
 #include <QTime>
 #include <QThread>
+#include <QDebug>
+
+extern "C"
+{
+	#include "modules/data.h"
+	#include "modules/request.h"
+	#include "modules/requestor.h"
+	#include "modules/actioner.h"
+	#include "modules/responder.h"
+// include C library here
+}
+
 
 class ElevatorSystem : public QObject
 {
@@ -14,7 +26,7 @@ public:
     void start();
 
 private:
-    void update(int elapsedTime);
+    int update(int elapsedTime);
 
     // Nested class
     class ElevatorSystemThread : public QThread
@@ -27,19 +39,16 @@ private:
     };
 
     // Variable
-    int currentValue;
     QTime time;
     ElevatorSystemThread *thread;
-    
+
 signals:
-    void valueChanged(int newValue);
-    
+
 public slots:
-    void reset();
 
 protected:
     int tick();
-    
+
 };
 
 #endif // ELEVATORSYSTEM_H

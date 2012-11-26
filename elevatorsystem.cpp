@@ -1,4 +1,5 @@
 #include "elevatorsystem.h"
+
 ElevatorSystem::ElevatorSystem(QObject *parent) :
     QObject(parent)
 {
@@ -9,7 +10,6 @@ ElevatorSystem::ElevatorSystem(QObject *parent) :
 void ElevatorSystem::start()
 {
     this->time.start();
-    this->currentValue = 0;
 
     this->thread->start();
 }
@@ -27,22 +27,36 @@ void ElevatorSystem::ElevatorSystemThread::run()
 
 int ElevatorSystem::tick()
 {
-    // update the time
+    // Get the time between frame
     int elapsed = this->time.elapsed();
     this->time.restart();
 
-    this->update(elapsed);
+    if (this->update(elapsed) != 0) return 1;
 
     return 0;
 }
 
-void ElevatorSystem::update(int elapsedTime)
+int ElevatorSystem::update(int elapsedTime)
 {
-    this->currentValue += elapsedTime;
-    this->valueChanged(this->currentValue);
-}
+    // Update your system here
+	if(curResp) {
+		curAct = executeRespond(curResp);
+		curResp = executeAction(curAct);
+		curAct = NULL;
+	} else
+		curResp = executeAction(curAct);
 
-void ElevatorSystem::reset()
-{
-    this->currentValue = 0;
+
+	//Uu tien Respond
+
+	if(curReq) {
+		curAct = executeRequest(curReq);
+		if(curAct != NULL)
+			qDebug() << "\n-----------\n";
+		curResp = executeAction(curAct);
+		curReq = NULL;
+		curAct = NULL;
+	}
+
+    return 0;
 }

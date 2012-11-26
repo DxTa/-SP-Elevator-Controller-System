@@ -5,6 +5,7 @@ Request* makeCUPRequest(void* key) {
 	Request *req = (Request*)malloc(sizeof(Request));
 	req->requestType = REQ_CUP;
 	req->key = (int*)key;
+	printf("REQ_CUP %d\n",*((int*)key));
 	return req;
 }
 
@@ -12,6 +13,7 @@ Request* makeCDOWNRequest(void* key) {
 	Request *req = (Request*)malloc(sizeof(Request));
 	req->requestType = REQ_CDOWN;
 	req->key = (int*)key;
+	printf("REQ_CDOWN %d\n",*((int*)key));
 	return req;
 }
 
@@ -19,6 +21,7 @@ Request* makeFLOORRequest(void* key) {
 	Request *req = (Request*)malloc(sizeof(Request));
 	req->requestType = REQ_FLOOR;
 	req->key = (int*)key;
+	printf("REQ_FLOOR %d\n",*((int*)key));
 	return req;
 }
 

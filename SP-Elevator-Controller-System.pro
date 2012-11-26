@@ -18,20 +18,40 @@ SOURCES += main.cpp\
     modules/responder.c \
     modules/requestor.c \
     modules/data.c \
+    modules/actmaker.c \
+    modules/respmaker.c \
     modules/actioner.c \
     modules/FunctionQueue/fqueue.c \
+    modules/planner.c \
+    modules/engine.c \
+    modules/door.c \
+    modules/informer.c \
+    modules/checker.c \
     ui/outsidedialog.cpp \
-    elevatorsystem.cpp
+    elevatorsystem.cpp \
+    ui/insidedialog.cpp \
+    ui/elevatordialog.cpp
 
 HEADERS  += ui/mainwindow.h \
     modules/request.h \
     modules/responder.h \
     modules/requestor.h \
     modules/data.h \
+    modules/actmaker.h \
+    modules/respmaker.h \
     modules/actioner.h \
     modules/FunctionQueue/fqueue.h \
+    modules/planner.h \
+    modules/engine.h \
+    modules/door.h \
+    modules/informer.h \
+    modules/checker.h \
     ui/outsidedialog.h \
-    elevatorsystem.h
+    elevatorsystem.h \
+    ui/insidedialog.h \
+    ui/elevatordialog.h
 
 FORMS    += ui/mainwindow.ui \
-    ui/outsidedialog.ui
+    ui/outsidedialog.ui \
+    ui/insidedialog.ui \
+    ui/elevatordialog.ui
