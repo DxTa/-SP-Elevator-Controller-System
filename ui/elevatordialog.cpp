@@ -80,8 +80,10 @@ ElevatorDialog::ElevatorDialog(QWidget *parent, ElevatorSystem *elevatorSystem) 
 
     this->elevatorSystem = elevatorSystem;
 
-    // Elevator view
-    this->connect(this->elevatorSystem, SIGNAL(changeElevatorPosition(int)), this, SLOT(changeElevatorPosition(int)));
+    // Elevator position
+    this->connect(this->elevatorSystem, SIGNAL(elevatorPositionChanged(int)), this, SLOT(changeElevatorPosition(int)));
+    // Door position
+    this->connect(this->elevatorSystem, SIGNAL(doorPositionChanged(double)), this, SLOT(changeDoorPosition(double)));
 }
 
 ElevatorDialog::~ElevatorDialog()
@@ -116,4 +118,20 @@ void ElevatorDialog::changeElevatorPosition(int position)
     geometry.setY(ElevatorDialog::ElevatorViewY - position*((600-50)/6));
 
     ui->elevatorView->setGeometry(geometry);
+}
+
+void ElevatorDialog::changeDoorPosition(double position)
+{
+    if (position <= 0.0)
+    {
+        ui->doorLabel->setText("CLOSED");
+    }
+    else if (position >= 1.0)
+    {
+        ui->doorLabel->setText("OPENED");
+    }
+    else
+    {
+        ui->doorLabel->setText(QString::number(position));
+    }
 }

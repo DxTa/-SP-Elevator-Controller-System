@@ -26,6 +26,7 @@ public slots:
 	void floor(int );
 	void changeWeight(int );
     void changeElevatorPosition(int position);
+    void changeDoorPosition(double position);
 
 private:
     Ui::ElevatorDialog *ui;
