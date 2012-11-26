@@ -25,6 +25,7 @@ int skip(Fnode* list,Fnode* *curr,int lvl) {
 	Fnode *temp;
 	temp = list;
 	int count = 0;
+
 	if (list == NULL)
 		return 0;
 	else {
@@ -97,7 +98,7 @@ void enqueueAction(Fnode** list, Action *act, int el) {
 			if (checkExistAct(*list, act->actionType, act->key) > 0)
 				break;
 			curr = NULL;
-			index == skip(*list,&curr,getLvlAct(act)+1);
+			index = skip(*list,&curr,getLvlAct(act)+1);
 			while(1) {
 				if (el == extractInt(act->key)) {
 					if (directOfElevator(*list,el) >= 0)
@@ -130,7 +131,7 @@ void enqueueAction(Fnode** list, Action *act, int el) {
 				break;
 			curr = NULL;
 			index=0;
-			index == skip(*list,&curr,getLvlAct(act)+1);
+			index = skip(*list,&curr,getLvlAct(act)+1);
 			while(1) {
 				if (el == extractInt(act->key)) {
 					if (directOfElevator(*list,el) <= 0)
@@ -162,7 +163,7 @@ void enqueueAction(Fnode** list, Action *act, int el) {
 				break;
 			curr = NULL;
 			index=0;
-			index == skip(*list,&curr,getLvlAct(act)+1);
+			index = skip(*list,&curr,getLvlAct(act)+1);
 			while(1) {
 				if (el == extractInt(act->key))
 					break;
