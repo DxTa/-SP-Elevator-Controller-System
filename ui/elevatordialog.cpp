@@ -102,6 +102,5 @@ void ElevatorDialog::floor(int i ) {
 }
 
 void ElevatorDialog::changeWeight(int i) {
-	elevator[0] += i;
-	qDebug() << elevator[0];
+	addWeight(1,i);
 }
