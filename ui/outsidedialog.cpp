@@ -18,6 +18,7 @@ OutsideDialog::OutsideDialog(QWidget *parent, ElevatorSystem *elevatorSystem) :
 	/* Add normal slots */
     QObject::connect(ui->upButton, SIGNAL(clicked()), this, SLOT(upClicked()));
     QObject::connect(ui->downButton, SIGNAL(clicked()), this, SLOT(downClicked()));
+    QObject::connect(ui->stepInsideButton, SIGNAL(clicked()), this, SLOT(stepInsideClicked()));
 
 
 	/* Add arguments to slots */

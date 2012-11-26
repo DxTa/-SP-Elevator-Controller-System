@@ -1,6 +1,7 @@
 #include "door.h"
 
-const float door_speed = 0.003;
+const float door_speed = 0.04;
+float wait_time = 4;
 
 void openD(float *pos) {
 	if (*pos < 1)
@@ -15,9 +16,15 @@ void closeD(float *pos) {
 int isDOpen(float *pos) {
 	if (*pos >= 1) {
 		*pos = 1;
-		return 0;
+		if(wait_time <=  0) {
+			wait_time = 4;
+			return 0;
+		} else {
+			wait_time -= door_speed;
+			return 1;
+		}
 	}
-	else return 1;
+	else return 2;
 }
 
 int isDClose(float *pos) {

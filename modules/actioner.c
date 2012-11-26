@@ -78,9 +78,12 @@ Respond* working() {
 					case 0:
 						//check j thi o day
 						dequeueAction(&list[0],ACT_DOPEN,NULL);
-						printf("mo duoc roi\n");
+						printf("dong nay \n");
 						return makeDCloseRespond(action->key);
 					case 1:
+						printf("dang cho\n");
+						break;
+					case 2:
 						openD(&eleDoor[0]);
 						printf("dang mo %.2f \%....\n",eleDoor[0]);
 						break;
