@@ -83,6 +83,10 @@ ElevatorDialog::ElevatorDialog(QWidget *parent, ElevatorSystem *elevatorSystem) 
     this->connect(this->elevatorSystem, SIGNAL(elevatorPositionChanged(int)), this, SLOT(changeElevatorPosition(int)));
     // Door position
     this->connect(this->elevatorSystem, SIGNAL(doorPositionChanged(double)), this, SLOT(changeDoorPosition(double)));
+
+    // Weight buttons
+    this->connect(this->ui->increaseWeightButton, SIGNAL(clicked()), this, SLOT(increaseWeight()));
+    this->connect(this->ui->decreaseWeightButton, SIGNAL(clicked()), this, SLOT(decreaseWeight()));
 }
 
 ElevatorDialog::~ElevatorDialog()
@@ -118,16 +122,26 @@ void ElevatorDialog::changeElevatorPosition(int position)
 
 void ElevatorDialog::changeDoorPosition(double position)
 {
-    if (position <= 0.0)
-    {
-        ui->doorLabel->setText("CLOSED");
-    }
-    else if (position >= 1.0)
-    {
-        ui->doorLabel->setText("OPENED");
-    }
-    else
-    {
-        ui->doorLabel->setText(QString::number(position));
-    }
+    double reversePosition = 1 - position;
+
+    QRect leftDoorGeometry = ui->leftDoor->geometry();
+    QRect rightDoorGeometry = ui->rightDoor->geometry();
+
+    leftDoorGeometry.setWidth(81*reversePosition);
+
+    rightDoorGeometry.setX(2*81 - 81*reversePosition);
+    rightDoorGeometry.setWidth(81*reversePosition);
+
+    ui->leftDoor->setGeometry(leftDoorGeometry);
+    ui->rightDoor->setGeometry(rightDoorGeometry);
+}
+
+void ElevatorDialog::increaseWeight()
+{
+
+}
+
+void ElevatorDialog::decreaseWeight()
+{
+
 }
