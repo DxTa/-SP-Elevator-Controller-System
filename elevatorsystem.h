@@ -45,10 +45,12 @@ private:
     QTime time;
     ElevatorSystemThread *thread;
 
-    int currentPosition;
+    int currentElevatorPosition;
+    double currentDoorPosition;
 
 signals:
-    void changeElevatorPosition(int position);
+    void elevatorPositionChanged(int position);
+    void doorPositionChanged(double position);
 
 public slots:
 
