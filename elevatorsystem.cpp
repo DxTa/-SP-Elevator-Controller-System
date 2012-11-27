@@ -67,9 +67,15 @@ int ElevatorSystem::update(int elapsedTime)
 
 void ElevatorSystem::draw()
 {
-    if (this->currentPosition != elevator[0])
+    if (this->currentElevatorPosition != elevator[0])
     {
-        this->currentPosition = elevator[0];
-        this->changeElevatorPosition(this->currentPosition);
+        this->currentElevatorPosition = elevator[0];
+        this->elevatorPositionChanged(this->currentElevatorPosition);
+    }
+
+    if (this->currentDoorPosition != eleDoor[0])
+    {
+        this->currentDoorPosition = eleDoor[0];
+        this->doorPositionChanged(this->currentDoorPosition);
     }
 }

@@ -79,8 +79,14 @@ ElevatorDialog::ElevatorDialog(QWidget *parent, ElevatorSystem *elevatorSystem) 
 
     this->elevatorSystem = elevatorSystem;
 
-    // Elevator view
-    this->connect(this->elevatorSystem, SIGNAL(changeElevatorPosition(int)), this, SLOT(changeElevatorPosition(int)));
+    // Elevator position
+    this->connect(this->elevatorSystem, SIGNAL(elevatorPositionChanged(int)), this, SLOT(changeElevatorPosition(int)));
+    // Door position
+    this->connect(this->elevatorSystem, SIGNAL(doorPositionChanged(double)), this, SLOT(changeDoorPosition(double)));
+
+    // Weight buttons
+    this->connect(this->ui->increaseWeightButton, SIGNAL(clicked()), this, SLOT(increaseWeight()));
+    this->connect(this->ui->decreaseWeightButton, SIGNAL(clicked()), this, SLOT(decreaseWeight()));
 }
 
 ElevatorDialog::~ElevatorDialog()
@@ -112,4 +118,30 @@ void ElevatorDialog::changeElevatorPosition(int position)
     geometry.setY(ElevatorDialog::ElevatorViewY - 7 - 107*(position-20)/20);
 
     ui->elevatorView->setGeometry(geometry);
+}
+
+void ElevatorDialog::changeDoorPosition(double position)
+{
+    double reversePosition = 1 - position;
+
+    QRect leftDoorGeometry = ui->leftDoor->geometry();
+    QRect rightDoorGeometry = ui->rightDoor->geometry();
+
+    leftDoorGeometry.setWidth(81*reversePosition);
+
+    rightDoorGeometry.setX(2*81 - 81*reversePosition);
+    rightDoorGeometry.setWidth(81*reversePosition);
+
+    ui->leftDoor->setGeometry(leftDoorGeometry);
+    ui->rightDoor->setGeometry(rightDoorGeometry);
+}
+
+void ElevatorDialog::increaseWeight()
+{
+
+}
+
+void ElevatorDialog::decreaseWeight()
+{
+
 }
