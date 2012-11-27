@@ -5,12 +5,11 @@
 #include "planner.h"
 #include "engine.h"
 #include "respmaker.h"
+#include "checker.h"
+#include "informer.h"
 
-extern int elevator[2];
-extern int eleWeight[2];
-extern float eleDoor[2];
+extern Fnode* list[2];
 
-int comparePosition(int cur,int des);
 void addWeight(int cur,int more);
 
 Respond* executeAction(Action* action);
