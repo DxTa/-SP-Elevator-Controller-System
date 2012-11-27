@@ -1,7 +1,7 @@
 #include "actioner.h"
 
 Fnode* list[2];
-int elevator[2] = {1,1};
+int elevator[2] = {20,1};
 int eleWeight[2] = {0,0};
 float eleDoor[2] = {0,0};
 int blocker[2] = {0,0};
