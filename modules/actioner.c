@@ -1,7 +1,7 @@
 #include "actioner.h"
 
 Fnode* list[2];
-int elevator[2] = {20,1};
+int elevator[2] = {20,20};
 int eleWeight[2] = {0,0};
 float eleDoor[2] = {0,0};
 int blocker[2] = {0,0};
@@ -68,7 +68,7 @@ Respond* working() {
 							return makeDoorNotCloseRespond(action->key);
 
 						goDown(&elevator[0]);
-						/* printf("-aa--dang xuong %d---\n",elevator[0]); */
+						/* printf("---dang xuong %d---\n",elevator[0]); */
 						break;
 					case 1:
 						/* check Door is close */
@@ -76,11 +76,13 @@ Respond* working() {
 							return makeDoorNotCloseRespond(action->key);
 
 						goUp(&elevator[0]);
-						/* printf("-aa--dang len %d---\n",elevator[0]); */
+						/* printf("---dang len %d---\n",elevator[0]); */
 						break;
 					case 0:
 						dequeueAction(&list[0],ACT_CUP,action->key);
 						dequeueAction(&list[0],ACT_FLOOR,action->key);
+						if (comparePosition(elevator[0],120) == 0)
+							dequeueAction(&list[0],ACT_CDOWN,action->key);
 						printf("---den tang %d---\n",extractInt(action->key));
 						return makeArrivalRespond(action->key);
 				}
@@ -107,6 +109,8 @@ Respond* working() {
 					case 0:
 						dequeueAction(&list[0],ACT_CDOWN,action->key);
 						dequeueAction(&list[0],ACT_FLOOR,action->key);
+						if (comparePosition(elevator[0],20) == 0)
+							dequeueAction(&list[0],ACT_CUP,action->key);
 						printf("---den tang %d---\n",extractInt(action->key));
 						return makeArrivalRespond(action->key);
 				}
@@ -131,9 +135,9 @@ Respond* working() {
 						break;
 					case 0:
 						dequeueAction(&list[0],ACT_FLOOR,action->key);
-						if (directOfElevator(list[0],elevator[0]) >= 1)
+						if (comparePosition(elevator[0],20) == 0 ||comparePosition(elevator[0],120) == 0 || directOfElevator(list[0],elevator[0]) >= 1)
 							dequeueAction(&list[0],ACT_CUP,action->key);
-						if (directOfElevator(list[0],elevator[0]) <= 1)
+						if (comparePosition(elevator[0],20) == 0 ||comparePosition(elevator[0],120) == 0 || directOfElevator(list[0],elevator[0]) <= 1)
 							dequeueAction(&list[0],ACT_CDOWN,action->key);
 						printf("---den tang %d---\n",extractInt(action->key));
 						return makeArrivalRespond(action->key);
@@ -144,7 +148,7 @@ Respond* working() {
 					case 0:
 						//check j thi o day
 						dequeueAction(&list[0],ACT_DOPEN,NULL);
-						printf("dong nay \n");
+						/* printf("dong nay \n"); */
 						return makeDCloseRespond(action->key);
 					case 1:
 						break;
