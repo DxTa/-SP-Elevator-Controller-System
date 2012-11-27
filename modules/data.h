@@ -61,6 +61,7 @@ extern char* curMessage;
 extern Request *curReq;
 extern Action *curAct;
 extern Respond *curResp;
+extern int blocker[2];
 
 int* makeInt(int value);
 

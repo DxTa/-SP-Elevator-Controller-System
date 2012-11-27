@@ -7,6 +7,11 @@
 
 #include "data.h"
 
+int checkWeight(int maxWeight,int weight);
+int checkDoorClose(int door);
+int checkDoorOpen(int door);
+int checkDoorBlocker(int door);
+
 
 #endif
 
