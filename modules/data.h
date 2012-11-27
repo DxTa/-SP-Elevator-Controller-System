@@ -40,6 +40,13 @@ typedef enum {
 	RESP_CLOSE_DOOR
 } RespondType;
 
+typedef enum {
+	CHECK_WEIGHT,
+	CHECK_DOOR_OPEN,
+	CHECK_DOOR_CLOSE,
+	CHECK_DOOR_BLOCKER
+} CheckType;
+
 typedef struct Request {
 	RequestType requestType;
 	void* key;

@@ -28,3 +28,17 @@ int checkDoorBlocker(int door) {
 		return 0;
 }
 
+
+int check(int checker,int val) {
+	switch(checker) {
+		case CHECK_WEIGHT:
+			return checkWeight(50,val);
+		case CHECK_DOOR_OPEN:
+			return checkDoorOpen(val);
+		case CHECK_DOOR_CLOSE:
+			return checkDoorClose(val);
+		case CHECK_DOOR_BLOCKER:
+			return checkDoorBlocker(val);
+	}
+
+}

@@ -1,6 +1,7 @@
 #include "actioner.h"
 
 Fnode* list[2];
+
 void addWeight(int cur,int more) {
 	if(more < 0 && eleWeight[cur-1] <= 0 )
 		return;
@@ -17,7 +18,7 @@ Respond* working() {
 				switch(comparePosition(elevator[0],extractInt(action->key))) {
 					case -1 :
 						/* check Door is close */
-						if(checkDoorClose(eleDoor[0]) == 1)
+						if(check(CHECK_DOOR_CLOSE,eleDoor[0]) == 1)
 							return makeDoorNotCloseRespond(action->key);
 
 						goDown(&elevator[0]);
@@ -25,7 +26,7 @@ Respond* working() {
 						break;
 					case 1:
 						/* check Door is close */
-						if(checkDoorClose(eleDoor[0]) == 1)
+						if(check(CHECK_DOOR_CLOSE,eleDoor[0]) == 1)
 							return makeDoorNotCloseRespond(action->key);
 
 						goUp(&elevator[0]);
@@ -45,7 +46,7 @@ Respond* working() {
 				switch(comparePosition(elevator[0],extractInt(action->key))) {
 					case -1 :
 						/* check Door is close */
-						if(checkDoorClose(eleDoor[0]) == 1)
+						if(check(CHECK_DOOR_CLOSE,eleDoor[0]) == 1)
 							return makeDoorNotCloseRespond(action->key);
 
 						goDown(&elevator[0]);
@@ -53,7 +54,7 @@ Respond* working() {
 						break;
 					case 1:
 						/* check Door is close */
-						if(checkDoorClose(eleDoor[0]) == 1)
+						if(check(CHECK_DOOR_CLOSE,eleDoor[0]) == 1)
 							return makeDoorNotCloseRespond(action->key);
 
 						goUp(&elevator[0]);
@@ -72,7 +73,7 @@ Respond* working() {
 				switch(comparePosition(elevator[0],extractInt(action->key))) {
 					case -1 :
 						/* check Door is close */
-						if(checkDoorClose(eleDoor[0]) == 1)
+						if(check(CHECK_DOOR_CLOSE,eleDoor[0]) == 1)
 							return makeDoorNotCloseRespond(action->key);
 
 						goDown(&elevator[0]);
@@ -80,7 +81,7 @@ Respond* working() {
 						break;
 					case 1:
 						/* check Door is close */
-						if(checkDoorClose(eleDoor[0]) == 1)
+						if(check(CHECK_DOOR_CLOSE,eleDoor[0]) == 1)
 							return makeDoorNotCloseRespond(action->key);
 
 						goUp(&elevator[0]);
@@ -121,10 +122,10 @@ Respond* working() {
 						break;
 					case 1:
 						/* check weight */
-						if(checkWeight(50,eleWeight[0]) == 1)
+						if(check(CHECK_WEIGHT,eleWeight[0]) == 1)
 							return makeOverloadRespond(action->key);
 
-						if(checkDoorBlocker(eleDoor[0]) == 1)
+						if(check(CHECK_DOOR_BLOCKER,eleDoor[0]) == 1)
 							return makeDoorCanNotCloseRespond(action->key);
 
 						closeD(&eleDoor[0]);
@@ -160,7 +161,7 @@ Respond* executeAction(Action* action) {
 			// giong ACT_DOPEN
 			// action dong cua
 			/* check weight */
-			if(checkWeight(50,eleWeight[0]) == 1)
+			if(check(CHECK_WEIGHT,eleWeight[0]) == 1)
 				return makeOverloadRespond(action->key);
 
 			dequeueAction(&list[0],ACT_DOPEN,NULL);
