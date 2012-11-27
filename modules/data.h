@@ -23,18 +23,21 @@ typedef enum {
 	ACT_LDIRECTION, //led for direction
 	ACT_LFLOOR,	//led for floor number
 	ACT_LMESSAGE, //led for show message
+	ACT_STOP
 
 } ActionType;
 
 typedef enum {
 	RESP_ARRIVAL,
-	RES_DOOR_CANNOT_CLOSE,
-	RES_INVALID_FLOOR,
-	RES_INVALID_BUTTON,
-	RES_OVERLOAD,
+	RESP_OVERLOAD,
 
-	RES_OPEN_DOOR,
-	RES_CLOSE_DOOR
+	RESP_DOOR_CANNOT_CLOSE,
+	RESP_INVALID_FLOOR,
+	RESP_INVALID_BUTTON,
+	RESP_DOOR_NOT_CLOSE,
+
+	RESP_OPEN_DOOR,
+	RESP_CLOSE_DOOR
 } RespondType;
 
 typedef struct Request {
