@@ -17,20 +17,24 @@ ElevatorDialog::ElevatorDialog(QWidget *parent, ElevatorSystem *elevatorSystem) 
 
     ui->setupUi(this);
 
+
 	/* Add arguments to slots */
 	QSignalMapper* signalMapperCUP = new QSignalMapper (this) ;
 	QSignalMapper* signalMapperCDOWN = new QSignalMapper (this) ;
 	QSignalMapper* signalMapperFloor = new QSignalMapper (this) ;
-	// QSignalMapper* signalMapperDoor = new QSignalMapper (this) ;
+	QSignalMapper* signalMapperDoor = new QSignalMapper (this) ;
 	QSignalMapper* signalMapperWeight = new QSignalMapper (this) ;
 
-	connect (ui->openDoorButton, SIGNAL(clicked()), signalMapperWeight, SLOT(map())) ;
-	connect (ui->closeDoorButton, SIGNAL(clicked()), signalMapperWeight, SLOT(map())) ;
+	/* Weight Buttons */
+	connect (ui->increaseWeightButton, SIGNAL(clicked()), signalMapperWeight, SLOT(map())) ;
+	connect (ui->decreaseWeightButton, SIGNAL(clicked()), signalMapperWeight, SLOT(map())) ;
 
-	signalMapperWeight -> setMapping (ui->closeDoorButton, -10) ;
-	signalMapperWeight -> setMapping (ui->openDoorButton, 10) ;
+	signalMapperWeight -> setMapping (ui->increaseWeightButton, 10) ;
+	signalMapperWeight -> setMapping (ui->decreaseWeightButton, -10) ;
+
 	connect (signalMapperWeight, SIGNAL(mapped(int)), this, SLOT(changeWeight(int))) ;
 
+	/* Digit Buttons */
 	connect (ui->digitButton_1, SIGNAL(clicked()), signalMapperFloor, SLOT(map())) ;
 	connect (ui->digitButton_2, SIGNAL(clicked()), signalMapperFloor, SLOT(map())) ;
 	connect (ui->digitButton_3, SIGNAL(clicked()), signalMapperFloor, SLOT(map())) ;
@@ -47,6 +51,7 @@ ElevatorDialog::ElevatorDialog(QWidget *parent, ElevatorSystem *elevatorSystem) 
 
 	connect (signalMapperFloor, SIGNAL(mapped(int)), this, SLOT(floor(int))) ;
 
+	/*Up Down Buttons */
 	connect (ui->downButton_1, SIGNAL(clicked()), signalMapperCDOWN, SLOT(map())) ;
 	connect (ui->upButton_1, SIGNAL(clicked()), signalMapperCUP, SLOT(map())) ;
 	connect (ui->downButton_2, SIGNAL(clicked()), signalMapperCDOWN, SLOT(map())) ;
@@ -77,6 +82,11 @@ ElevatorDialog::ElevatorDialog(QWidget *parent, ElevatorSystem *elevatorSystem) 
 	connect (signalMapperCDOWN, SIGNAL(mapped(int)), this, SLOT(downClicked(int))) ;
 	connect (signalMapperCUP, SIGNAL(mapped(int)), this, SLOT(upClicked(int))) ;
 
+	/* Door Buttons */
+    QObject::connect(ui->openDoorButton, SIGNAL(clicked()), this, SLOT(openDoorClicked()));
+    QObject::connect(ui->closeDoorButton, SIGNAL(clicked()), this, SLOT(closeDoorClicked()));
+
+	/* Connect system */
     this->elevatorSystem = elevatorSystem;
 
     // Elevator position
@@ -85,8 +95,6 @@ ElevatorDialog::ElevatorDialog(QWidget *parent, ElevatorSystem *elevatorSystem) 
     this->connect(this->elevatorSystem, SIGNAL(doorPositionChanged(double)), this, SLOT(changeDoorPosition(double)));
 
     // Weight buttons
-    this->connect(this->ui->increaseWeightButton, SIGNAL(clicked()), this, SLOT(increaseWeight()));
-    this->connect(this->ui->decreaseWeightButton, SIGNAL(clicked()), this, SLOT(decreaseWeight()));
 }
 
 ElevatorDialog::~ElevatorDialog()
@@ -136,12 +144,10 @@ void ElevatorDialog::changeDoorPosition(double position)
     ui->rightDoor->setGeometry(rightDoorGeometry);
 }
 
-void ElevatorDialog::increaseWeight()
-{
-
+void ElevatorDialog::openDoorClicked() {
+	curReq = sendRequest(REQ_DOPEN,makeInt(1));
 }
 
-void ElevatorDialog::decreaseWeight()
-{
-
+void ElevatorDialog::closeDoorClicked() {
+	curReq = sendRequest(REQ_DCLOSE,makeInt(1));
 }
