@@ -4,12 +4,46 @@ Fnode* list[2];
 int elevator[2] = {1,1};
 int eleWeight[2] = {0,0};
 float eleDoor[2] = {0,0};
+int blocker[2] = {0,0};
 
 void addWeight(int cur,int more) {
 	if(more < 0 && eleWeight[cur-1] <= 0 )
 		return;
 	eleWeight[cur-1] += more;
 	printf("---Weight: %d\n",eleWeight[cur-1]);
+}
+
+void changeBlocker(int cur,int val) {
+	blocker[cur-1] = val;
+}
+
+
+int checkWeight(int maxWeight, int weight) {
+	if(weight <= maxWeight)
+		return 0;
+	else
+		return 1;
+}
+
+int checkDoorOpen(int door) {
+	if(door == 1)
+		return 0;
+	else
+		return 1;
+}
+
+int checkDoorClose(int door) {
+	if(door == 0)
+		return 0;
+	else
+		return 1;
+}
+
+int checkDoorBlocker(int door) {
+	if(door <= 0.5 && blocker[0] == 1)
+		return 1;
+	else
+		return 0;
 }
 
 int comparePosition(int cur,int des) {
@@ -26,15 +60,23 @@ Respond* working() {
 		Action *action = list[0]->val;
 		switch(action->actionType) {
 			case ACT_CUP:
-				printf("CUP");
+				/* printf("CUP"); */
 				switch(comparePosition(elevator[0],extractInt(action->key))) {
 					case -1 :
+						/* check Door is close */
+						if(checkDoorClose(eleDoor[0]) == 1)
+							return makeDoorNotCloseRespond(action->key);
+
 						goDown(&elevator[0]);
-						printf("-aa--dang xuong %d---\n",elevator[0]);
+						/* printf("-aa--dang xuong %d---\n",elevator[0]); */
 						break;
 					case 1:
+						/* check Door is close */
+						if(checkDoorClose(eleDoor[0]) == 1)
+							return makeDoorNotCloseRespond(action->key);
+
 						goUp(&elevator[0]);
-						printf("-aa--dang len %d---\n",elevator[0]);
+						/* printf("-aa--dang len %d---\n",elevator[0]); */
 						break;
 					case 0:
 						dequeueAction(&list[0],ACT_CUP,action->key);
@@ -44,15 +86,23 @@ Respond* working() {
 				}
 				break;
 			case ACT_CDOWN:
-				printf("CDOWN");
+				/* printf("CDOWN"); */
 				switch(comparePosition(elevator[0],extractInt(action->key))) {
 					case -1 :
+						/* check Door is close */
+						if(checkDoorClose(eleDoor[0]) == 1)
+							return makeDoorNotCloseRespond(action->key);
+
 						goDown(&elevator[0]);
-						printf("---dang xuong %d---\n",elevator[0]);
+						/* printf("---dang xuong %d---\n",elevator[0]); */
 						break;
 					case 1:
+						/* check Door is close */
+						if(checkDoorClose(eleDoor[0]) == 1)
+							return makeDoorNotCloseRespond(action->key);
+
 						goUp(&elevator[0]);
-						printf("---dang len %d---\n",elevator[0]);
+						/* printf("---dang len %d---\n",elevator[0]); */
 						break;
 					case 0:
 						dequeueAction(&list[0],ACT_CDOWN,action->key);
@@ -64,12 +114,20 @@ Respond* working() {
 			case ACT_FLOOR:
 				switch(comparePosition(elevator[0],extractInt(action->key))) {
 					case -1 :
+						/* check Door is close */
+						if(checkDoorClose(eleDoor[0]) == 1)
+							return makeDoorNotCloseRespond(action->key);
+
 						goDown(&elevator[0]);
-						printf("---dang xuong %d---\n",elevator[0]);
+						/* printf("---dang xuong %d---\n",elevator[0]); */
 						break;
 					case 1:
+						/* check Door is close */
+						if(checkDoorClose(eleDoor[0]) == 1)
+							return makeDoorNotCloseRespond(action->key);
+
 						goUp(&elevator[0]);
-						printf("---dang len %d---\n",elevator[0]);
+						/* printf("---dang len %d---\n",elevator[0]); */
 						break;
 					case 0:
 						dequeueAction(&list[0],ACT_FLOOR,action->key);
@@ -89,7 +147,6 @@ Respond* working() {
 						printf("dong nay \n");
 						return makeDCloseRespond(action->key);
 					case 1:
-						printf("dang cho\n");
 						break;
 					case 2:
 						openD(&eleDoor[0]);
@@ -106,6 +163,13 @@ Respond* working() {
 						printf("dong duoc roi\n");
 						break;
 					case 1:
+						/* check weight */
+						if(checkWeight(50,eleWeight[0]) == 1)
+							return makeOverloadRespond(action->key);
+
+						if(checkDoorBlocker(eleDoor[0]) == 1)
+							return makeDoorCanNotCloseRespond(action->key);
+
 						closeD(&eleDoor[0]);
 						printf("dang dong %.2f \%....\n",eleDoor[0]);
 						break;
@@ -134,15 +198,16 @@ Respond* executeAction(Action* action) {
 			dequeueAction(&list[0],ACT_DCLOSE,NULL);
 			enqueueAction(&list[0],action,elevator[0]);
 			/* printf("LIST AFTER ENQUEUE %d\n",count(list[0])); */
-			//return makeDOPENDoneRespond();
 			break;
 		case ACT_DCLOSE:
 			// giong ACT_DOPEN
 			// action dong cua
+			/* check weight */
+			if(checkWeight(50,eleWeight[0]) == 1)
+				return makeOverloadRespond(action->key);
+
 			dequeueAction(&list[0],ACT_DOPEN,NULL);
 			enqueueAction(&list[0],action,elevator[0]);
-			// if co loi, return makeDoorCannotCloseRespond()
-			//return makeDCLOSEDoneRespond();
 			break;
 		case ACT_ALARM:
 			break;
@@ -153,6 +218,8 @@ Respond* executeAction(Action* action) {
 		case ACT_LFLOOR:
 			break;
 		case ACT_LMESSAGE:
+			break;
+		case ACT_STOP:
 			break;
 		default:
 			break;

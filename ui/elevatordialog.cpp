@@ -4,7 +4,6 @@
 extern "C"
 {
 	#include <stdio.h>
-	#include "modules/data.h"
 	#include "modules/request.h"
 // include C library here
 }
@@ -22,7 +21,7 @@ ElevatorDialog::ElevatorDialog(QWidget *parent, ElevatorSystem *elevatorSystem) 
 	QSignalMapper* signalMapperCUP = new QSignalMapper (this) ;
 	QSignalMapper* signalMapperCDOWN = new QSignalMapper (this) ;
 	QSignalMapper* signalMapperFloor = new QSignalMapper (this) ;
-	QSignalMapper* signalMapperDoor = new QSignalMapper (this) ;
+	// QSignalMapper* signalMapperDoor = new QSignalMapper (this) ;
 	QSignalMapper* signalMapperWeight = new QSignalMapper (this) ;
 
 	connect (ui->openDoorButton, SIGNAL(clicked()), signalMapperWeight, SLOT(map())) ;

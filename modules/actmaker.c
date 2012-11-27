@@ -46,3 +46,10 @@ Action* makeALARMAction(void* key) {
 	return act;
 }
 
+Action* makeSTOPAction(void* key) {
+	Action* act = (Action*)malloc(sizeof(Action));
+	act->actionType = ACT_STOP;
+	act->key = key;
+	return act;
+}
+
