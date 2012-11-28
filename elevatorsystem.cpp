@@ -84,4 +84,10 @@ void ElevatorSystem::draw()
         this->currentMessage = curMessage;
         this->currentMessageChanged(this->currentMessage);
     }
+
+    if (this->currentWeight != eleWeight[0])
+    {
+        this->currentWeight = eleWeight[0];
+        this->currentWeightChanged(this->currentWeight);
+    }
 }

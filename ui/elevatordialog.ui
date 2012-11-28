@@ -129,8 +129,8 @@ background-color:white;</string>
     <rect>
      <x>501</x>
      <y>48</y>
-     <width>241</width>
-     <height>241</height>
+     <width>266</width>
+     <height>281</height>
     </rect>
    </property>
    <property name="frameShape">
@@ -231,29 +231,54 @@ background-color:white;</string>
      </layout>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
-      <item>
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>Weight:</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="increaseWeightButton">
-        <property name="text">
-         <string>+</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="decreaseWeightButton">
-        <property name="text">
-         <string>-</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
+     <widget class="QFrame" name="">
+      <property name="frameShape">
+       <enum>QFrame::Box</enum>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_7">
+       <item>
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>Weight (max weight=50):</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QPushButton" name="increaseWeightButton">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>+</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="weightLabel">
+           <property name="text">
+            <string>0</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="decreaseWeightButton">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>-</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -505,6 +530,10 @@ background-color:white;</string>
   <zorder>frame_2</zorder>
   <zorder>elevatorView</zorder>
   <zorder>frame</zorder>
+  <zorder>decreaseWeightButton</zorder>
+  <zorder>label_3</zorder>
+  <zorder>increaseWeightButton</zorder>
+  <zorder>weightLabel</zorder>
  </widget>
  <resources/>
  <connections/>
