@@ -83,19 +83,24 @@ background-color:lightgrey;</string>
    <widget class="QLabel" name="floorIndicatorLabel">
     <property name="geometry">
      <rect>
-      <x>180</x>
+      <x>170</x>
       <y>10</y>
-      <width>62</width>
-      <height>51</height>
+      <width>71</width>
+      <height>61</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color:black;
-color:white;
-font-size:20px;</string>
+color:white;</string>
     </property>
     <property name="text">
      <string>1</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
     </property>
    </widget>
   </widget>

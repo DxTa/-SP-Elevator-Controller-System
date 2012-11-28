@@ -47,10 +47,12 @@ private:
 
     int currentElevatorPosition;
     double currentDoorPosition;
+    QString currentMessage;
 
 signals:
     void elevatorPositionChanged(int position);
     void doorPositionChanged(double position);
+    void currentMessageChanged(QString message);
 
 public slots:
 

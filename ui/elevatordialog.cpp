@@ -100,6 +100,8 @@ ElevatorDialog::ElevatorDialog(QWidget *parent, ElevatorSystem *elevatorSystem) 
     QObject::connect(ui->blockDoorButton, SIGNAL(clicked()), this, SLOT(blockDoorClicked()));
     QObject::connect(ui->freeFallButton, SIGNAL(clicked()), this, SLOT(freeFallClicked()));
 
+    // Current message
+    this->connect(this->elevatorSystem, SIGNAL(currentMessageChanged(QString)), this, SLOT(changeCurrentMessage(QString)));
 }
 
 ElevatorDialog::~ElevatorDialog()
@@ -171,4 +173,8 @@ void ElevatorDialog::blockDoorClicked() {
 
 void ElevatorDialog::freeFallClicked() {
 	speedUp(2);
+
+void ElevatorDialog::changeCurrentMessage(QString message)
+{
+    ui->floorIndicatorLabel->setText(message);
 }

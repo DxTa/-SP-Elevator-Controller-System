@@ -32,6 +32,7 @@ public slots:
 	void alarmClicked();
 	void blockDoorClicked();
 	void freeFallClicked();
+    void changeCurrentMessage(QString message);
 
 private:
     Ui::ElevatorDialog *ui;
