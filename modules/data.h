@@ -20,9 +20,6 @@ typedef enum {
 	ACT_DCLOSE,
 	ACT_ALARM,
 	ACT_BREAK,
-	ACT_LDIRECTION, //led for direction
-	ACT_LFLOOR,	//led for floor number
-	ACT_LMESSAGE, //led for show message
 	ACT_STOP
 
 } ActionType;
@@ -54,7 +51,9 @@ typedef enum {
 	DISP_ARRIVAL,
 	DISP_MOVEUP,
 	DISP_MOVEDOWN,
-	DISP_ALARM
+	DISP_ALARM,
+	DISP_BRAKE,
+	DISP_WORK
 } DisplayType;
 
 typedef struct Request {
@@ -79,6 +78,8 @@ extern Request *curReq;
 extern Action *curAct;
 extern Respond *curResp;
 extern int blocker[2];
+extern int maxSpeed;
+extern int maxWeight;
 
 int* makeInt(int value);
 

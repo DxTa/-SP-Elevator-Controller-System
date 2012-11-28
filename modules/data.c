@@ -5,6 +5,8 @@ char* curMessage = "";
 Request *curReq;
 Action *curAct;
 Respond *curResp;
+int maxSpeed = 2;
+int maxWeight = 50;
 int blocker[2] = {0,0};
 
 int* makeInt(int value) {

@@ -95,6 +95,11 @@ ElevatorDialog::ElevatorDialog(QWidget *parent, ElevatorSystem *elevatorSystem) 
     // Door position
     this->connect(this->elevatorSystem, SIGNAL(doorPositionChanged(double)), this, SLOT(changeDoorPosition(double)));
 
+    /* Function Buttons */
+    QObject::connect(ui->alarmButton, SIGNAL(clicked()), this, SLOT(alarmClicked()));
+    QObject::connect(ui->blockDoorButton, SIGNAL(clicked()), this, SLOT(blockDoorClicked()));
+    QObject::connect(ui->freeFallButton, SIGNAL(clicked()), this, SLOT(freeFallClicked()));
+
     // Current message
     this->connect(this->elevatorSystem, SIGNAL(currentMessageChanged(QString)), this, SLOT(changeCurrentMessage(QString)));
 }
@@ -153,6 +158,29 @@ void ElevatorDialog::openDoorClicked() {
 
 void ElevatorDialog::closeDoorClicked() {
 	curReq = sendRequest(REQ_DCLOSE,makeInt(1));
+}
+
+void ElevatorDialog::alarmClicked() {
+	curReq = sendRequest(REQ_ALARM,makeInt(elevator[0]));
+}
+
+void ElevatorDialog::blockDoorClicked() {
+	if(blocker[0] == 0 )
+		blocker[0] = 1;
+	else
+		blocker[0] = 0;
+}
+
+void ElevatorDialog::freeFallClicked() {
+	static int i = 0;
+	if(i == 0) {
+		speedUp(2);
+		i++;
+	} else {
+		speedUp(1);
+		i--;
+	}
+
 }
 
 void ElevatorDialog::changeCurrentMessage(QString message)
