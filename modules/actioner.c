@@ -3,7 +3,6 @@
 Fnode* list[2];
 //for show the current direction of elevator
 //1 --> up. -1 --> down. 0 -->stand still
-//useful for led display and for tracking previous state
 int state[2];
 
 Respond* working() {
@@ -45,7 +44,7 @@ Respond* working() {
 						break;
 					case 0:
 						curMessage = display(DISP_ARRIVAL,action->key);
-						state[0] = 0;
+						/* state[0] = 0; */
 						return makeArrivalRespond(action->key);
 				}
 				break;
@@ -75,7 +74,7 @@ Respond* working() {
 						break;
 					case 0:
 						curMessage = display(DISP_ARRIVAL,action->key);
-						state[0] = 0;
+						/* state[0] = 0; */
 						return makeArrivalRespond(action->key);
 				}
 				break;
@@ -105,7 +104,7 @@ Respond* working() {
 						break;
 					case 0:
 						curMessage = display(DISP_ARRIVAL,action->key);
-						state[0] = 0;
+						/* state[0] = 0; */
 						return makeArrivalRespond(action->key);
 				}
 				break;
@@ -125,7 +124,7 @@ Respond* working() {
 				}
 				break;
 			case ACT_DCLOSE:
-				state[0] = 0;
+				/* state[0] = 0; */
 				switch(isDClose(&eleDoor[0])) {
 					case 0:
 						//check j thi o day
@@ -165,8 +164,7 @@ Respond* executeAction(Action* action) {
 			break;
 		case ACT_DOPEN:
 			/* check on floor */
-			printf("\n%d\n",state[0]);
-			if(check(CHECK_ON_FLOOR,state[0]) == 0) {
+			if(check(CHECK_ON_FLOOR,elevator[0]) == 0) {
 				enqueueAction(&list[0],action,elevator[0],state[0]);
 			}
 			break;
