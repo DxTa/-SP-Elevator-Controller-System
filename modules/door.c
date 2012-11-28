@@ -1,7 +1,7 @@
 #include "door.h"
 
 const float door_speed = 0.04;
-float wait_time = 6;
+float wait_time = 4;
 
 void openD(float *pos) {
 	if (*pos < 1)

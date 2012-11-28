@@ -2,8 +2,6 @@
 #include <stdio.h>
 #define NUM_OF_RESPONDS 10
 
-// se co nhung loi k thuc hien trong nay, vi du nhu loi dut cap,
-// cac loi do se dc xu li bang phuong phap co khi, dung phan cung
 struct Respond responds[10] = {
 	// co vat can khong cho cua dong
   {RESP_DOOR_CANNOT_CLOSE, "", "Door cannot close."},
@@ -54,7 +52,7 @@ Action* executeRespond(Respond* respond) {
 			break;
 		case RESP_DOOR_NOT_CLOSE:
 			error(RESP_DOOR_NOT_CLOSE);
-			return makeSTOPAction(respond->key);
+			return makeDCLOSEAction(respond->key);
 			break;
 
 			// respond khi ng dung bam nut mo hoac dong thang may

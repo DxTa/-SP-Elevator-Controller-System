@@ -102,6 +102,9 @@ ElevatorDialog::ElevatorDialog(QWidget *parent, ElevatorSystem *elevatorSystem) 
 
     // Current message
     this->connect(this->elevatorSystem, SIGNAL(currentMessageChanged(QString)), this, SLOT(changeCurrentMessage(QString)));
+
+    // Hide the block object
+    this->ui->blockObject->setVisible(false);
 }
 
 ElevatorDialog::~ElevatorDialog()
@@ -150,6 +153,16 @@ void ElevatorDialog::changeDoorPosition(double position)
 
     ui->leftDoor->setGeometry(leftDoorGeometry);
     ui->rightDoor->setGeometry(rightDoorGeometry);
+
+    // Enable block door button if door is openning
+    if (position > 0)
+    {
+        ui->blockDoorButton->setEnabled(true);
+    }
+    else
+    {
+        ui->blockDoorButton->setEnabled(false);
+    }
 }
 
 void ElevatorDialog::openDoorClicked() {
@@ -165,16 +178,28 @@ void ElevatorDialog::alarmClicked() {
 }
 
 void ElevatorDialog::blockDoorClicked() {
-	if(blocker[0] == 0 )
+    if (blocker[0] == 0)
+    {
 		blocker[0] = 1;
+
+        // Show the blockObject
+        ui->blockObject->setVisible(true);
+        ui->blockDoorButton->setText("Unblock door");
+    }
 	else
+    {
 		blocker[0] = 0;
+
+        // Hide the blockObject
+        ui->blockObject->setVisible(false);
+        ui->blockDoorButton->setText("Block door");
+    }
 }
 
 void ElevatorDialog::freeFallClicked() {
 	static int i = 0;
 	if(i == 0) {
-		speedUp(2);
+		speedUp(3);
 		i++;
 	} else {
 		speedUp(1);
