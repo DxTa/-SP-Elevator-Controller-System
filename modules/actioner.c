@@ -1,6 +1,10 @@
 #include "actioner.h"
 
 Fnode* list[2];
+//for show the current direction of elevator
+//1 --> up. -1 --> down. 0 -->stand still
+//useful for led display and for tracking previous state
+int state[2];
 
 void addWeight(int cur,int more) {
 	if(more < 0 && eleWeight[cur-1] <= 0 )
@@ -22,6 +26,7 @@ Respond* working() {
 							return makeDoorNotCloseRespond(action->key);
 
 						goDown(&elevator[0]);
+						state[0] = -1;
 						/* printf("---dang xuong %d---\n",elevator[0]); */
 						break;
 					case 1:
@@ -30,13 +35,10 @@ Respond* working() {
 							return makeDoorNotCloseRespond(action->key);
 
 						goUp(&elevator[0]);
+						state[0] = 1;
 						/* printf("---dang len %d---\n",elevator[0]); */
 						break;
 					case 0:
-						dequeueAction(&list[0],ACT_CUP,action->key);
-						dequeueAction(&list[0],ACT_FLOOR,action->key);
-						if (comparePosition(elevator[0],120) == 0)
-							dequeueAction(&list[0],ACT_CDOWN,action->key);
 						printf("---den tang %d---\n",extractInt(action->key));
 						return makeArrivalRespond(action->key);
 				}
@@ -50,6 +52,7 @@ Respond* working() {
 							return makeDoorNotCloseRespond(action->key);
 
 						goDown(&elevator[0]);
+						state[0] = -1;
 						/* printf("---dang xuong %d---\n",elevator[0]); */
 						break;
 					case 1:
@@ -58,13 +61,10 @@ Respond* working() {
 							return makeDoorNotCloseRespond(action->key);
 
 						goUp(&elevator[0]);
+						state[0] = 1;
 						/* printf("---dang len %d---\n",elevator[0]); */
 						break;
 					case 0:
-						dequeueAction(&list[0],ACT_CDOWN,action->key);
-						dequeueAction(&list[0],ACT_FLOOR,action->key);
-						if (comparePosition(elevator[0],20) == 0)
-							dequeueAction(&list[0],ACT_CUP,action->key);
 						printf("---den tang %d---\n",extractInt(action->key));
 						return makeArrivalRespond(action->key);
 				}
@@ -77,6 +77,7 @@ Respond* working() {
 							return makeDoorNotCloseRespond(action->key);
 
 						goDown(&elevator[0]);
+						state[0] = -1;
 						/* printf("---dang xuong %d---\n",elevator[0]); */
 						break;
 					case 1:
@@ -85,19 +86,16 @@ Respond* working() {
 							return makeDoorNotCloseRespond(action->key);
 
 						goUp(&elevator[0]);
+						state[0] = 1;
 						/* printf("---dang len %d---\n",elevator[0]); */
 						break;
 					case 0:
-						dequeueAction(&list[0],ACT_FLOOR,action->key);
-						if (comparePosition(elevator[0],20) == 0 ||comparePosition(elevator[0],120) == 0 || directOfElevator(list[0],elevator[0]) >= 1)
-							dequeueAction(&list[0],ACT_CUP,action->key);
-						if (comparePosition(elevator[0],20) == 0 ||comparePosition(elevator[0],120) == 0 || directOfElevator(list[0],elevator[0]) <= 1)
-							dequeueAction(&list[0],ACT_CDOWN,action->key);
 						printf("---den tang %d---\n",extractInt(action->key));
 						return makeArrivalRespond(action->key);
 				}
 				break;
 			case ACT_DOPEN:
+				state[0] = directOfElevator(list[0],elevator[0]);
 				switch(isDOpen(&eleDoor[0])) {
 					case 0:
 						//check j thi o day
@@ -146,15 +144,14 @@ Respond* executeAction(Action* action) {
 		case ACT_CDOWN:
 		case ACT_FLOOR:
 			printf("LIST BEFORE ENQUEUE %d\n",count(list[0]));
-			enqueueAction(&list[0],action,elevator[0]);
+			enqueueAction(&list[0],action,elevator[0],state[0]);
 			printf("LIST AFTER ENQUEUE %d\n",count(list[0]));
 			break;
 		case ACT_DOPEN:
 			// can phai check xem thang may co o tang` nao hay khong
 			// neu khong thi deo cho mo? cua?
 			/* printf("LIST BEFORE ENQUEUE %d\n",count(list[0])); */
-			dequeueAction(&list[0],ACT_DCLOSE,NULL);
-			enqueueAction(&list[0],action,elevator[0]);
+			enqueueAction(&list[0],action,elevator[0],state[0]);
 			/* printf("LIST AFTER ENQUEUE %d\n",count(list[0])); */
 			break;
 		case ACT_DCLOSE:
@@ -164,8 +161,7 @@ Respond* executeAction(Action* action) {
 			if(check(CHECK_WEIGHT,eleWeight[0]) == 1)
 				return makeOverloadRespond(action->key);
 
-			dequeueAction(&list[0],ACT_DOPEN,NULL);
-			enqueueAction(&list[0],action,elevator[0]);
+			enqueueAction(&list[0],action,elevator[0],state[0]);
 			break;
 		case ACT_ALARM:
 			break;

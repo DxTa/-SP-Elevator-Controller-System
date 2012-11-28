@@ -19,6 +19,16 @@ int getLvlAct(Action *act) {
 	}
 }
 
+int isLastDesTop(Fnode *list, int el, int state) {
+	if (state >= 0 && directOfElevator(list,el) <= 0)
+		return 0;
+}
+
+int isLastDesBot(Fnode *list, int el, int state) {
+	if (state <= 0 && directOfElevator(list,el) >= 0)
+		return 0;
+}
+
 //ham nay ho~ tro cho viec bo? qua nhung~ action khong can thiet
 //trong xu ly
 int skip(Fnode* list,Fnode* *curr,int lvl) {
@@ -69,17 +79,35 @@ int checkExistAct(Fnode *list, ActionType type, void *key) {
 //neu ton tai thi khong add them
 //trong nay da bao gom tinh toan routing va muc do uu tien
 //thuc hien action
-void enqueueAction(Fnode** list, Action *act, int el) {
-	Fnode* curr;
+void enqueueAction(Fnode** list, Action *act, int el, int state) {
+	Fnode *curr,*temp;
 	int index = 0;
 	switch(act->actionType) {
 		case ACT_DOPEN:
+			dequeueAction(&list[0],ACT_DCLOSE,NULL);
+			if (isLastDesBot(*list,el,state) == 0 || isLastDesTop(*list,el,state) == 0) {
+				dequeueAction(list,ACT_CUP,act->key);
+				dequeueAction(list,ACT_FLOOR,act->key);
+				dequeueAction(list,ACT_CDOWN,act->key);
+			}
+			else {
+				if (directOfElevator(*list,el) >= 0) {
+					dequeueAction(list,ACT_CUP,act->key);
+					dequeueAction(list,ACT_FLOOR,act->key);
+				}
+				else if (directOfElevator(*list,el) <= 0) {
+					dequeueAction(list,ACT_CDOWN,act->key);
+					dequeueAction(list,ACT_FLOOR,act->key);
+				}
+			}
+
 			if (checkExistAct(*list, ACT_DOPEN, NULL) > 0)
 				break;
 			index = skip(*list,&curr,getLvlAct(act) + 1);
 			addFnodeAt(list,act,index);
 			break;
 		case ACT_DCLOSE:
+			dequeueAction(&list[0],ACT_DOPEN,NULL);
 			if (checkExistAct(*list, ACT_DCLOSE, NULL) > 0)
 				break;
 			index = skip(*list,&curr,getLvlAct(act) + 1);
@@ -116,7 +144,8 @@ void enqueueAction(Fnode** list, Action *act, int el) {
 					break;
 				}
 				else if (
-						((el <= extractInt(act->key)) && (extractInt(act->key) <= extractInt(curr->val->key)))
+						((el <= extractInt(act->key)) && (extractInt(act->key) <= extractInt(curr->val->key))) ||
+						((el <= extractInt(curr->val->key)) && (curr->val->actionType == ACT_CDOWN) && (extractInt(act->key) >= extractInt(curr->val->key)))
 						) {
 					addFnodeAt(list,act,index);
 					break;
@@ -155,7 +184,10 @@ void enqueueAction(Fnode** list, Action *act, int el) {
 					addFnodeAt(list,act,index);
 					break;
 				}
-				else if ((el >= extractInt(act->key)) && (extractInt(act->key) >= extractInt(curr->val->key))) {
+				else if (
+						((el >= extractInt(act->key)) && (extractInt(act->key) >= extractInt(curr->val->key))) ||
+						((el >= extractInt(curr->val->key)) && (curr->val->actionType == ACT_CUP) && (extractInt(act->key) <= extractInt(curr->val->key)))
+						){
 					addFnodeAt(list,act,index);
 					break;
 				}
@@ -215,6 +247,7 @@ void dequeueAction(Fnode* *list, ActionType type, void* key) {
 	Fnode *curr,*prev;
 	curr = *list;
 	prev = NULL;
+
 	if (key == NULL) {
 		while(curr != NULL) {
 			if (curr->val->actionType == type) {
