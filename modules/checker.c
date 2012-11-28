@@ -35,6 +35,13 @@ int checkMotorSpeed(int speed) {
 	else return 0;
 }
 
+int checkOnFloor(int state) {
+	if(state == 0)
+		return 0;
+	else
+		return 1;
+}
+
 
 int check(int checker,double val) {
 	switch(checker) {
@@ -48,6 +55,8 @@ int check(int checker,double val) {
 			return checkDoorBlocker(val);
 		case CHECK_MOTOR_SPEED:
 			return checkMotorSpeed(val);
+		case CHECK_ON_FLOOR:
+			return checkOnFloor(val);
 	}
 
 }

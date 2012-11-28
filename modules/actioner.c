@@ -15,6 +15,7 @@ Respond* working() {
 				curMessage = display(DISP_ALARM,makeInt(elevator[0]));
 				break;
 			case ACT_BREAK:
+				printf("\ndassdzozoz\n");
 				brake();
 				break;
 			case ACT_CUP:
@@ -43,6 +44,7 @@ Respond* working() {
 						break;
 					case 0:
 						curMessage = display(DISP_ARRIVAL,action->key);
+						state[0] = 0;
 						return makeArrivalRespond(action->key);
 				}
 				break;
@@ -72,6 +74,7 @@ Respond* working() {
 						break;
 					case 0:
 						curMessage = display(DISP_ARRIVAL,action->key);
+						state[0] = 0;
 						return makeArrivalRespond(action->key);
 				}
 				break;
@@ -101,6 +104,7 @@ Respond* working() {
 						break;
 					case 0:
 						curMessage = display(DISP_ARRIVAL,action->key);
+						state[0] = 0;
 						return makeArrivalRespond(action->key);
 				}
 				break;
@@ -142,8 +146,9 @@ Respond* working() {
 				}
 				break;
 		}
-		if(checkMotorSpeed(Motorspeed) == 0)
+		if(checkMotorSpeed(Motorspeed) == 0) {
 			dequeueAction(&list[0],ACT_BREAK,NULL);
+		}
 	}
 	return NULL;
 }
@@ -158,7 +163,9 @@ Respond* executeAction(Action* action) {
 			enqueueAction(&list[0],action,elevator[0],state[0]);
 			break;
 		case ACT_DOPEN:
-			enqueueAction(&list[0],action,elevator[0],state[0]);
+			/* check on floor */
+			if(check(CHECK_ON_FLOOR,state[0]) == 0)
+				enqueueAction(&list[0],action,elevator[0],state[0]);
 			break;
 		case ACT_DCLOSE:
 			/* check weight */
@@ -176,6 +183,7 @@ Respond* executeAction(Action* action) {
 			break;
 		case ACT_BREAK:
 			enqueueAction(&list[0],action,elevator[0],state[0]);
+			printf("\nLIST %d\n",count(list[0]));
 			break;
 		case ACT_STOP:
 			break;
