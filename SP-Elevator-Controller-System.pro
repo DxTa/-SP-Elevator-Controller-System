@@ -29,9 +29,7 @@ SOURCES += main.cpp\
     modules/checker.c \
     modules/displayer.c \
     modules/alarmer.c \
-    ui/outsidedialog.cpp \
     elevatorsystem.cpp \
-    ui/insidedialog.cpp \
     ui/elevatordialog.cpp
 
 HEADERS  += ui/mainwindow.h \
@@ -50,12 +48,8 @@ HEADERS  += ui/mainwindow.h \
     modules/checker.h \
     modules/displayer.h \
     modules/alarmer.h \
-    ui/outsidedialog.h \
     elevatorsystem.h \
-    ui/insidedialog.h \
     ui/elevatordialog.h
 
 FORMS    += ui/mainwindow.ui \
-    ui/outsidedialog.ui \
-    ui/insidedialog.ui \
     ui/elevatordialog.ui

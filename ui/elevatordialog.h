@@ -29,6 +29,7 @@ public slots:
     void changeDoorPosition(double position);
 	void openDoorClicked();
 	void closeDoorClicked();
+    void changeCurrentMessage(QString message);
 
 private:
     Ui::ElevatorDialog *ui;

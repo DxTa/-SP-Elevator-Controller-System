@@ -95,7 +95,8 @@ ElevatorDialog::ElevatorDialog(QWidget *parent, ElevatorSystem *elevatorSystem) 
     // Door position
     this->connect(this->elevatorSystem, SIGNAL(doorPositionChanged(double)), this, SLOT(changeDoorPosition(double)));
 
-    // Weight buttons
+    // Current message
+    this->connect(this->elevatorSystem, SIGNAL(currentMessageChanged(QString)), this, SLOT(changeCurrentMessage(QString)));
 }
 
 ElevatorDialog::~ElevatorDialog()
@@ -124,7 +125,8 @@ void ElevatorDialog::changeElevatorPosition(int position)
 {
     QRect geometry = ui->elevatorView->geometry();
 
-    geometry.setY(ElevatorDialog::ElevatorViewY - 7 - 107*(position-20)/20);
+    int newY = ElevatorDialog::ElevatorViewY - 7 - 107*(position-20)/20;
+    geometry.setY(newY);
 
     ui->elevatorView->setGeometry(geometry);
 }
@@ -151,4 +153,9 @@ void ElevatorDialog::openDoorClicked() {
 
 void ElevatorDialog::closeDoorClicked() {
 	curReq = sendRequest(REQ_DCLOSE,makeInt(1));
+}
+
+void ElevatorDialog::changeCurrentMessage(QString message)
+{
+    ui->floorIndicatorLabel->setText(message);
 }

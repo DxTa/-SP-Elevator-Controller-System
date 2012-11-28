@@ -78,4 +78,10 @@ void ElevatorSystem::draw()
         this->currentDoorPosition = eleDoor[0];
         this->doorPositionChanged(this->currentDoorPosition);
     }
+
+    if (this->currentMessage != curMessage)
+    {
+        this->currentMessage = curMessage;
+        this->currentMessageChanged(this->currentMessage);
+    }
 }
