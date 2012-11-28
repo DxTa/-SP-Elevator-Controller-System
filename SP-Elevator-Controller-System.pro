@@ -27,6 +27,8 @@ SOURCES += main.cpp\
     modules/door.c \
     modules/informer.c \
     modules/checker.c \
+    modules/displayer.c \
+    modules/alarmer.c \
     elevatorsystem.cpp \
     ui/elevatordialog.cpp
 
@@ -44,6 +46,8 @@ HEADERS  += ui/mainwindow.h \
     modules/door.h \
     modules/informer.h \
     modules/checker.h \
+    modules/displayer.h \
+    modules/alarmer.h \
     elevatorsystem.h \
     ui/elevatordialog.h
 

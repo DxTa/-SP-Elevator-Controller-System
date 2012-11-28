@@ -28,6 +28,12 @@ int checkDoorBlocker(int door) {
 		return 0;
 }
 
+int checkMotorSpeed(int speed) {
+	if(speed >= 2)
+		return 1;
+	else return 0;
+}
+
 
 int check(int checker,int val) {
 	switch(checker) {
@@ -39,6 +45,8 @@ int check(int checker,int val) {
 			return checkDoorClose(val);
 		case CHECK_DOOR_BLOCKER:
 			return checkDoorBlocker(val);
+		case CHECK_MOTOR_SPEED:
+			return checkMotorSpeed(val);
 	}
 
 }
