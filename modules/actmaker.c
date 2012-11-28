@@ -53,3 +53,9 @@ Action* makeSTOPAction(void* key) {
 	return act;
 }
 
+Action* makeBREAKAction(void* key) {
+	Action* act = (Action*)malloc(sizeof(Action));
+	act->actionType = ACT_BREAK;
+	act->key = key;
+	return act;
+}

@@ -1,4 +1,5 @@
 #include "responder.h"
+#include <stdio.h>
 #define NUM_OF_RESPONDS 10
 
 // se co nhung loi k thuc hien trong nay, vi du nhu loi dut cap,
@@ -16,7 +17,8 @@ struct Respond responds[10] = {
 
   {RESP_OPEN_DOOR, "", "Open door"},
   {RESP_CLOSE_DOOR, "", "Close door"},
-  {RESP_DOOR_NOT_CLOSE,"","Door not Close"}
+  {RESP_DOOR_NOT_CLOSE,"","Door not Close"},
+  {RESP_FALLING,"","FALLLING"}
 };
 
 // TODO: chuoi cac hoat dong khi gap error
@@ -61,6 +63,10 @@ Action* executeRespond(Respond* respond) {
 			break;
 		case RESP_CLOSE_DOOR:
 			return makeDCLOSEAction(respond->key);
+			break;
+
+		case RESP_FALLING:
+			return makeBREAKAction(respond->key);
 			break;
 
 		default:

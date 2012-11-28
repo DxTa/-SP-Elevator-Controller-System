@@ -37,15 +37,25 @@ typedef enum {
 	RESP_DOOR_NOT_CLOSE,
 
 	RESP_OPEN_DOOR,
-	RESP_CLOSE_DOOR
+	RESP_CLOSE_DOOR,
+
+	RESP_FALLING
 } RespondType;
 
 typedef enum {
 	CHECK_WEIGHT,
 	CHECK_DOOR_OPEN,
 	CHECK_DOOR_CLOSE,
-	CHECK_DOOR_BLOCKER
+	CHECK_DOOR_BLOCKER,
+	CHECK_MOTOR_SPEED
 } CheckType;
+
+typedef enum {
+	DISP_ARRIVAL,
+	DISP_MOVEUP,
+	DISP_MOVEDOWN,
+	DISP_ALARM
+} DisplayType;
 
 typedef struct Request {
 	RequestType requestType;
@@ -71,6 +81,8 @@ extern Respond *curResp;
 extern int blocker[2];
 
 int* makeInt(int value);
+
+void addWeight(int cur,int more);
 
 int extractInt(void *val);
 

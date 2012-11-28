@@ -5,6 +5,7 @@ extern "C"
 {
 	#include <stdio.h>
 	#include "modules/request.h"
+	#include "modules/engine.h"
 // include C library here
 }
 
@@ -116,7 +117,8 @@ void ElevatorDialog::floor(int i ) {
 }
 
 void ElevatorDialog::changeWeight(int i) {
-	addWeight(1,i);
+	speedUp(2);
+	// addWeight(1,i);
 }
 
 void ElevatorDialog::changeElevatorPosition(int position)
