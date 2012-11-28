@@ -172,7 +172,16 @@ void ElevatorDialog::blockDoorClicked() {
 }
 
 void ElevatorDialog::freeFallClicked() {
-	speedUp(2);
+	static int i = 0;
+	if(i == 0) {
+		speedUp(2);
+		i++;
+	} else {
+		speedUp(1);
+		i--;
+	}
+
+}
 
 void ElevatorDialog::changeCurrentMessage(QString message)
 {

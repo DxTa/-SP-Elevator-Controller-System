@@ -12,9 +12,9 @@ Respond* working() {
 		switch(action->actionType) {
 			case ACT_ALARM:
 				alarmer(makeInt(elevator[0]));
+				curMessage = display(DISP_ALARM,makeInt(elevator[0]));
 				break;
 			case ACT_BREAK:
-				printf("\nbreak");
 				brake();
 				break;
 			case ACT_CUP:
@@ -131,8 +131,10 @@ Respond* working() {
 						if(check(CHECK_WEIGHT,eleWeight[0]) == 1)
 							return makeOverloadRespond(action->key);
 
-						if(check(CHECK_DOOR_BLOCKER,eleDoor[0]) == 1)
+						if(check(CHECK_DOOR_BLOCKER,eleDoor[0]) == 1) {
+							dequeueAction(&list[0],ACT_DCLOSE,NULL);
 							return makeDoorCanNotCloseRespond(action->key);
+						}
 
 						closeD(&eleDoor[0]);
 						printf("dang dong %.2f \%\n",eleDoor[0]);
@@ -140,6 +142,8 @@ Respond* working() {
 				}
 				break;
 		}
+		if(checkMotorSpeed(Motorspeed) == 0)
+			dequeueAction(&list[0],ACT_BREAK,NULL);
 	}
 	return NULL;
 }
@@ -160,26 +164,18 @@ Respond* executeAction(Action* action) {
 			/* check weight */
 			if(check(CHECK_WEIGHT,eleWeight[0]) == 1)
 				return makeOverloadRespond(action->key);
-
 			enqueueAction(&list[0],action,elevator[0],state[0]);
 			break;
 		case ACT_ALARM:
-			if (checkExistAct(list[0],ACT_ALARM,NULL) > 0 )
+			if (checkExistAct(list[0],ACT_ALARM,NULL) > 0 ) {
 				dequeueAction(&list[0],ACT_ALARM,NULL);
+				curMessage = display(DISP_WORK,makeInt(elevator[0]));
+			}
 			else
 				enqueueAction(&list[0],action,elevator[0],state[0]);
 			break;
 		case ACT_BREAK:
-			if (checkExistAct(list[0],ACT_BREAK,NULL) > 0 )
-				dequeueAction(&list[0],ACT_BREAK,NULL);
-			else
-				enqueueAction(&list[0],action,elevator[0],state[0]);
-			break;
-		case ACT_LDIRECTION:
-			break;
-		case ACT_LFLOOR:
-			break;
-		case ACT_LMESSAGE:
+			enqueueAction(&list[0],action,elevator[0],state[0]);
 			break;
 		case ACT_STOP:
 			break;
