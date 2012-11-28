@@ -20,8 +20,10 @@ char* display(int display,void* value) {
 			sprintf(buff,"Alarm");
 			return strdup(buff);
 		case DISP_BRAKE:
-			printf("\n--dasad\n");
 			sprintf(buff,"Braking");
+			return strdup(buff);
+		case DISP_OVERLOAD:
+			sprintf(buff,"OVERLOAD");
 			return strdup(buff);
 	}
 	return "";

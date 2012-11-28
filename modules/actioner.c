@@ -1,9 +1,7 @@
 #include "actioner.h"
 
 Fnode* list[2];
-//for show the current direction of elevator
 //1 --> up. -1 --> down. 0 -->stand still
-//useful for led display and for tracking previous state
 int state[2];
 
 Respond* working() {
@@ -110,11 +108,11 @@ Respond* working() {
 				}
 				break;
 			case ACT_DOPEN:
-				state[0] = directOfElevator(list[0],elevator[0]);
 				switch(isDOpen(&eleDoor[0])) {
 					case 0:
-						//check j thi o day
+						curMessage = display(DISP_WORK,makeInt(elevator[0]));
 						dequeueAction(&list[0],ACT_DOPEN,NULL);
+						state[0] = directOfElevator(list[0],elevator[0]);
 						return makeDCloseRespond(action->key);
 					case 1:
 						break;
@@ -125,19 +123,25 @@ Respond* working() {
 				}
 				break;
 			case ACT_DCLOSE:
+				state[0] = 0;
 				switch(isDClose(&eleDoor[0])) {
 					case 0:
-						//check j thi o day
+						/*check blocker*/
+						if(check(CHECK_DOOR_BLOCKER,eleDoor[0]) == 1) {
+							return makeDoorCanNotCloseRespond(action->key);
+						}
 						dequeueAction(&list[0],ACT_DCLOSE,NULL);
 						printf("dong duoc roi\n");
 						break;
 					case 1:
 						/* check weight */
-						if(check(CHECK_WEIGHT,eleWeight[0]) == 1)
+						if(check(CHECK_WEIGHT,eleWeight[0]) == 1) {
+							curMessage = display(DISP_OVERLOAD,NULL);
 							return makeOverloadRespond(action->key);
+						}
 
+						/*check blocker*/
 						if(check(CHECK_DOOR_BLOCKER,eleDoor[0]) == 1) {
-							dequeueAction(&list[0],ACT_DCLOSE,NULL);
 							return makeDoorCanNotCloseRespond(action->key);
 						}
 
@@ -162,13 +166,17 @@ Respond* executeAction(Action* action) {
 			break;
 		case ACT_DOPEN:
 			/* check on floor */
-			if(check(CHECK_ON_FLOOR,state[0]) == 0)
+			printf("\n%d\n",state[0]);
+			if(check(CHECK_ON_FLOOR,state[0]) == 0) {
 				enqueueAction(&list[0],action,elevator[0],state[0]);
+			}
 			break;
 		case ACT_DCLOSE:
 			/* check weight */
-			if(check(CHECK_WEIGHT,eleWeight[0]) == 1)
+			if(check(CHECK_WEIGHT,eleWeight[0]) == 1) {
+				curMessage = display(DISP_OVERLOAD,NULL);
 				return makeOverloadRespond(action->key);
+			}
 			enqueueAction(&list[0],action,elevator[0],state[0]);
 			break;
 		case ACT_ALARM:
