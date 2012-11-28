@@ -142,8 +142,8 @@ Respond* working() {
 				}
 				break;
 		}
-		if(checkMotorSpeed(Motorspeed) == 0)
-			dequeueAction(&list[0],ACT_BREAK,NULL);
+        if(checkMotorSpeed(Motorspeed) == 0)
+            dequeueAction(&list[0],ACT_BREAK,NULL);
 	}
 	return NULL;
 }
