@@ -34,8 +34,8 @@ int checkMotorSpeed(double speed) {
 		return 0;
 }
 
-int checkOnFloor(int state) {
-	if(state == 0)
+int checkOnFloor(int el) {
+	if(el%20 == 0)
 		return 0;
 	else
 		return 1;
