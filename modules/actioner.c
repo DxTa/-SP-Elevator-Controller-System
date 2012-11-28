@@ -110,11 +110,11 @@ Respond* working() {
 				}
 				break;
 			case ACT_DOPEN:
-				state[0] = directOfElevator(list[0],elevator[0]);
 				switch(isDOpen(&eleDoor[0])) {
 					case 0:
-						//check j thi o day
+						curMessage = display(DISP_WORK,makeInt(elevator[0]));
 						dequeueAction(&list[0],ACT_DOPEN,NULL);
+						state[0] = directOfElevator(list[0],elevator[0]);
 						return makeDCloseRespond(action->key);
 					case 1:
 						break;
@@ -125,6 +125,7 @@ Respond* working() {
 				}
 				break;
 			case ACT_DCLOSE:
+				state[0] = 0;
 				switch(isDClose(&eleDoor[0])) {
 					case 0:
 						//check j thi o day
@@ -133,11 +134,13 @@ Respond* working() {
 						break;
 					case 1:
 						/* check weight */
-						if(check(CHECK_WEIGHT,eleWeight[0]) == 1)
+						if(check(CHECK_WEIGHT,eleWeight[0]) == 1) {
+							printf("\dasdsd\n");
+							curMessage = display(DISP_OVERLOAD,NULL);
 							return makeOverloadRespond(action->key);
+						}
 
 						if(check(CHECK_DOOR_BLOCKER,eleDoor[0]) == 1) {
-							dequeueAction(&list[0],ACT_DCLOSE,NULL);
 							return makeDoorCanNotCloseRespond(action->key);
 						}
 
@@ -162,13 +165,17 @@ Respond* executeAction(Action* action) {
 			break;
 		case ACT_DOPEN:
 			/* check on floor */
-			if(check(CHECK_ON_FLOOR,state[0]) == 0)
+			printf("\n%d\n",state[0]);
+			if(check(CHECK_ON_FLOOR,state[0]) == 0) {
 				enqueueAction(&list[0],action,elevator[0],state[0]);
+			}
 			break;
 		case ACT_DCLOSE:
 			/* check weight */
-			if(check(CHECK_WEIGHT,eleWeight[0]) == 1)
+			if(check(CHECK_WEIGHT,eleWeight[0]) == 1) {
+				curMessage = display(DISP_OVERLOAD,NULL);
 				return makeOverloadRespond(action->key);
+			}
 			enqueueAction(&list[0],action,elevator[0],state[0]);
 			break;
 		case ACT_ALARM:

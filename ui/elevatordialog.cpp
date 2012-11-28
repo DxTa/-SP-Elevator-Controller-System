@@ -103,8 +103,15 @@ ElevatorDialog::ElevatorDialog(QWidget *parent, ElevatorSystem *elevatorSystem) 
     // Current message
     this->connect(this->elevatorSystem, SIGNAL(currentMessageChanged(QString)), this, SLOT(changeCurrentMessage(QString)));
 
+    // Current weight
+    this->connect(this->elevatorSystem, SIGNAL(currentWeightChanged(int)), this, SLOT(changeCurrentWeight(int)));
+
     // Hide the block object
     this->ui->blockObject->setVisible(false);
+
+    // Hide up of f6 and down of f1
+    ui->upButton_6->setVisible(false);
+    ui->downButton_1->setVisible(false);
 }
 
 ElevatorDialog::~ElevatorDialog()
@@ -154,14 +161,19 @@ void ElevatorDialog::changeDoorPosition(double position)
     ui->leftDoor->setGeometry(leftDoorGeometry);
     ui->rightDoor->setGeometry(rightDoorGeometry);
 
-    // Enable block door button if door is openning
+    // Enable block door button if door is opening
+    // also enable weight buttons
     if (position > 0)
     {
         ui->blockDoorButton->setEnabled(true);
+        ui->increaseWeightButton->setEnabled(true);
+        ui->decreaseWeightButton->setEnabled(true);
     }
     else
     {
         ui->blockDoorButton->setEnabled(false);
+        ui->decreaseWeightButton->setEnabled(false);
+        ui->increaseWeightButton->setEnabled(false);
     }
 }
 
@@ -175,6 +187,16 @@ void ElevatorDialog::closeDoorClicked() {
 
 void ElevatorDialog::alarmClicked() {
 	curReq = sendRequest(REQ_ALARM,makeInt(elevator[0]));
+
+    // change alarm button text
+    if (ui->alarmButton->text() == "Alarm ON")
+    {
+        ui->alarmButton->setText("Alarm OFF");
+    }
+    else
+    {
+        ui->alarmButton->setText("Alarm ON");
+    }
 }
 
 void ElevatorDialog::blockDoorClicked() {
@@ -211,4 +233,19 @@ void ElevatorDialog::freeFallClicked() {
 void ElevatorDialog::changeCurrentMessage(QString message)
 {
     ui->floorIndicatorLabel->setText(message);
+}
+
+void ElevatorDialog::changeCurrentWeight(int weight)
+{
+    ui->weightLabel->setText(QString::number(weight));
+
+    if (weight > maxWeight)
+    {
+        // Warning overload by making weight label red
+        ui->weightLabel->setStyleSheet("color:red;");
+    }
+    else
+    {
+        ui->weightLabel->setStyleSheet("");
+    }
 }
