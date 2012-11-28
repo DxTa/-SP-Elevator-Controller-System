@@ -16,7 +16,7 @@
   <widget class="QFrame" name="elevatorView">
    <property name="geometry">
     <rect>
-     <x>240</x>
+     <x>225</x>
      <y>583</y>
      <width>250</width>
      <height>81</height>
@@ -201,6 +201,9 @@ background-color:white;</string>
        </item>
        <item row="2" column="2">
         <widget class="QPushButton" name="alarmButton">
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
          <property name="text">
           <string>Alarm OFF</string>
          </property>
