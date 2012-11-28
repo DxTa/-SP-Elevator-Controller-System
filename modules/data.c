@@ -1,6 +1,7 @@
 #include "data.h"
+#include "informer.h"
 
-char* curMessage;
+char* curMessage = "";
 Request *curReq;
 Action *curAct;
 Respond *curResp;
@@ -18,4 +19,11 @@ int extractInt(void* val) {
 
 void changeBlocker(int cur,int val) {
 	blocker[cur-1] = val;
+}
+
+void addWeight(int cur,int more) {
+	if(more < 0 && eleWeight[cur-1] <= 0 )
+		return;
+	eleWeight[cur-1] += more;
+	printf("---Weight: %d\n",eleWeight[cur-1]);
 }

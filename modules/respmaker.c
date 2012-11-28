@@ -36,3 +36,9 @@ Respond* makeDoorCanNotCloseRespond(void* key) {
 	return resp;
 }
 
+Respond* makeFallingRespond(void* key) {
+	Respond* resp = (Respond*)malloc(sizeof(Respond));
+	resp->key = key;
+	resp->respondType = RESP_FALLING;
+	return resp;
+}

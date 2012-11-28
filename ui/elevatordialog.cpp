@@ -5,6 +5,7 @@ extern "C"
 {
 	#include <stdio.h>
 	#include "modules/request.h"
+	#include "modules/engine.h"
 // include C library here
 }
 

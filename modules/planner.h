@@ -10,4 +10,6 @@ Fnode* nextDes(Fnode *list, int el, Fnode *now);
 int directOfElevator(Fnode *list, int el);
 int checkExistAct(Fnode *list, ActionType type, void *key);
 
+int count(Fnode* l);
+
 #endif
