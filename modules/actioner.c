@@ -14,9 +14,14 @@ Respond* working() {
 				alarmer(makeInt(elevator[0]));
 				break;
 			case ACT_BREAK:
-				printf("\nbreak\n");
+				printf("\nbreak");
+				brake();
 				break;
 			case ACT_CUP:
+				/* check falling */
+				if(check(CHECK_MOTOR_SPEED,Motorspeed) == 1)
+					return makeFallingRespond(makeInt(elevator[0]));
+
 				switch(comparePosition(elevator[0],extractInt(action->key))) {
 					case -1 :
 						/* check Door is close */
@@ -42,6 +47,10 @@ Respond* working() {
 				}
 				break;
 			case ACT_CDOWN:
+				/* check falling */
+				if(check(CHECK_MOTOR_SPEED,Motorspeed) == 1)
+					return makeFallingRespond(makeInt(elevator[0]));
+
 				switch(comparePosition(elevator[0],extractInt(action->key))) {
 					case -1 :
 						/* check Door is close */
@@ -67,6 +76,10 @@ Respond* working() {
 				}
 				break;
 			case ACT_FLOOR:
+				/* check falling */
+				if(check(CHECK_MOTOR_SPEED,Motorspeed) == 1)
+					return makeFallingRespond(makeInt(elevator[0]));
+
 				switch(comparePosition(elevator[0],extractInt(action->key))) {
 					case -1 :
 						/* check Door is close */
@@ -128,8 +141,6 @@ Respond* working() {
 				break;
 		}
 	}
-	if(check(CHECK_MOTOR_SPEED,Motorspeed) == 1)
-		return makeFallingRespond(makeInt(elevator[0]));
 	return NULL;
 }
 
@@ -140,20 +151,12 @@ Respond* executeAction(Action* action) {
 		case ACT_CUP:
 		case ACT_CDOWN:
 		case ACT_FLOOR:
-			printf("LIST BEFORE ENQUEUE %d\n",count(list[0]));
 			enqueueAction(&list[0],action,elevator[0],state[0]);
-			printf("LIST AFTER ENQUEUE %d\n",count(list[0]));
 			break;
 		case ACT_DOPEN:
-			// can phai check xem thang may co o tang` nao hay khong
-			// neu khong thi deo cho mo? cua?
-			/* printf("LIST BEFORE ENQUEUE %d\n",count(list[0])); */
 			enqueueAction(&list[0],action,elevator[0],state[0]);
-			/* printf("LIST AFTER ENQUEUE %d\n",count(list[0])); */
 			break;
 		case ACT_DCLOSE:
-			// giong ACT_DOPEN
-			// action dong cua
 			/* check weight */
 			if(check(CHECK_WEIGHT,eleWeight[0]) == 1)
 				return makeOverloadRespond(action->key);

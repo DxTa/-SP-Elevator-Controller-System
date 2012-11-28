@@ -117,8 +117,7 @@ void ElevatorDialog::floor(int i ) {
 }
 
 void ElevatorDialog::changeWeight(int i) {
-	speedUp(2);
-	// addWeight(1,i);
+	addWeight(1,i);
 }
 
 void ElevatorDialog::changeElevatorPosition(int position)
