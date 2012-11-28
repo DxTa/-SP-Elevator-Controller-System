@@ -211,7 +211,7 @@ void ElevatorDialog::blockDoorClicked() {
 void ElevatorDialog::freeFallClicked() {
 	static int i = 0;
 	if(i == 0) {
-		speedUp(2);
+		speedUp(3);
 		i++;
 	} else {
 		speedUp(1);

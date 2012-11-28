@@ -29,10 +29,18 @@ int checkDoorBlocker(double door) {
 	return 0;
 }
 
-int checkMotorSpeed(int speed) {
-	if(speed >= maxSpeed)
+int checkMotorSpeed(double speed) {
+	if(speed > maxSpeed)
 		return 1;
-	else return 0;
+	else
+		return 0;
+}
+
+int checkOnFloor(int state) {
+	if(state == 0)
+		return 0;
+	else
+		return 1;
 }
 
 
@@ -48,6 +56,8 @@ int check(int checker,double val) {
 			return checkDoorBlocker(val);
 		case CHECK_MOTOR_SPEED:
 			return checkMotorSpeed(val);
+		case CHECK_ON_FLOOR:
+			return checkOnFloor(val);
 	}
 
 }
