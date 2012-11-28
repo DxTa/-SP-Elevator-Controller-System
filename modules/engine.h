@@ -11,6 +11,6 @@ void brake();
 
 void speedUp(int val);
 
-extern int Motorspeed;
+extern double Motorspeed;
 
 #endif

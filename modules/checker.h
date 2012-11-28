@@ -14,7 +14,7 @@ int checkWeight(int maxWeight,int weight);
 int checkDoorClose(double door);
 int checkDoorOpen(double door);
 int checkDoorBlocker(double door);
-int checkMotorSpeed(int speed);
+int checkMotorSpeed(double speed);
 int checkOnFloor(int state);
 
 

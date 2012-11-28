@@ -15,8 +15,9 @@ Respond* working() {
 				curMessage = display(DISP_ALARM,makeInt(elevator[0]));
 				break;
 			case ACT_BREAK:
-				printf("\ndassdzozoz\n");
 				brake();
+				if(check(CHECK_MOTOR_SPEED,Motorspeed) == 0)
+					dequeueAction(&list[0],ACT_BREAK,NULL);
 				break;
 			case ACT_CUP:
 				/* check falling */
@@ -146,9 +147,6 @@ Respond* working() {
 				}
 				break;
 		}
-		if(checkMotorSpeed(Motorspeed) == 0) {
-			dequeueAction(&list[0],ACT_BREAK,NULL);
-		}
 	}
 	return NULL;
 }
@@ -183,7 +181,6 @@ Respond* executeAction(Action* action) {
 			break;
 		case ACT_BREAK:
 			enqueueAction(&list[0],action,elevator[0],state[0]);
-			printf("\nLIST %d\n",count(list[0]));
 			break;
 		case ACT_STOP:
 			break;
