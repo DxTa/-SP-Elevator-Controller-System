@@ -29,6 +29,9 @@ public slots:
     void changeDoorPosition(double position);
 	void openDoorClicked();
 	void closeDoorClicked();
+	void alarmClicked();
+	void blockDoorClicked();
+	void freeFallClicked();
 
 private:
     Ui::ElevatorDialog *ui;
