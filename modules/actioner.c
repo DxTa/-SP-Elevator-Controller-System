@@ -125,6 +125,7 @@ Respond* working() {
 				}
 				break;
 			case ACT_DCLOSE:
+				state[0] = 0;
 				switch(isDClose(&eleDoor[0])) {
 					case 0:
 						//check j thi o day
@@ -137,7 +138,6 @@ Respond* working() {
 							return makeOverloadRespond(action->key);
 
 						if(check(CHECK_DOOR_BLOCKER,eleDoor[0]) == 1) {
-							dequeueAction(&list[0],ACT_DCLOSE,NULL);
 							return makeDoorCanNotCloseRespond(action->key);
 						}
 
@@ -162,8 +162,10 @@ Respond* executeAction(Action* action) {
 			break;
 		case ACT_DOPEN:
 			/* check on floor */
-			if(check(CHECK_ON_FLOOR,state[0]) == 0)
+			if(check(CHECK_ON_FLOOR,state[0]) == 0) {
+				printf("\naadasds");
 				enqueueAction(&list[0],action,elevator[0],state[0]);
+			}
 			break;
 		case ACT_DCLOSE:
 			/* check weight */
