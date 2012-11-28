@@ -1,9 +1,7 @@
 #include "actioner.h"
 
 Fnode* list[2];
-//for show the current direction of elevator
 //1 --> up. -1 --> down. 0 -->stand still
-//useful for led display and for tracking previous state
 int state[2];
 
 Respond* working() {

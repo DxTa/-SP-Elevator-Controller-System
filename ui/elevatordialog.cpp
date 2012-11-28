@@ -134,6 +134,7 @@ void ElevatorDialog::floor(int i ) {
 
 void ElevatorDialog::changeWeight(int i) {
 	addWeight(1,i);
+	curReq = sendRequest(REQ_DOPEN,makeInt(1));
 }
 
 void ElevatorDialog::changeElevatorPosition(int position)
