@@ -52,7 +52,7 @@ Action* executeRespond(Respond* respond) {
 			break;
 		case RESP_DOOR_NOT_CLOSE:
 			error(RESP_DOOR_NOT_CLOSE);
-			return makeSTOPAction(respond->key);
+			return makeDOPENAction(respond->key);
 			break;
 
 			// respond khi ng dung bam nut mo hoac dong thang may

@@ -54,7 +54,8 @@ typedef enum {
 	DISP_MOVEDOWN,
 	DISP_ALARM,
 	DISP_BRAKE,
-	DISP_WORK
+	DISP_WORK,
+	DISP_OVERLOAD
 } DisplayType;
 
 typedef struct Request {
