@@ -123,7 +123,8 @@ void ElevatorDialog::changeElevatorPosition(int position)
 {
     QRect geometry = ui->elevatorView->geometry();
 
-    geometry.setY(ElevatorDialog::ElevatorViewY - 7 - 107*(position-20)/20);
+    int newY = ElevatorDialog::ElevatorViewY - 7 - 107*(position-20)/20;
+    geometry.setY(newY);
 
     ui->elevatorView->setGeometry(geometry);
 }
