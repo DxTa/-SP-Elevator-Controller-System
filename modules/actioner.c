@@ -1,7 +1,6 @@
 #include "actioner.h"
 
 Fnode* list[2];
-//for show the current direction of elevator
 //1 --> up. -1 --> down. 0 -->stand still
 int state[2];
 
@@ -127,18 +126,21 @@ Respond* working() {
 				/* state[0] = 0; */
 				switch(isDClose(&eleDoor[0])) {
 					case 0:
-						//check j thi o day
+						/*check blocker*/
+						if(check(CHECK_DOOR_BLOCKER,eleDoor[0]) == 1) {
+							return makeDoorCanNotCloseRespond(action->key);
+						}
 						dequeueAction(&list[0],ACT_DCLOSE,NULL);
 						printf("dong duoc roi\n");
 						break;
 					case 1:
 						/* check weight */
 						if(check(CHECK_WEIGHT,eleWeight[0]) == 1) {
-							printf("\dasdsd\n");
 							curMessage = display(DISP_OVERLOAD,NULL);
 							return makeOverloadRespond(action->key);
 						}
 
+						/*check blocker*/
 						if(check(CHECK_DOOR_BLOCKER,eleDoor[0]) == 1) {
 							return makeDoorCanNotCloseRespond(action->key);
 						}

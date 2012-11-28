@@ -22,10 +22,8 @@ int checkDoorClose(double door) {
 }
 
 int checkDoorBlocker(double door) {
-	if(door <= 0.2) {
-		if(blocker[0] == 1)
-			return 1;
-	}
+	if(blocker[0] == 1)
+		return 1;
 	return 0;
 }
 
