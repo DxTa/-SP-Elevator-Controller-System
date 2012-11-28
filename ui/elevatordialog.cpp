@@ -187,6 +187,16 @@ void ElevatorDialog::closeDoorClicked() {
 
 void ElevatorDialog::alarmClicked() {
 	curReq = sendRequest(REQ_ALARM,makeInt(elevator[0]));
+
+    // change alarm button text
+    if (ui->alarmButton->text() == "Alarm ON")
+    {
+        ui->alarmButton->setText("Alarm OFF");
+    }
+    else
+    {
+        ui->alarmButton->setText("Alarm ON");
+    }
 }
 
 void ElevatorDialog::blockDoorClicked() {

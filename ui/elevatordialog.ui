@@ -129,7 +129,7 @@ background-color:white;</string>
     <rect>
      <x>501</x>
      <y>48</y>
-     <width>266</width>
+     <width>311</width>
      <height>281</height>
     </rect>
    </property>
@@ -181,14 +181,14 @@ background-color:white;</string>
        <item row="2" column="0">
         <widget class="QPushButton" name="closeDoorButton">
          <property name="text">
-          <string> &gt;&lt; </string>
+          <string>   &gt;&lt;   </string>
          </property>
         </widget>
        </item>
        <item row="2" column="1">
         <widget class="QPushButton" name="openDoorButton">
          <property name="text">
-          <string> &lt;&gt; </string>
+          <string>   &lt;&gt;   </string>
          </property>
         </widget>
        </item>
@@ -202,7 +202,7 @@ background-color:white;</string>
        <item row="2" column="2">
         <widget class="QPushButton" name="alarmButton">
          <property name="text">
-          <string>Alarm</string>
+          <string>Alarm OFF</string>
          </property>
         </widget>
        </item>
@@ -231,7 +231,7 @@ background-color:white;</string>
      </layout>
     </item>
     <item>
-     <widget class="QFrame" name="">
+     <widget class="QFrame" name="frame">
       <property name="frameShape">
        <enum>QFrame::Box</enum>
       </property>
@@ -530,10 +530,6 @@ background-color:white;</string>
   <zorder>frame_2</zorder>
   <zorder>elevatorView</zorder>
   <zorder>frame</zorder>
-  <zorder>decreaseWeightButton</zorder>
-  <zorder>label_3</zorder>
-  <zorder>increaseWeightButton</zorder>
-  <zorder>weightLabel</zorder>
  </widget>
  <resources/>
  <connections/>
