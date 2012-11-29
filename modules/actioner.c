@@ -3,7 +3,6 @@
 Fnode* list[2];
 //1 --> up. -1 --> down. 0 -->stand still
 int state[2];
-char* schedule[2];
 
 Respond* working() {
 	if(list[0]) {
