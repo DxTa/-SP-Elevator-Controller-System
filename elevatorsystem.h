@@ -49,12 +49,14 @@ private:
     double currentDoorPosition;
     QString currentMessage;
     int currentWeight;
+    QString currentLog;
 
 signals:
     void elevatorPositionChanged(int position);
     void doorPositionChanged(double position);
     void currentMessageChanged(QString message);
     void currentWeightChanged(int weight);
+    void currentLogChanged(QString log);
 
 public slots:
 

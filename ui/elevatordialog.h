@@ -33,6 +33,7 @@ public slots:
     void blockDoorClicked();
     void changeCurrentMessage(QString message);
     void changeCurrentWeight(int weight);
+    void changeCurrentLog(QString log);
 
 private:
     Ui::ElevatorDialog *ui;
