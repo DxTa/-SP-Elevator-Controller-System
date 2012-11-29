@@ -1,4 +1,4 @@
-double Motorspeed = 1;
+double Motorspeed = 0.5;
 
 void goUp(int *pos) {
 	*pos += Motorspeed;
