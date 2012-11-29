@@ -104,6 +104,9 @@ ElevatorDialog::ElevatorDialog(QWidget *parent, ElevatorSystem *elevatorSystem) 
     // Current weight
     this->connect(this->elevatorSystem, SIGNAL(currentWeightChanged(int)), this, SLOT(changeCurrentWeight(int)));
 
+    // current log
+    this->connect(this->elevatorSystem, SIGNAL(currentLogChanged(QString)), this, SLOT(changeCurrentLog(QString)));
+
     // Hide the block object
     this->ui->blockObject->setVisible(false);
 
@@ -235,4 +238,9 @@ void ElevatorDialog::changeCurrentWeight(int weight)
     {
         ui->weightLabel->setStyleSheet("");
     }
+}
+
+void ElevatorDialog::changeCurrentLog(QString log)
+{
+    ui->logLabel->setText(log);
 }

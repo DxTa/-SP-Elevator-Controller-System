@@ -90,4 +90,10 @@ void ElevatorSystem::draw()
         this->currentWeight = eleWeight[0];
         this->currentWeightChanged(this->currentWeight);
     }
+
+    if (this->currentLog != schedule[0])
+    {
+        this->currentLog = schedule[0];
+        this->currentLogChanged(this->currentLog);
+    }
 }

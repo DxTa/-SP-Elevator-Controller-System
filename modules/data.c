@@ -2,6 +2,7 @@
 #include "informer.h"
 
 char* curMessage = "";
+char schedule[2][256] = {"",""};
 Request *curReq;
 Action *curAct;
 Respond *curResp;

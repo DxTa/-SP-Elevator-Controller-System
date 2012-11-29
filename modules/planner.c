@@ -345,7 +345,9 @@ char* scheduleTraverse(Fnode *list) {
 	Fnode *curr,*next;
 	int index = skip(list,&curr,2);
 	char buff[256];
-	buff[0] = '\0';
+	int i;
+	for (i = 0; i< 256; i++)
+		buff[i] = '\0';
 	char *temp;
 	if (curr == NULL)
 		return buff;
@@ -363,6 +365,6 @@ char* scheduleTraverse(Fnode *list) {
 		curr = next;
 		next = curr->next;
 	}
-	/* strcat(buff,"\0"); */
+	strcat(buff,"\0");
 	return buff;
 }

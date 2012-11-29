@@ -4,10 +4,9 @@
 Fnode* list[2];
 //1 --> up. -1 --> down. 0 -->stand still
 int state[2];
-char schedule[2][256];
 
 Respond* working() {
-	printf("----x%sx----\n",schedule[0]);
+	printf("------x%sx----\n",schedule[0]);
 	if(list[0]) {
 		Action *action = list[0]->val;
 		switch(action->actionType) {
@@ -46,7 +45,6 @@ Respond* working() {
 						break;
 					case 0:
 						curMessage = display(DISP_ARRIVAL,action->key);
-						strcpy(schedule[0],scheduleTraverse(list[0]));
 						/* state[0] = 0; */
 						return makeArrivalRespond(action->key);
 				}
@@ -75,7 +73,6 @@ Respond* working() {
 						break;
 					case 0:
 						curMessage = display(DISP_ARRIVAL,action->key);
-						strcpy(schedule[0],scheduleTraverse(list[0]));
 						/* state[0] = 0; */
 						return makeArrivalRespond(action->key);
 				}
@@ -106,12 +103,12 @@ Respond* working() {
 						break;
 					case 0:
 						curMessage = display(DISP_ARRIVAL,action->key);
-						strcpy(schedule[0],scheduleTraverse(list[0]));
 						/* state[0] = 0; */
 						return makeArrivalRespond(action->key);
 				}
 				break;
 			case ACT_DOPEN:
+				strcpy(schedule[0],scheduleTraverse(list[0]));
 				switch(isDOpen(&eleDoor[0])) {
 					case 0:
 						curMessage = display(DISP_WORK,makeInt(elevator[0]));
