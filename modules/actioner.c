@@ -43,7 +43,7 @@ Respond* working() {
 						break;
 					case 0:
 						curMessage = display(DISP_ARRIVAL,action->key);
-						state[0] = 0;
+						/* state[0] = 0; */
 						return makeArrivalRespond(action->key);
 				}
 				break;
@@ -73,7 +73,7 @@ Respond* working() {
 						break;
 					case 0:
 						curMessage = display(DISP_ARRIVAL,action->key);
-						state[0] = 0;
+						/* state[0] = 0; */
 						return makeArrivalRespond(action->key);
 				}
 				break;
@@ -103,7 +103,7 @@ Respond* working() {
 						break;
 					case 0:
 						curMessage = display(DISP_ARRIVAL,action->key);
-						state[0] = 0;
+						/* state[0] = 0; */
 						return makeArrivalRespond(action->key);
 				}
 				break;
@@ -123,7 +123,7 @@ Respond* working() {
 				}
 				break;
 			case ACT_DCLOSE:
-				state[0] = 0;
+				/* state[0] = 0; */
 				switch(isDClose(&eleDoor[0])) {
 					case 0:
 						/*check blocker*/
@@ -166,8 +166,7 @@ Respond* executeAction(Action* action) {
 			break;
 		case ACT_DOPEN:
 			/* check on floor */
-			printf("\n%d\n",state[0]);
-			if(check(CHECK_ON_FLOOR,state[0]) == 0) {
+			if(check(CHECK_ON_FLOOR,elevator[0]) == 0) {
 				enqueueAction(&list[0],action,elevator[0],state[0]);
 			}
 			break;

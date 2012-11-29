@@ -145,6 +145,7 @@ void enqueueAction(Fnode** list, Action *act, int el, int state) {
 				}
 				else if (
 						((el <= extractInt(act->key)) && (extractInt(act->key) <= extractInt(curr->val->key))) ||
+						((curr->val->actionType == ACT_CUP) && (extractInt(act->key) <= extractInt(curr->val->key))) ||
 						((el <= extractInt(curr->val->key)) && (curr->val->actionType == ACT_CDOWN) && (extractInt(act->key) >= extractInt(curr->val->key)))
 						) {
 					addFnodeAt(list,act,index);
@@ -186,6 +187,7 @@ void enqueueAction(Fnode** list, Action *act, int el, int state) {
 				}
 				else if (
 						((el >= extractInt(act->key)) && (extractInt(act->key) >= extractInt(curr->val->key))) ||
+						((curr->val->actionType == ACT_CDOWN) && (extractInt(act->key) >= extractInt(curr->val->key))) ||
 						((el >= extractInt(curr->val->key)) && (curr->val->actionType == ACT_CUP) && (extractInt(act->key) <= extractInt(curr->val->key)))
 						){
 					addFnodeAt(list,act,index);

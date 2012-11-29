@@ -15,7 +15,7 @@ int checkDoorClose(double door);
 int checkDoorOpen(double door);
 int checkDoorBlocker(double door);
 int checkMotorSpeed(double speed);
-int checkOnFloor(int state);
+int checkOnFloor(int el);
 
 
 #endif
