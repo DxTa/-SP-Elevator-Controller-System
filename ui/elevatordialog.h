@@ -30,8 +30,7 @@ public slots:
 	void openDoorClicked();
 	void closeDoorClicked();
 	void alarmClicked();
-	void blockDoorClicked();
-	void freeFallClicked();
+    void blockDoorClicked();
     void changeCurrentMessage(QString message);
     void changeCurrentWeight(int weight);
 
