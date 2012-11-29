@@ -1,4 +1,5 @@
 #include "planner.h"
+#include <string.h>
 
 //phan chia muc do uu tien cua action
 int getLvlAct(Action *act) {
@@ -329,3 +330,39 @@ int directOfElevator(Fnode *list, int el) {
 		return 1; //go up
 	else return 0;
 }
+
+char* itoa(long n)
+{
+    int len = n==0 ? 1 : floor(log10l(abs(n)))+1;
+    if (n<0) len++; // room for negative sign '-'
+
+    char    *buf = (char*) calloc(sizeof(char), len+1); // +1 for null
+    snprintf(buf, len, "%ld", n);
+    return   buf;
+}
+
+char* scheduleTraverse(Fnode *list) {
+	Fnode *curr,*next;
+	int index = skip(list,&curr,2);
+	char buff[256];
+	char *temp;
+	next = curr->next;
+	buff[0] = '\0';
+
+	while(curr != NULL) {
+		if (next == NULL || extractInt(next->val->key) != extractInt(curr->val->key)) {
+			temp = itoa(extractInt(curr->val->key)/2);
+			strcat(buff,temp);
+			strcat(buff," ");
+			free(temp);
+		}
+		if (next == NULL)
+			break;
+		curr = next;
+		next = curr->next;
+	}
+	strcat(buff,"\0");
+	return buff;
+}
+
+

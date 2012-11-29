@@ -3,6 +3,7 @@
 Fnode* list[2];
 //1 --> up. -1 --> down. 0 -->stand still
 int state[2];
+char* schedule[2];
 
 Respond* working() {
 	if(list[0]) {
@@ -43,6 +44,8 @@ Respond* working() {
 						break;
 					case 0:
 						curMessage = display(DISP_ARRIVAL,action->key);
+						schedule[0] = scheduleTraverse(list[0]);
+						printf("----%s----\n",schedule[0]);
 						/* state[0] = 0; */
 						return makeArrivalRespond(action->key);
 				}
@@ -73,6 +76,8 @@ Respond* working() {
 						break;
 					case 0:
 						curMessage = display(DISP_ARRIVAL,action->key);
+						schedule[0] = scheduleTraverse(list[0]);
+						printf("----%s----\n",schedule[0]);
 						/* state[0] = 0; */
 						return makeArrivalRespond(action->key);
 				}
@@ -103,6 +108,8 @@ Respond* working() {
 						break;
 					case 0:
 						curMessage = display(DISP_ARRIVAL,action->key);
+						schedule[0] = scheduleTraverse(list[0]);
+						printf("----%s----\n",schedule[0]);
 						/* state[0] = 0; */
 						return makeArrivalRespond(action->key);
 				}
@@ -163,6 +170,8 @@ Respond* executeAction(Action* action) {
 		case ACT_CDOWN:
 		case ACT_FLOOR:
 			enqueueAction(&list[0],action,elevator[0],state[0]);
+			schedule[0] = scheduleTraverse(list[0]);
+			printf("----%s----\n",schedule[0]);
 			break;
 		case ACT_DOPEN:
 			/* check on floor */

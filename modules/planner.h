@@ -9,7 +9,7 @@ void dequeueAction(Fnode* *list, ActionType type, void* key);
 Fnode* nextDes(Fnode *list, int el, Fnode *now);
 int directOfElevator(Fnode *list, int el);
 int checkExistAct(Fnode *list, ActionType type, void *key);
-
+char* scheduleTraverse(Fnode *list);
 int count(Fnode* l);
 
 #endif
