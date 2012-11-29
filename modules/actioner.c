@@ -1,11 +1,13 @@
 #include "actioner.h"
+#include <string.h>
 
 Fnode* list[2];
 //1 --> up. -1 --> down. 0 -->stand still
 int state[2];
-char* schedule[2];
+char schedule[2][256];
 
 Respond* working() {
+	printf("----x%sx----\n",schedule[0]);
 	if(list[0]) {
 		Action *action = list[0]->val;
 		switch(action->actionType) {
@@ -44,8 +46,7 @@ Respond* working() {
 						break;
 					case 0:
 						curMessage = display(DISP_ARRIVAL,action->key);
-						schedule[0] = scheduleTraverse(list[0]);
-						printf("----%s----\n",schedule[0]);
+						strcpy(schedule[0],scheduleTraverse(list[0]));
 						/* state[0] = 0; */
 						return makeArrivalRespond(action->key);
 				}
@@ -60,7 +61,6 @@ Respond* working() {
 						/* check Door is close */
 						if(check(CHECK_DOOR_CLOSE,eleDoor[0]) == 1)
 							return makeDoorNotCloseRespond(action->key);
-
 						curMessage = display(DISP_MOVEDOWN,makeInt(elevator[0]));
 						goDown(&elevator[0]);
 						state[0] = -1;
@@ -69,15 +69,13 @@ Respond* working() {
 						/* check Door is close */
 						if(check(CHECK_DOOR_CLOSE,eleDoor[0]) == 1)
 							return makeDoorNotCloseRespond(action->key);
-
 						curMessage = display(DISP_MOVEUP,makeInt(elevator[0]));
 						goUp(&elevator[0]);
 						state[0] = 1;
 						break;
 					case 0:
 						curMessage = display(DISP_ARRIVAL,action->key);
-						schedule[0] = scheduleTraverse(list[0]);
-						printf("----%s----\n",schedule[0]);
+						strcpy(schedule[0],scheduleTraverse(list[0]));
 						/* state[0] = 0; */
 						return makeArrivalRespond(action->key);
 				}
@@ -108,8 +106,7 @@ Respond* working() {
 						break;
 					case 0:
 						curMessage = display(DISP_ARRIVAL,action->key);
-						schedule[0] = scheduleTraverse(list[0]);
-						printf("----%s----\n",schedule[0]);
+						strcpy(schedule[0],scheduleTraverse(list[0]));
 						/* state[0] = 0; */
 						return makeArrivalRespond(action->key);
 				}
@@ -170,8 +167,7 @@ Respond* executeAction(Action* action) {
 		case ACT_CDOWN:
 		case ACT_FLOOR:
 			enqueueAction(&list[0],action,elevator[0],state[0]);
-			schedule[0] = scheduleTraverse(list[0]);
-			printf("----%s----\n",schedule[0]);
+			strcpy(schedule[0],scheduleTraverse(list[0]));
 			break;
 		case ACT_DOPEN:
 			/* check on floor */
