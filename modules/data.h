@@ -82,6 +82,7 @@ extern Respond *curResp;
 extern int blocker[2];
 extern int maxSpeed;
 extern int maxWeight;
+extern char* schedule[2];
 
 int* makeInt(int value);
 
