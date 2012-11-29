@@ -224,13 +224,6 @@ background-color:white;</string>
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="QPushButton" name="freeFallButton">
-        <property name="text">
-         <string>Free fall</string>
-        </property>
-       </widget>
-      </item>
      </layout>
     </item>
     <item>
